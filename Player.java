@@ -31,6 +31,7 @@ public class Player extends JFrame {
 		container = this.getContentPane();
 		dc = new DrawingComponent();
 		mkl = new MyKeyListener();
+		this.addKeyListener(mkl);
 	}
 
 	public void setUpGUI() {
@@ -41,7 +42,7 @@ public class Player extends JFrame {
 		container.setLayout(new BorderLayout());
 
 		dc.addKeyListener(mkl);
-		container.addKeyListener(mkl);
+	
 		container.add(dc);
 
 		this.setVisible(true);
@@ -69,6 +70,42 @@ public class Player extends JFrame {
 
 	public interface DrawingObject {
 		void draw(Graphics2D g2d);
+	}
+
+	private class MyKeyListener implements KeyListener {
+
+		public void keyTyped(KeyEvent ke) {
+
+		}
+
+		public void keyPressed(KeyEvent ke) {
+			int keyCode = ke.getKeyCode();
+
+			switch (keyCode) {
+				case KeyEvent.VK_UP: 
+					System.out.println("^"); 
+					break;
+                case KeyEvent.VK_DOWN: 
+                	System.out.println("V"); 
+                	break;
+                case KeyEvent.VK_LEFT: 
+                	System.out.println("<"); 
+                	break;
+                case KeyEvent.VK_RIGHT: 
+                	System.out.println(">"); 
+                	break;
+                case KeyEvent.VK_SPACE:
+                	System.out.println("SPACE");
+                	break;
+                default: 
+                	System.out.println("Other key was pressed"); 
+                	break;
+			}
+		}
+
+		public void keyReleased(KeyEvent ke) {
+			
+		}
 	}
 
 	private class StartMenu implements DrawingObject {
@@ -206,8 +243,14 @@ public class Player extends JFrame {
 			
 		public ClientSideConnection()
 		{
-			
-			
+			try
+			{
+				socket = new Socket("localhost",1842);
+			}
+			catch(IOException ex)
+			{
+				System.out.println("IOException from CSC Constructor");
+			}
 		}
 	}
 
