@@ -224,7 +224,10 @@ public class Player extends JFrame {
 			g2d.drawString(shipText, 200, 450);
 		}
 	}
-	// Client Side Connection
+
+	/**
+	 * This private class is for the client side connection.
+	 */
 	private class ClientSideConnection
 	{
 			private Socket socket;
