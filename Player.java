@@ -211,8 +211,10 @@ public class Player extends JFrame {
 			
 		public ClientSideConnection()
 		{
-			
-			
+			try
+			{
+				socket = new Socket("localhost",1842)
+			}
 		}
 	}
 
