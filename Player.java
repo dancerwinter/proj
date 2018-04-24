@@ -71,21 +71,6 @@ public class Player extends JFrame {
 		void draw(Graphics2D g2d);
 	}
 
-	private class GameScreen implements DrawingObject {
-
-		private Path2D.Double p;
-
-		public GameScreen() {
-
-		}
-
-		@Override
-		public void draw(Graphics2D g2d) {
-
-		}
-
-	}
-
 	private class MyKeyListener implements KeyListener {
 
 		public MyKeyListener() {
@@ -153,6 +138,43 @@ public class Player extends JFrame {
 		}
 	}
 
+	private class GameScreen implements DrawingObject {
+
+		private PlayerShip ps;
+
+		public GameScreen() {
+			ps = new PlayerShip(Color.RED);
+		}
+
+		@Override
+		public void draw(Graphics2D g2d) {
+			ps.draw(g2d);
+		}
+
+	}
+
+	private class PlayerShip implements DrawingObject {
+
+		private Path2D.Double p;
+		private Color color;
+
+		public PlayerShip(Color c) {
+			p = new Path2D.Double();
+			color = c;
+		}
+
+		@Override
+		public void draw(Graphics2D g2d) {
+			p.moveTo(450, 325);
+			p.lineTo(470, 345);
+			p.lineTo(430, 345);
+			p.lineTo(450, 325);
+
+			g2d.setColor(color);
+			g2d.fill(p);
+		}
+	}
+
 	private class InstructionMenu implements DrawingObject {
 
 		private Rectangle2D.Double background, foreground;
@@ -202,7 +224,10 @@ public class Player extends JFrame {
 			g2d.drawString(shipText, 200, 450);
 		}
 	}
-	// Client Side Connection
+
+	/**
+	 * This private class is for the client side connection.
+	 */
 	private class ClientSideConnection
 	{
 			private Socket socket;
