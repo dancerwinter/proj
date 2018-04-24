@@ -23,9 +23,6 @@ public class Player extends JFrame {
 	private ClientSideConnection csc;
 	private PlayerShip ps;
 
-	/**
-	 *
-	 */
 	public Player(int w, int h) {
 		width = w;
 		height = h;
@@ -33,6 +30,7 @@ public class Player extends JFrame {
 		dc = new DrawingComponent();
 		ps = new PlayerShip(Color.RED);
 		mkl = new MyKeyListener();
+
 		this.addKeyListener(mkl);
 	}
 
@@ -64,22 +62,27 @@ public class Player extends JFrame {
 				case KeyEvent.VK_UP: 
 					System.out.println("^");
 					break;
+
                 case KeyEvent.VK_DOWN: 
                 	System.out.println("V"); 
                 	break;
+
                 case KeyEvent.VK_LEFT: 
                 	System.out.println("<");
                 	ps.moveLeft(speed);
                 	dc.repaint();
                 	break;
+
                 case KeyEvent.VK_RIGHT: 
                 	System.out.println(">"); 
-                	ps.moveRight(speed);
+                	ps.moveRight(-speed);
                 	dc.repaint();
                 	break;
+
                 case KeyEvent.VK_SPACE:
                 	System.out.println("SPACE");
                 	break;
+                	
                 default: 
                 	System.out.println("Other key was pressed"); 
                 	break;

@@ -16,8 +16,8 @@ public class PlayerShip implements DrawingObject {
 	@Override
 	public void draw(Graphics2D g2d) {
 		p.moveTo(x, 325);
-		p.lineTo(x + 20, 365);
-		p.lineTo(x - 20, 365);
+		p.lineTo(x + 40, 365);
+		p.lineTo(x - 40, 365);
 		p.lineTo(x, 325);
 
 		g2d.setColor(color);
