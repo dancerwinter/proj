@@ -70,21 +70,6 @@ public class Player extends JFrame {
 		void draw(Graphics2D g2d);
 	}
 
-	private class GameScreen implements DrawingObject {
-
-		private Path2D.Double p;
-
-		public GameScreen() {
-
-		}
-
-		@Override
-		public void draw(Graphics2D g2d) {
-
-		}
-
-	}
-
 	private class MyKeyListener implements KeyListener {
 
 		public MyKeyListener() {
@@ -149,6 +134,43 @@ public class Player extends JFrame {
 			g2d.setFont(new Font("Impact", Font.PLAIN, 100));
 			g2d.setColor(new Color(255, 255, 255, 165));
 			g2d.drawString(startText, 100, 400);
+		}
+	}
+
+	private class GameScreen implements DrawingObject {
+
+		private PlayerShip ps;
+
+		public GameScreen() {
+			ps = new PlayerShip(Color.RED);
+		}
+
+		@Override
+		public void draw(Graphics2D g2d) {
+			ps.draw(g2d);
+		}
+
+	}
+
+	private class PlayerShip implements DrawingObject {
+
+		private Path2D.Double p;
+		private Color color;
+
+		public PlayerShip(Color c) {
+			p = new Path2D.Double();
+			color = c;
+		}
+
+		@Override
+		public void draw(Graphics2D g2d) {
+			p.moveTo(450, 325);
+			p.lineTo(470, 345);
+			p.lineTo(430, 345);
+			p.lineTo(450, 325);
+
+			g2d.setColor(color);
+			g2d.fill(p);
 		}
 	}
 
