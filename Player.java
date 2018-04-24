@@ -9,7 +9,7 @@ import java.net.*;
 
 /**
  * @author Neil Daniel B. Bautista, Jessica Anne M. Manzano
- * @IDNumber 17, 171429
+ * @IDNumber 170252, 171429
  * @version April 24, 2018
  *
  */
@@ -20,6 +20,7 @@ public class Player extends JFrame {
 	private Container container;
 	private DrawingComponent dc;
 	private MyKeyListener mkl;
+	private ClientSideConnection csc;
 
 	/**
 	 *
@@ -221,6 +222,19 @@ public class Player extends JFrame {
 			g2d.drawString(healthBarText, 150, 530);
 			g2d.drawString(ammoText, 400, 325);
 			g2d.drawString(shipText, 200, 450);
+		}
+	}
+	// Client Side Connection
+	private class ClientSideConnection
+	{
+			private Socket socket;
+			private DataInputStream dataIn;
+			private DataOutputStream dataOut;
+			
+		public ClientSideConnection()
+		{
+			
+			
 		}
 	}
 
