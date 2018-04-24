@@ -31,6 +31,7 @@ public class Player extends JFrame {
 		container = this.getContentPane();
 		dc = new DrawingComponent();
 		mkl = new MyKeyListener();
+		this.addKeyListener(mkl);
 	}
 
 	public void setUpGUI() {
@@ -41,7 +42,7 @@ public class Player extends JFrame {
 		container.setLayout(new BorderLayout());
 
 		dc.addKeyListener(mkl);
-		container.addKeyListener(mkl);
+	
 		container.add(dc);
 
 		this.setVisible(true);
@@ -72,10 +73,6 @@ public class Player extends JFrame {
 	}
 
 	private class MyKeyListener implements KeyListener {
-
-		public MyKeyListener() {
-
-		}
 
 		public void keyTyped(KeyEvent ke) {
 
@@ -238,7 +235,11 @@ public class Player extends JFrame {
 		{
 			try
 			{
-				socket = new Socket("localhost",1842)
+				socket = new Socket("localhost",1842);
+			}
+			catch(IOException ex)
+			{
+				System.out.println("IOException from CSC Constructor");
 			}
 		}
 	}
