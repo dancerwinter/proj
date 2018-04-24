@@ -84,7 +84,7 @@ public class Player extends JFrame {
 
 	private class MyKeyListener implements KeyListener {
 
-		private void KeyPressed(KeyEvent ke) {
+		public void KeyPressed(KeyEvent ke) {
 			int keyCode = ke.getKeyCode();
 
 			switch(keyCode) {
@@ -96,11 +96,11 @@ public class Player extends JFrame {
 			}
 		}
 
-		private void KeyTyped(KeyEvent ke) {
+		public void KeyTyped(KeyEvent ke) {
 
 		}
 
-		private void keyReleased(KeyEvent ke) {
+		public void keyReleased(KeyEvent ke) {
 			System.out.println("Key has been released");
 		}
 	}
