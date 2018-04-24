@@ -19,7 +19,11 @@ public class Player extends JFrame {
 	private int width, height;
 	private Container container;
 	private DrawingComponent dc;
+	private MyKeyListener mkl;
 
+	/**
+	 *
+	 */
 	public Player(int w, int h) {
 		width = w;
 		height = h;
@@ -45,6 +49,7 @@ public class Player extends JFrame {
 
 		public DrawingComponent() {
 			objects.add(new InstructionMenu());
+			objects.add(new GameScreen());
 		}
 
 		protected void paintComponent(Graphics g) {
@@ -60,6 +65,44 @@ public class Player extends JFrame {
 
 	public interface DrawingObject {
 		void draw(Graphics2D g2d);
+	}
+
+	private class GameScreen implements DrawingObject {
+
+		private Path2D.Double p;
+
+		public GameScreen() {
+
+		}
+
+		@Override
+		public void draw(Graphics2D g2d) {
+
+		}
+
+	}
+
+	private class MyKeyListener implements KeyListener {
+
+		private void KeyPressed(KeyEvent ke) {
+			int keyCode = ke.getKeyCode();
+
+			switch(keyCode) {
+				case KeyEvent.VK_UP : System.out.println("^"); break;
+                case KeyEvent.VK_DOWN : System.out.println("V"); break;
+                case KeyEvent.VK_LEFT : System.out.println("<"); break;
+                case KeyEvent.VK_RIGHT : System.out.println(">"); break;
+                default : System.out.println("Other key was pressed"); break;
+			}
+		}
+
+		private void KeyTyped(KeyEvent ke) {
+
+		}
+
+		private void keyReleased(KeyEvent ke) {
+			System.out.println("Key has been released");
+		}
 	}
 
 	private class InstructionMenu implements DrawingObject {
