@@ -23,6 +23,11 @@ public class Player extends JFrame {
 	private ClientSideConnection csc;
 	private PlayerShip ps;
 
+	/**
+	 *@Constructor
+	 * param: w = width of frame h = height of frame
+	 *
+	 */
 	public Player(int w, int h) {
 		width = w;
 		height = h;
@@ -40,12 +45,18 @@ public class Player extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		container.setLayout(new BorderLayout());
-
-		dc.addKeyListener(mkl);
-	
 		container.add(dc);
 
 		this.setVisible(true);
+	}
+	/**
+	* @method
+	* void sets up connection to GameServer
+	*/
+	public void connectToServer()
+	{
+		csc = new ClientSideConnection();
+		
 	}
 
 	private class MyKeyListener implements KeyListener {
@@ -108,6 +119,8 @@ public class Player extends JFrame {
 			try
 			{
 				socket = new Socket("localhost",1842);
+				dataIn = new DataInputStream(socket.getInputStream());
+				dataOut = new DataOutputStream(socket.getOutputStream());
 			}
 			catch(IOException ex)
 			{
@@ -119,5 +132,6 @@ public class Player extends JFrame {
 	public static void main (String[] args) {
 		Player p = new Player(900, 650);
 		p.setUpGUI();
+		
 	}
 }
