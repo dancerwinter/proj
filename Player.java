@@ -29,6 +29,7 @@ public class Player extends JFrame {
 		height = h;
 		container = this.getContentPane();
 		dc = new DrawingComponent();
+		mkl = new MyKeyListener();
 	}
 
 	public void setUpGUI() {
@@ -38,6 +39,8 @@ public class Player extends JFrame {
 
 		container.setLayout(new BorderLayout());
 
+		dc.addKeyListener(mkl);
+		container.addKeyListener(mkl);
 		container.add(dc);
 
 		this.setVisible(true);
@@ -84,24 +87,68 @@ public class Player extends JFrame {
 
 	private class MyKeyListener implements KeyListener {
 
-		public void KeyPressed(KeyEvent ke) {
+		public MyKeyListener() {
+
+		}
+
+		public void keyTyped(KeyEvent ke) {
+
+		}
+
+		public void keyPressed(KeyEvent ke) {
 			int keyCode = ke.getKeyCode();
 
-			switch(keyCode) {
-				case KeyEvent.VK_UP : System.out.println("^"); break;
-                case KeyEvent.VK_DOWN : System.out.println("V"); break;
-                case KeyEvent.VK_LEFT : System.out.println("<"); break;
-                case KeyEvent.VK_RIGHT : System.out.println(">"); break;
-                default : System.out.println("Other key was pressed"); break;
+			switch (keyCode) {
+				case KeyEvent.VK_UP: 
+					System.out.println("^"); 
+					break;
+                case KeyEvent.VK_DOWN: 
+                	System.out.println("V"); 
+                	break;
+                case KeyEvent.VK_LEFT: 
+                	System.out.println("<"); 
+                	break;
+                case KeyEvent.VK_RIGHT: 
+                	System.out.println(">"); 
+                	break;
+                case KeyEvent.VK_SPACE:
+                	System.out.println("SPACE");
+                	break;
+                default: 
+                	System.out.println("Other key was pressed"); 
+                	break;
 			}
 		}
 
-		public void KeyTyped(KeyEvent ke) {
+		public void keyReleased(KeyEvent ke) {
+			
+		}
+	}
 
+	private class StartMenu implements DrawingObject {
+		
+		private Rectangle2D.Double r;
+		private String titleText, startText;
+
+		public StartMenu() {
+			r = new Rectangle2D.Double(0, 0, 900, 650);
+			titleText = "S P A C E W A R S";
+			startText = "PRESS ENTER";
 		}
 
-		public void keyReleased(KeyEvent ke) {
-			System.out.println("Key has been released");
+		@Override
+		public void draw(Graphics2D g2d) {
+			
+			g2d.setColor(new Color(30, 30, 30));
+			g2d.fill(r);
+
+			g2d.setFont(new Font("Impact", Font.PLAIN, 110));
+			g2d.setColor(new Color(255, 255, 255, 165));
+			g2d.drawString(titleText, 100, 150);
+
+			g2d.setFont(new Font("Impact", Font.PLAIN, 100));
+			g2d.setColor(new Color(255, 255, 255, 165));
+			g2d.drawString(startText, 100, 400);
 		}
 	}
 
