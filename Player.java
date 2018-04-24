@@ -52,7 +52,7 @@ public class Player extends JFrame {
 		ArrayList<DrawingObject> objects = new ArrayList<DrawingObject>();
 
 		public DrawingComponent() {
-			objects.add(new InstructionMenu());
+			// objects.add(new InstructionMenu());
 			objects.add(new GameScreen());
 		}
 
@@ -69,46 +69,6 @@ public class Player extends JFrame {
 
 	public interface DrawingObject {
 		void draw(Graphics2D g2d);
-	}
-
-	private class MyKeyListener implements KeyListener {
-
-		public MyKeyListener() {
-
-		}
-
-		public void keyTyped(KeyEvent ke) {
-
-		}
-
-		public void keyPressed(KeyEvent ke) {
-			int keyCode = ke.getKeyCode();
-
-			switch (keyCode) {
-				case KeyEvent.VK_UP: 
-					System.out.println("^"); 
-					break;
-                case KeyEvent.VK_DOWN: 
-                	System.out.println("V"); 
-                	break;
-                case KeyEvent.VK_LEFT: 
-                	System.out.println("<"); 
-                	break;
-                case KeyEvent.VK_RIGHT: 
-                	System.out.println(">"); 
-                	break;
-                case KeyEvent.VK_SPACE:
-                	System.out.println("SPACE");
-                	break;
-                default: 
-                	System.out.println("Other key was pressed"); 
-                	break;
-			}
-		}
-
-		public void keyReleased(KeyEvent ke) {
-			
-		}
 	}
 
 	private class StartMenu implements DrawingObject {
@@ -157,21 +117,31 @@ public class Player extends JFrame {
 
 		private Path2D.Double p;
 		private Color color;
+		private int x;
 
 		public PlayerShip(Color c) {
 			p = new Path2D.Double();
 			color = c;
+			x = 450;
 		}
 
 		@Override
 		public void draw(Graphics2D g2d) {
-			p.moveTo(450, 325);
-			p.lineTo(470, 345);
-			p.lineTo(430, 345);
-			p.lineTo(450, 325);
+			p.moveTo(x, 325);
+			p.lineTo(x + 20, 345);
+			p.lineTo(x - 20, 345);
+			p.lineTo(x, 325);
 
 			g2d.setColor(color);
 			g2d.fill(p);
+		}
+
+		public void moveLeft(int speed) {
+			x -= speed;
+		}
+
+		public void moveRight(int speed) {
+			x += speed;
 		}
 	}
 
