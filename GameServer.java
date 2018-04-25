@@ -2,12 +2,22 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
+/**
+ * @author Neil Daniel B. Bautista, Jessica Anne M. Manzano
+ * @IDNumber 170252, 171429
+ * @version April 24, 2018
+ *
+ * This program is the server class.
+ */
 public class GameServer {
 	private ServerSocket ss;
 	private DataInputStream dataIn;
 	private DataOutputStream dataOut;
 	private int numPlay;
 	
+	/**
+	 * This is the constructor for the GameServer class.
+	 */
 	public GameServer() {
 		System.out.println("TheServer has been instantiated");
 		try {
@@ -19,6 +29,9 @@ public class GameServer {
 		}
 	}
 
+	/**
+	 * This is a method that accepts clients.
+	 */
 	public void connectPlayers() {
 		 try {
 			System.out.println("Waiting for connection...");
@@ -35,6 +48,9 @@ public class GameServer {
 		
 	}
 
+	/**
+	 * This is the main method for the GameServer class.
+	 */
 	public static void main(String args[]) {
 		GameServer gs = new GameServer();
 		gs.connectPlayers();
