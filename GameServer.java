@@ -8,6 +8,8 @@ public class GameServer
 	private DataInputStream dataIn;
 	private DataOutputStream dataOut;
 	private int numPlay;
+	private ServerSideConnection player1;
+	private ServerSideConnection player2;
 	
 	public GameServer()
 	{
@@ -36,6 +38,10 @@ public class GameServer
 			System.out.println("IOException from connectPlayers()");
 		}
 		
+	}
+	private class ServerSideConnection implements Runnable
+	{
+
 	}
 	public static void main(String args[])
 	{
