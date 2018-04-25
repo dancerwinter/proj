@@ -35,6 +35,7 @@ public class PlayerShip implements DrawingObject {
 
 	public void moveLeft(double speed) {
 		x += speed;
+		
 		if(x <= 0) {
 			x = 0;
 		}

@@ -79,11 +79,16 @@ public class Player extends JFrame {
 			RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			g2d.setRenderingHints(rh);
 
-			ps.draw(g2d);
 			bullet.draw(g2d);
+			ps.draw(g2d);
+			
 		}
 	}
 
+	/**
+	 * This private class implements KeyListener.
+	 * 
+	 */
 	private class MyKeyListener implements KeyListener {
 
 		public void keyTyped(KeyEvent ke) {
@@ -120,8 +125,9 @@ public class Player extends JFrame {
                 	break;
 
                 case KeyEvent.VK_SPACE:
-                	System.out.println("SPACE");
+                	System.out.println("SPACE from Player");
                 	bullet.fireBullet(-speed);
+                	dc.repaint();
                 	break;
                 	
                 default:
