@@ -15,7 +15,7 @@ public class PlayerShip implements DrawingObject {
 
 	@Override
 	public void draw(Graphics2D g2d) {
-		r = new Rectangle2D.Double(x, ppppy, 50, 50);
+		r = new Rectangle2D.Double(x, y, 50, 50);
 
 		g2d.setColor(color);
 		g2d.fill(r);
@@ -23,10 +23,18 @@ public class PlayerShip implements DrawingObject {
 
 	public void moveLeft(int speed) {
 		x += speed;
+		if(x<=0)
+		{
+			x = 0;
+		}
 	}
 
 	public void moveRight(int speed) {
 		x += speed;
+		if(x>=835)
+		{
+			x = 835;
+		}
 	}
 
 	public void moveUp(int speed) {

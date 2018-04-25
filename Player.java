@@ -142,6 +142,7 @@ public class Player extends JFrame {
 			
 		public ClientSideConnection()
 		{
+			System.out.println("ClientSideConnectionMade");
 			try
 			{
 				socket = new Socket("localhost",1842);
