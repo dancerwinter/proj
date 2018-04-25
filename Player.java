@@ -162,7 +162,7 @@ public class Player extends JFrame {
 
 	public static void main (String[] args) {
 		Player p = new Player(900, 650);
-		// p.connectToServer();// comment this out to test the frame only
+		p.connectToServer(); // comment this out to test the frame only
 		p.setUpGUI();
 		
 		
