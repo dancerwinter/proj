@@ -26,6 +26,7 @@ public class Player extends JFrame {
 	private MyKeyListener mkl;
 	private ClientSideConnection csc;
 	private PlayerShip ps;
+	private Projectile bullet;
 
 	/**
 	 * @Constructor
@@ -37,7 +38,8 @@ public class Player extends JFrame {
 		height = h;
 		container = this.getContentPane();
 		ps = new PlayerShip(Color.RED);
-		dc = new DrawingComponent();		
+		bullet = new Projectile();
+		dc = new DrawingComponent();	
 		mkl = new MyKeyListener();
 
 		this.addKeyListener(mkl);
@@ -78,6 +80,7 @@ public class Player extends JFrame {
 			g2d.setRenderingHints(rh);
 
 			ps.draw(g2d);
+			bullet.draw(g2d);
 		}
 	}
 
@@ -118,6 +121,7 @@ public class Player extends JFrame {
 
                 case KeyEvent.VK_SPACE:
                 	System.out.println("SPACE");
+                	bullet.fireBullet(-speed);
                 	break;
                 	
                 default:
