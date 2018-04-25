@@ -11,7 +11,7 @@ public class Projectile implements DrawingObject {
 
 	public Projectile() {
 		x = 490;
-		y = 202;
+		y = 365;
 	}
 
 	@Override
@@ -23,12 +23,13 @@ public class Projectile implements DrawingObject {
 	}
 
 	public void fireBullet(double s) {
-		if (y != -50) {
-			y += speed;
-		}
 
-		else {
-			y = ps.getCenter();
+		System.out.println("Bullet fired from Projectile");
+
+		if (y != 0) {
+			y--;
 		}
 	}
+
+	// Make a thread in the projectile
 }
