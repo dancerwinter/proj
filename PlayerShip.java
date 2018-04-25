@@ -23,10 +23,18 @@ public class PlayerShip implements DrawingObject {
 
 	public void moveLeft(double speed) {
 		x += speed;
+		if(x<=0)
+		{
+			x = 0;
+		}
 	}
 
 	public void moveRight(double speed) {
 		x += speed;
+		if(x>=835)
+		{
+			x = 835;
+		}
 	}
 
 	public void moveUp(double speed) {

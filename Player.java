@@ -142,6 +142,7 @@ public class Player extends JFrame {
 			
 		public ClientSideConnection()
 		{
+			System.out.println("ClientSideConnectionMade");
 			try
 			{
 				socket = new Socket("localhost",1842);
@@ -157,7 +158,9 @@ public class Player extends JFrame {
 
 	public static void main (String[] args) {
 		Player p = new Player(900, 650);
+		// p.connectToServer();// comment this out to test the frame only
 		p.setUpGUI();
+		
 		
 	}
 }
