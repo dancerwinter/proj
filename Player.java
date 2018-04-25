@@ -89,7 +89,7 @@ public class Player extends JFrame {
 
 		public void keyPressed(KeyEvent ke) {
 			int keyCode = ke.getKeyCode();
-			int speed = 5;
+			double speed = 10;
 
 			switch (keyCode) {
 				case KeyEvent.VK_UP: 
