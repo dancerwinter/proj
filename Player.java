@@ -14,6 +14,10 @@ import java.net.*;
  *
  */
 
+/**
+ *
+ *
+ */
 public class Player extends JFrame {
 	
 	private int width, height;
@@ -24,7 +28,7 @@ public class Player extends JFrame {
 	private PlayerShip ps;
 
 	/**
-	 *@Constructor
+	 * @Constructor
 	 * param: w = width of frame h = height of frame
 	 *
 	 */
@@ -32,8 +36,8 @@ public class Player extends JFrame {
 		width = w;
 		height = h;
 		container = this.getContentPane();
-		dc = new DrawingComponent();
 		ps = new PlayerShip(Color.RED);
+		dc = new DrawingComponent();		
 		mkl = new MyKeyListener();
 
 		this.addKeyListener(mkl);
@@ -45,8 +49,11 @@ public class Player extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		container.setLayout(new BorderLayout());
+
 		container.add(dc);
 
+		dc.revalidate();
+		
 		this.setVisible(true);
 	}
 	/**
@@ -57,6 +64,21 @@ public class Player extends JFrame {
 	{
 		csc = new ClientSideConnection();
 		
+	}
+
+	private class DrawingComponent extends JComponent{
+
+		public DrawingComponent() {
+			System.out.println("DrawingComponent instantiated");
+		}
+
+		protected void paintComponent(Graphics g) {
+			Graphics2D g2d = (Graphics2D) g;
+			RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			g2d.setRenderingHints(rh);
+
+			ps.draw(g2d);
+		}
 	}
 
 	private class MyKeyListener implements KeyListener {
@@ -72,21 +94,25 @@ public class Player extends JFrame {
 			switch (keyCode) {
 				case KeyEvent.VK_UP: 
 					System.out.println("^");
+					ps.moveUp(-speed);
+					dc.repaint();
 					break;
 
                 case KeyEvent.VK_DOWN: 
                 	System.out.println("V"); 
+                	ps.moveDown(speed);
+                	dc.repaint();
                 	break;
 
                 case KeyEvent.VK_LEFT: 
                 	System.out.println("<");
-                	ps.moveLeft(speed);
+                	ps.moveLeft(-speed);
                 	dc.repaint();
                 	break;
 
                 case KeyEvent.VK_RIGHT: 
                 	System.out.println(">"); 
-                	ps.moveRight(-speed);
+                	ps.moveRight(speed);
                 	dc.repaint();
                 	break;
 
@@ -94,7 +120,7 @@ public class Player extends JFrame {
                 	System.out.println("SPACE");
                 	break;
                 	
-                default: 
+                default:
                 	System.out.println("Other key was pressed"); 
                 	break;
 			}
