@@ -14,6 +14,8 @@ public class GameServer {
 	private DataInputStream dataIn;
 	private DataOutputStream dataOut;
 	private int numPlay;
+	private ServerSideConnection player1;
+	private ServerSideConnection player2;
 	
 	/**
 	 * This is the constructor for the GameServer class.
@@ -40,14 +42,38 @@ public class GameServer {
 				numPlay++;
 				System.out.println("Player#" + numPlay + " has connected");
 			}
-		}
-
-		catch(IOException ex) {
+		} catch(IOException ex) {
 			System.out.println("IOException from connectPlayers()");
 		}
 		
 	}
+	 /**
+	 * This is a class to support both player connections made
+	 * @Parameters s: Socket of the player 1 or 2; id: numPlay variable to determine who is player one and two based on who connected first
+	 */
+	private class ServerSideConnection implements Runnable
+	{
+		private Socket socket;
+		private DataInputStream dataIn;
+		private DataOutputStream dataOut;
+		private int playerID;
 
+		public ServerSideConnection(Socket s, int id)
+		{
+			socket = s;
+			playerID = id;
+			try{
+				dataIn = new DataInputStream(socket.getInputStream());
+				dataOut = new DataOutputStream(socket.getOutputStream());
+			} catch (IOException ex){
+				System.out.println("IOException from run() SSC Constructor");
+			}
+		}
+		public void run()
+		{
+
+		}
+	}
 	/**
 	 * This is the main method for the GameServer class.
 	 */
