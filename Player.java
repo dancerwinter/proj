@@ -32,7 +32,7 @@ public class Player extends JFrame {
 	private ClientSideConnection csc;
 	private PlayerShip ps;
 	private Projectile bullet1, bullet2, bullet3, bullet4, bullet5;
-	private boolean up, down, left, right, spacebar;
+	private boolean up, down, left, right, spacebar, reload;
 	private Timer tm;
 	private int playerID;
 	private int otherPlayer;
@@ -157,6 +157,10 @@ public class Player extends JFrame {
 					}*/
 				}
 
+			if (reload) {
+				bulletsFired = 0;
+			}
+
 				System.out.println(bulletsFired);
 
 				
@@ -209,6 +213,10 @@ public class Player extends JFrame {
                 case KeyEvent.VK_SPACE:
                 	spacebar = true;
                 	break;
+
+                case KeyEvent.VK_CONTROL:
+                	reload = true;
+                	break;
                 	
                 default:
                 	System.out.println("Other key was pressed"); 
@@ -239,6 +247,10 @@ public class Player extends JFrame {
                 case KeyEvent.VK_SPACE:
                 	bulletsFired++;
                 	bulletsLeft--;
+                	break;
+
+                case KeyEvent.VK_CONTROL:
+                	reload = false;
                 	break;
                 }
 		}
