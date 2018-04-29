@@ -49,4 +49,12 @@ public class Projectile implements Runnable{
 	public double getPositionY() {
 		return y;
 	}
+	public boolean isOutOfFrame(){
+		boolean outOfFrame = false;
+		if(y <= -40)
+		{
+			outOfFrame = true;
+		}
+		return outOfFrame;
+	}
 }

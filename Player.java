@@ -78,12 +78,12 @@ public class Player extends JFrame {
 		if (playerID == 1)
 		{
 			System.out.println("You're player number 1");
-			otherPlayer == 2;
+			otherPlayer = 2;
 		}
 		if(playerID == 2)
 		{
 			System.out.println("you're player number 2");
-			otherPlayer == 1;
+			otherPlayer = 1;
 		}
 	}
 
@@ -218,9 +218,9 @@ public class Player extends JFrame {
                 case KeyEvent.VK_SPACE:
                 	spacebar = true;
 
-                	if (trigger) {
+                	// if (trigger) {
                 		
-                	}
+                	// }
 
                 	break;
 
@@ -302,10 +302,13 @@ public class Player extends JFrame {
 			}
 		}
 	}
-
+	public void connectToServer()
+	{
+		csc = new ClientSideConnection();
+	}
 	public static void main (String[] args) {
 		Player p = new Player(900, 650);
-		
+		p.connectToServer();
 		p.setUpGUI();
 		
 		
