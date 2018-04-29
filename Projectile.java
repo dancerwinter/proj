@@ -22,11 +22,7 @@ public class Projectile implements Runnable{
 	}
 
 	public void run() {
-		try {
-			
-		} 
-
-		catch (InterruptedException e) {}
+		
 	}
 
 	public void fireBullet(double speed, double firingPositionX, double firingPositionY) {

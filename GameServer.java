@@ -16,6 +16,8 @@ public class GameServer {
 	private int numPlay;
 	private ServerSideConnectionOut player1Out;
 	private ServerSideConnectionOut player2Out;
+	private ServerSideConnectionIn player1In;
+	private ServerSideConnectionIn player2In;
 	
 	/**
 	 * This is the constructor for the GameServer class.
@@ -42,15 +44,20 @@ public class GameServer {
 				numPlay++;
 				System.out.println("Player#" + numPlay + " has connected");
 				ServerSideConnectionOut ssco = new ServerSideConnectionOut(s, numPlay);
+				ServerSideConnectionIn ssci = new ServerSideConnectionIn(s);
 				if(numPlay == 1)
 				{
 					player1Out = ssco;
+					player1In = ssci;
 				}
 				else{
 					player2Out = ssco;
+					player1In = ssci;
 				}
 				Thread t = new Thread(ssco);
+				Thread t1 = new Thread(ssci);
 				t.start();
+				t1.start();
 			}
 		} catch(IOException ex) {
 			System.out.println("IOException from connectPlayers()");
@@ -100,7 +107,7 @@ public class GameServer {
 		private DataInputStream dataIn;
 		private DataOutputStream dataOut;
 
-		public ServerSideConnectionIn
+		public ServerSideConnectionIn(Socket s)
 		{
 			socket = s;
 			try{

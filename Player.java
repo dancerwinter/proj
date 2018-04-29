@@ -75,6 +75,17 @@ public class Player extends JFrame {
 		dc.revalidate();
 		
 		this.setVisible(true);
+
+		if (playerID == 1)
+		{
+			System.out.println("You're player number 1");
+			otherPlayer == 2;
+		}
+		if(playerID == 2)
+		{
+			System.out.println("you're player number 2");
+			otherPlayer == 1;
+		}
 	}
 
 	private class DrawingComponent extends JComponent{
