@@ -14,8 +14,8 @@ public class GameServer {
 	private DataInputStream dataIn;
 	private DataOutputStream dataOut;
 	private int numPlay;
-	private ServerSideConnectionOut player1;
-	private ServerSideConnectionOut player2;
+	private ServerSideConnectionOut player1Out;
+	private ServerSideConnectionOut player2Out;
 	
 	/**
 	 * This is the constructor for the GameServer class.
@@ -44,10 +44,10 @@ public class GameServer {
 				ServerSideConnectionOut ssco = new ServerSideConnectionOut(s, numPlay);
 				if(numPlay == 1)
 				{
-					player1 = ssco;
+					player1Out = ssco;
 				}
 				else{
-					player2 = ssco;
+					player2Out = ssco;
 				}
 				Thread t = new Thread(ssco);
 				t.start();
@@ -92,6 +92,29 @@ public class GameServer {
 			}catch(IOException ex){
 				System.out.println("IOException from run() method SSCO");
 			}
+		}
+	}
+	private class ServerSideConnectionIn implements Runnable
+	{
+		private Socket socket;
+		private DataInputStream dataIn;
+		private DataOutputStream dataOut;
+
+		public ServerSideConnectionIn
+		{
+			socket = s;
+			try{
+				dataIn = new DataInputStream(socket.getInputStream());
+				dataOut = new DataOutputStream(socket.getOutputStream());
+			} catch(IOException ex){
+				System.out.println("IOException from run() SSCI Constructor");
+			}
+		}
+		public void run()
+		{
+			// try{
+			
+			// }
 		}
 	}
 	/**
