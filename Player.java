@@ -46,11 +46,11 @@ public class Player extends JFrame {
 		height = h;
 		container = this.getContentPane();
 		ps = new PlayerShip(Color.RED);
-		bullet1 = new Projectile(950, 650);
-		bullet2 = new Projectile(950, 650);
-		bullet3 = new Projectile(950, 650);
-		bullet4 = new Projectile(950, 650);
-		bullet5 = new Projectile(950, 650);
+		bullet1 = new Projectile(850, 300);
+		bullet2 = new Projectile(850, 350);
+		bullet3 = new Projectile(850, 400);
+		bullet4 = new Projectile(850, 450);
+		bullet5 = new Projectile(850, 500);
 
 		dc = new DrawingComponent();	
 		mkl = new MyKeyListener();
@@ -124,8 +124,8 @@ public class Player extends JFrame {
 				dc.repaint();
 			}
 
-			if (spacebar && bulletsFired < 6) {
-				if (bulletsFired == 0) {
+			if (spacebar && bulletsFired < 7) {
+				if (bulletsFired == 1) {
 					// bullet1.reloadBullet(ps.getPositionX(), ps.getPositionY());
 
 					bullet1.fireBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
@@ -133,22 +133,22 @@ public class Player extends JFrame {
 
 				}
 
-				else if (bulletsFired == 1) {
+				else if (bulletsFired == 2) {
 					bullet2.fireBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
 					dc.repaint();
 				}
 
-				else if (bulletsFired == 2) {
+				else if (bulletsFired == 3) {
 					bullet3.fireBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
 					dc.repaint();
 				}
 
-				else if (bulletsFired == 3) {
+				else if (bulletsFired == 4) {
 					bullet4.fireBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
 					dc.repaint();
 				}
 
-				else if (bulletsFired == 4) {
+				else if (bulletsFired == 5) {
 					bullet5.fireBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
 					dc.repaint();
 
@@ -157,13 +157,14 @@ public class Player extends JFrame {
 					}*/
 				}
 
-				else if (bulletsFired == 5) {
+				else if (bulletsFired == 6) {
 					
 
 				}
 
 			if (reload) {
 				bulletsFired = 0;
+				bullet1.reloadBullet(850, 300);
 			}
 
 			}
