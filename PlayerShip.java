@@ -7,6 +7,7 @@ public class PlayerShip implements DrawingObject {
 	private Color color;
 	private double x, y;
 	private double width, height;
+	private int health;
 
 	public PlayerShip(Color c) {
 		color = c;
@@ -14,6 +15,7 @@ public class PlayerShip implements DrawingObject {
 		y = 325;
 		width = 80;
 		height = 80;
+		health = 5;
 	}
 
 	@Override
@@ -32,6 +34,14 @@ public class PlayerShip implements DrawingObject {
 	public double getPositionY() {
 		double position = y + (height / 2);
 		return position;
+	}
+
+	public int getHealth() {
+		return health;
+	}
+
+	public void damageShip() {
+		health--;
 	}
 
 	public void moveLeft(double speed) {
