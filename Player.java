@@ -21,7 +21,7 @@ import java.net.*;
  *
  *
  */
-public class PlayerGUI extends JFrame {
+public class Player extends JFrame {
 	
 	private int width, height;
 	private int bulletsFired, bulletsLeft;
@@ -40,7 +40,7 @@ public class PlayerGUI extends JFrame {
 	 * param: w = width of frame h = height of frame
 	 *
 	 */
-	public PlayerGUI(int w, int h) {
+	public Player(int w, int h) {
 		width = w;
 		height = h;
 		container = this.getContentPane();
@@ -74,15 +74,6 @@ public class PlayerGUI extends JFrame {
 		dc.revalidate();
 		
 		this.setVisible(true);
-	}
-	/**
-	* @method
-	* void sets up connection to GameServer
-	*/
-	public void connectToServer()
-	{
-		csc = new ClientSideConnection();
-		
 	}
 
 	private class DrawingComponent extends JComponent{
@@ -288,7 +279,7 @@ public class PlayerGUI extends JFrame {
 	}
 
 	public static void main (String[] args) {
-		PlayerGUI p = new PlayerGUI(900, 650);
+		Player p = new Player(900, 650);
 		
 		p.setUpGUI();
 		
