@@ -166,9 +166,6 @@ public class Player extends JFrame {
 				bulletsFired = 0;
 			}
 
-				// System.out.println(bulletsFired);
-
-				
 			}
 		}
 	}
@@ -220,6 +217,7 @@ public class Player extends JFrame {
                 	break;
 
                 case KeyEvent.VK_CONTROL:
+
                 	reload = true;
                 	break;
                 	
@@ -250,6 +248,7 @@ public class Player extends JFrame {
                 	break;
 
                 case KeyEvent.VK_SPACE:
+                	System.out.println(bulletsFired);
                 	if (bulletsFired == 5) {
                 		System.out.println("Press Ctrl to reload");
                 	}
@@ -258,7 +257,7 @@ public class Player extends JFrame {
 	                	bulletsFired++;
 	                	bulletsLeft--;
                 	}
-                	
+
                 	break;
 
                 case KeyEvent.VK_CONTROL:
