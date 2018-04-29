@@ -69,10 +69,9 @@ public class Player extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		container.setLayout(new BorderLayout());
-
 		container.add(dc);
 
-		dc.revalidate();
+		// dc.revalidate();
 		
 		this.setVisible(true);
 	}
@@ -87,7 +86,6 @@ public class Player extends JFrame {
 			Graphics2D g2d = (Graphics2D) g;
 			RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			g2d.setRenderingHints(rh);
-
 			
 			bullet1.draw(g2d);
 			bullet2.draw(g2d);
@@ -126,40 +124,29 @@ public class Player extends JFrame {
 
 			if (spacebar && bulletsFired < 7) {
 				if (bulletsFired == 1) {
-					// bullet1.reloadBullet(ps.getPositionX(), ps.getPositionY());
-
-					bullet1.fireBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
+					bullet1.loadBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
+					bullet1.fireBullet(speed);
 					dc.repaint();
-
 				}
 
 				else if (bulletsFired == 2) {
-					bullet2.fireBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
+					bullet2.loadBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
 					dc.repaint();
 				}
 
 				else if (bulletsFired == 3) {
-					bullet3.fireBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
+					bullet3.loadBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
 					dc.repaint();
 				}
 
 				else if (bulletsFired == 4) {
-					bullet4.fireBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
+					bullet4.loadBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
 					dc.repaint();
 				}
 
 				else if (bulletsFired == 5) {
-					bullet5.fireBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
+					bullet5.loadBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
 					dc.repaint();
-
-					/*if (bulletsLeft == 0) {
-					bulletsFired = 0;
-					}*/
-				}
-
-				else if (bulletsFired == 6) {
-					
-
 				}
 
 			if (reload) {
@@ -219,6 +206,11 @@ public class Player extends JFrame {
 
                 case KeyEvent.VK_SPACE:
                 	spacebar = true;
+
+                	if (trigger) {
+                		
+                	}
+
                 	break;
 
                 case KeyEvent.VK_CONTROL:
@@ -253,6 +245,7 @@ public class Player extends JFrame {
                 	break;
 
                 case KeyEvent.VK_SPACE:
+                	
                 	System.out.println(bulletsFired);
                 	if (bulletsFired == 5) {
                 		System.out.println("Press Ctrl to reload");
