@@ -165,6 +165,10 @@ public class Player extends JFrame {
 			if (reload) {
 				bulletsFired = 0;
 				bullet1.reloadBullet(850, 300);
+				bullet2.reloadBullet(850, 350);
+				bullet3.reloadBullet(850, 400);
+				bullet4.reloadBullet(850, 450);
+				bullet5.reloadBullet(850, 500);
 			}
 
 			}
