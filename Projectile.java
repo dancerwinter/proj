@@ -24,11 +24,11 @@ public class Projectile implements DrawingObject {
 
 	public void fireBullet(double speed, double firingPositionX, double firingPositionY) {
 
-		x = firingPositionX;
+		x = firingPositionX - 1;
 		
-		if (y != -34) {
-			y -= speed;
-		}
+		// if (y != -34) {
+		// 	y -= speed;
+		// }
 
 		if (y < -36) {
 			y = firingPositionY;

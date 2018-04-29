@@ -38,10 +38,10 @@ public class PlayerShip implements DrawingObject {
 		x += speed;
 		
 		if (x <= 0) {
-			x = 950;
+			x = 0;
 		}
 	}
-
+	
 	public void moveRight(double speed) {
 		x += speed;
 
