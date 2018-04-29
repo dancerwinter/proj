@@ -3,7 +3,7 @@ import java.awt.geom.*;
 
 public class PlayerShip implements DrawingObject {
 
-	private Ellipse2D.Double r;
+	private Rectangle2D.Double r;
 	private Color color;
 	private double x, y;
 	private double width, height;
@@ -18,7 +18,7 @@ public class PlayerShip implements DrawingObject {
 
 	@Override
 	public void draw(Graphics2D g2d) {
-		r = new Ellipse2D.Double(x, y, width, height);
+		r = new Rectangle2D.Double(x, y, width, height);
 
 		g2d.setColor(color);
 		g2d.fill(r);
@@ -61,8 +61,8 @@ public class PlayerShip implements DrawingObject {
 	public void moveDown(double speed) {
 		y += speed;
 
-		if (y >= 525) {
-			y = 525;
+		if (y >= 524) {
+			y = 524;
 		}
 	}
 }
