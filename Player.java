@@ -46,11 +46,11 @@ public class Player extends JFrame {
 		height = h;
 		container = this.getContentPane();
 		ps = new PlayerShip(Color.RED);
-		bullet1 = new Projectile(850, 300);
-		bullet2 = new Projectile(850, 350);
-		bullet3 = new Projectile(850, 400);
-		bullet4 = new Projectile(850, 450);
-		bullet5 = new Projectile(850, 500);
+		bullet1 = new Projectile(690, 550);
+		bullet2 = new Projectile(730, 550);
+		bullet3 = new Projectile(770, 550);
+		bullet4 = new Projectile(810, 550);
+		bullet5 = new Projectile(850, 550);
 
 		dc = new DrawingComponent();	
 		mkl = new MyKeyListener();
@@ -164,11 +164,11 @@ public class Player extends JFrame {
 
 			if (reload) {
 				bulletsFired = 0;
-				bullet1.reloadBullet(850, 300);
-				bullet2.reloadBullet(850, 350);
-				bullet3.reloadBullet(850, 400);
-				bullet4.reloadBullet(850, 450);
-				bullet5.reloadBullet(850, 500);
+				bullet1.reloadBullet(690, 550);
+				bullet2.reloadBullet(730, 550);
+				bullet3.reloadBullet(770, 550);
+				bullet4.reloadBullet(810, 550);
+				bullet5.reloadBullet(850, 550);
 			}
 
 			}
