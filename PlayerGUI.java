@@ -251,17 +251,6 @@ public class PlayerGUI extends JFrame {
                 }
 		}
 	}
-
-	/**
-	* @method
-	* void sets up connection to GameServer
-	*/
-	public void connectToServer()
-	{
-		csc = new ClientSideConnection();
-		
-	}
-
 	/**
 	 * This private class is for the client side connection.
 	 */
