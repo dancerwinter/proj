@@ -21,7 +21,7 @@ import java.net.*;
  *
  *
  */
-public class PlayerGUI extends JFrame {
+public class Player extends JFrame {
 	
 	private int width, height;
 	private int bulletsFired, bulletsLeft;
@@ -34,13 +34,14 @@ public class PlayerGUI extends JFrame {
 	private Projectile bullet1, bullet2, bullet3, bullet4, bullet5;
 	private boolean up, down, left, right, spacebar;
 	private Timer tm;
-
+	private int playerID;
+	private int otherPlayer;
 	/**
 	 * @Constructor
 	 * param: w = width of frame h = height of frame
 	 *
 	 */
-	public PlayerGUI(int w, int h) {
+	public Player(int w, int h) {
 		width = w;
 		height = h;
 		container = this.getContentPane();
@@ -64,7 +65,7 @@ public class PlayerGUI extends JFrame {
 
 	public void setUpGUI() {
 		this.setSize(width, height);
-		this.setTitle("SPACE WARS");
+		this.setTitle("SPACE WARS" + playerID);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		container.setLayout(new BorderLayout());
@@ -253,16 +254,6 @@ public class PlayerGUI extends JFrame {
 	}
 
 	/**
-	* @method
-	* void sets up connection to GameServer
-	*/
-	public void connectToServer()
-	{
-		csc = new ClientSideConnection();
-		
-	}
-
-	/**
 	 * This private class is for the client side connection.
 	 */
 	private class ClientSideConnection
@@ -279,6 +270,8 @@ public class PlayerGUI extends JFrame {
 				socket = new Socket("localhost",1842);
 				dataIn = new DataInputStream(socket.getInputStream());
 				dataOut = new DataOutputStream(socket.getOutputStream());
+				playerID = dataIn.readInt();
+				System.out.println("Connected to server as player number" + playerID);
 			}
 			catch(IOException ex)
 			{
@@ -288,7 +281,7 @@ public class PlayerGUI extends JFrame {
 	}
 
 	public static void main (String[] args) {
-		PlayerGUI p = new PlayerGUI(900, 650);
+		Player p = new Player(900, 650);
 		
 		p.setUpGUI();
 		

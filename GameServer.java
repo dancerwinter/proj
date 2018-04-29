@@ -42,7 +42,15 @@ public class GameServer {
 				numPlay++;
 				System.out.println("Player#" + numPlay + " has connected");
 				ServerSideConnectionOut ssco = new ServerSideConnectionOut(s, numPlay);
-
+				if(numPlay == 1)
+				{
+					player1 = ssco;
+				}
+				else{
+					player2 = ssco;
+				}
+				Thread t = new Thread(ssco);
+				t.start();
 			}
 		} catch(IOException ex) {
 			System.out.println("IOException from connectPlayers()");
