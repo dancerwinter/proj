@@ -29,6 +29,10 @@ public class Projectile implements DrawingObject {
 		if (y != -34) {
 			y -= speed;
 		}
+
+		if (y < -36) {
+			y = firingPositionY;
+		}
 	}
 
 	public void reloadBullet(double xLocation, double yLocation) {
