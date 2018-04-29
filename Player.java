@@ -125,7 +125,7 @@ public class Player extends JFrame {
 			}
 
 			if (spacebar && bulletsFired < 6) {
-				if (bulletsFired == 1) {
+				if (bulletsFired == 0) {
 					// bullet1.reloadBullet(ps.getPositionX(), ps.getPositionY());
 
 					bullet1.fireBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
@@ -133,22 +133,22 @@ public class Player extends JFrame {
 
 				}
 
-				else if (bulletsFired == 2) {
+				else if (bulletsFired == 1) {
 					bullet2.fireBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
 					dc.repaint();
 				}
 
-				else if (bulletsFired == 3) {
+				else if (bulletsFired == 2) {
 					bullet3.fireBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
 					dc.repaint();
 				}
 
-				else if (bulletsFired == 4) {
+				else if (bulletsFired == 3) {
 					bullet4.fireBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
 					dc.repaint();
 				}
 
-				else if (bulletsFired == 5) {
+				else if (bulletsFired == 4) {
 					bullet5.fireBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
 					dc.repaint();
 
@@ -157,13 +157,15 @@ public class Player extends JFrame {
 					}*/
 				}
 
+				else if (bulletsFired == 5) {
+					
+
+				}
+
 			if (reload) {
 				bulletsFired = 0;
 			}
 
-				System.out.println(bulletsFired);
-
-				
 			}
 		}
 	}
@@ -215,6 +217,7 @@ public class Player extends JFrame {
                 	break;
 
                 case KeyEvent.VK_CONTROL:
+
                 	reload = true;
                 	break;
                 	
@@ -245,8 +248,16 @@ public class Player extends JFrame {
                 	break;
 
                 case KeyEvent.VK_SPACE:
-                	bulletsFired++;
-                	bulletsLeft--;
+                	System.out.println(bulletsFired);
+                	if (bulletsFired == 5) {
+                		System.out.println("Press Ctrl to reload");
+                	}
+
+                	else {
+	                	bulletsFired++;
+	                	bulletsLeft--;
+                	}
+
                 	break;
 
                 case KeyEvent.VK_CONTROL:
