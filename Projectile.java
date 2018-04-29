@@ -15,26 +15,25 @@ public class Projectile implements Runnable{
 	}
 
 	public void draw(Graphics2D g2d) {
-		r = new Rectangle2D.Double(x, y, 20, 34);
+		r = new Rectangle2D.Double(x, y, 20, 40);
 
 		g2d.setColor(new Color(255, 102, 204));
 		g2d.fill(r);
 	}
 
 	public void run() {
-		
 	}
 
-	public void fireBullet(double speed, double firingPositionX, double firingPositionY) {
+	public void loadBullet(double speed, double firingPositionX, double firingPositionY) {
 
-		x = firingPositionX - 1;
-		
-		// if (y != -34) {
-		// 	y -= speed;
-		// }
+		x = firingPositionX - 9;
+		y = firingPositionY;
 
-		if (y < -36) {
-			y = firingPositionY;
+	}
+
+	public void fireBullet(double speed) {
+		if (y != -36) {
+			y -= speed ;
 		}
 	}
 
