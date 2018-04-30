@@ -25,7 +25,7 @@ public class Projectile implements Runnable{
 
 	}
 
-	public void loadBullet(double speed, double firingPositionX, double firingPositionY) {
+	public void loadBullet(double firingPositionX, double firingPositionY) {
 
 		x = firingPositionX - 9;
 		y = firingPositionY;
@@ -35,6 +35,10 @@ public class Projectile implements Runnable{
 	public void fireBullet(double speed) {
 		if (y != -36) {
 			y -= speed ;
+		}
+
+		else if (y < -50) {
+			y = -40;
 		}
 	}
 

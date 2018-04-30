@@ -32,7 +32,7 @@ public class Player extends JFrame {
 	private ClientSideConnection csc;
 	private PlayerShip ps;
 	private Projectile bullet1, bullet2, bullet3, bullet4, bullet5;
-	private boolean up, down, left, right, spacebar, reload;
+	private boolean up, down, left, right, spacebar, reload, trigger;
 	private Timer tm;
 	private int playerID;
 	private int otherPlayer;
@@ -46,6 +46,9 @@ public class Player extends JFrame {
 		height = h;
 		container = this.getContentPane();
 		ps = new PlayerShip(Color.RED);
+
+		ArrayList<Projectile> cartridge = new ArrayList<Projectile>();
+
 		bullet1 = new Projectile(690, 550);
 		bullet2 = new Projectile(730, 550);
 		bullet3 = new Projectile(770, 550);
@@ -124,40 +127,63 @@ public class Player extends JFrame {
 
 			if (spacebar && bulletsFired < 7) {
 				if (bulletsFired == 1) {
-					bullet1.loadBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
-					bullet1.fireBullet(speed);
+					bullet1.loadBullet(ps.getPositionX(), ps.getPositionY());
 					dc.repaint();
 				}
 
 				else if (bulletsFired == 2) {
-					bullet2.loadBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
+					bullet2.loadBullet(ps.getPositionX(), ps.getPositionY());
 					dc.repaint();
 				}
 
 				else if (bulletsFired == 3) {
-					bullet3.loadBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
+					bullet3.loadBullet(ps.getPositionX(), ps.getPositionY());
 					dc.repaint();
 				}
 
 				else if (bulletsFired == 4) {
-					bullet4.loadBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
+					bullet4.loadBullet(ps.getPositionX(), ps.getPositionY());
 					dc.repaint();
 				}
 
 				else if (bulletsFired == 5) {
-					bullet5.loadBullet(speed * 5, ps.getPositionX(), ps.getPositionY());
+					bullet5.loadBullet(ps.getPositionX(), ps.getPositionY());
 					dc.repaint();
 				}
 
-			if (reload) {
-				bulletsFired = 0;
-				bullet1.reloadBullet(690, 550);
-				bullet2.reloadBullet(730, 550);
-				bullet3.reloadBullet(770, 550);
-				bullet4.reloadBullet(810, 550);
-				bullet5.reloadBullet(850, 550);
-			}
+				if (!spacebar && !left && !right) {
+					if (bulletsFired == 1) {
+						bullet1.fireBullet(speed);
+						dc.repaint();
+					}
 
+					else if (bulletsFired == 2) {
+						bullet2.fireBullet(speed);
+					}
+
+					else if (bulletsFired == 3) {
+						bullet3.fireBullet(speed);
+					}
+
+					else if (bulletsFired == 4) {
+						bullet4.fireBullet(speed);
+					}
+
+					else if (bulletsFired == 5) {
+						bullet5.fireBullet(speed);
+					}
+				}
+
+				bullet1.fireBullet(speed * 3);
+
+				if (reload) {
+					bulletsFired = 0;
+					bullet1.reloadBullet(690, 550);
+					bullet2.reloadBullet(730, 550);
+					bullet3.reloadBullet(770, 550);
+					bullet4.reloadBullet(810, 550);
+					bullet5.reloadBullet(850, 550);
+				}
 			}
 		}
 	}
@@ -206,15 +232,10 @@ public class Player extends JFrame {
 
                 case KeyEvent.VK_SPACE:
                 	spacebar = true;
-
-                	if (trigger) {
-                		
-                	}
-
+                	trigger = true;
                 	break;
 
                 case KeyEvent.VK_CONTROL:
-
                 	reload = true;
                 	break;
                 	
@@ -245,7 +266,7 @@ public class Player extends JFrame {
                 	break;
 
                 case KeyEvent.VK_SPACE:
-                	
+
                 	System.out.println(bulletsFired);
                 	if (bulletsFired == 5) {
                 		System.out.println("Press Ctrl to reload");
