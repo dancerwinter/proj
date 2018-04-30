@@ -77,6 +77,17 @@ public class Player extends JFrame {
 		// dc.revalidate();
 		
 		this.setVisible(true);
+
+		if (playerID == 1)
+		{
+			System.out.println("You're player number 1");
+			otherPlayer = 2;
+		}
+		if(playerID == 2)
+		{
+			System.out.println("you're player number 2");
+			otherPlayer = 1;
+		}
 	}
 
 	private class DrawingComponent extends JComponent{
@@ -232,7 +243,6 @@ public class Player extends JFrame {
 
                 case KeyEvent.VK_SPACE:
                 	spacebar = true;
-                	trigger = true;
                 	break;
 
                 case KeyEvent.VK_CONTROL:
@@ -312,10 +322,13 @@ public class Player extends JFrame {
 			}
 		}
 	}
-
+	public void connectToServer()
+	{
+		csc = new ClientSideConnection();
+	}
 	public static void main (String[] args) {
 		Player p = new Player(900, 650);
-		
+		p.connectToServer();
 		p.setUpGUI();
 		
 		
