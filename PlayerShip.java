@@ -11,8 +11,8 @@ public class PlayerShip {
 	private double x, y;
 	private double width, height;
 	private int health;
-	private Projectile bullet1,bullet2,bullet3,bullet4,bullet5;
-	private Projectile[] ammo;
+	// private Projectile bullet1,bullet2,bullet3,bullet4,bullet5;
+	// private Projectile[] ammo;
 	
 
 	public PlayerShip() {
@@ -21,36 +21,35 @@ public class PlayerShip {
 		width = 80;
 		height = 80;
 		health = 5;
-		ammo = new Projectile[5];
+		// ammo = new Projectile[5];
 
-		bullet1 = new Projectile(100,500);
-		bullet2 = new Projectile(150,500);
-		bullet3 = new Projectile(200,500);
-		bullet4 = new Projectile(250,500);
-		bullet5 = new Projectile(300,500);
+		// bullet1 = new Projectile(100,500);
+		// bullet2 = new Projectile(150,500);
+		// bullet3 = new Projectile(200,500);
+		// bullet4 = new Projectile(250,500);
+		// bullet5 = new Projectile(300,500);
+		
+		// ammo[0] = bullet1;
+		// ammo[1] = bullet2;
+		// ammo[2] = bullet3;
+		// ammo[3] = bullet4;
+		// ammo[4] = bullet5;
 		
 
-		ammo[0] = bullet1;
-		ammo[1] = bullet2;
-		ammo[2] = bullet3;
-		ammo[3] = bullet4;
-		ammo[4] = bullet5;
-		
+		// for (int i = 0; i<5 ; i++)
+		// {
+		// 	ammo[i] = new Projectile(100+(i*10),500);
 
-		for (int i = 0; i<5 ; i++)
-		{
-			ammo[i] = new Projectile(100+(i*10),500);
-
-		}
+		// }
 
 	}
 
 	public void draw(Graphics2D g2d) {
 
-		for (int i = 0; i<5;i++)
-		{
-			ammo[i].draw(g2d);
-		}
+		// for (int i = 0; i<5;i++)
+		// {
+		// 	ammo[i].draw(g2d);
+		// }
 		r = new Rectangle2D.Double(x, y, width, height);
 		g2d.setColor(new Color(0,0,0,100));
 		g2d.fill(r);
