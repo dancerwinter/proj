@@ -32,7 +32,7 @@ public class Projectile implements Runnable{
 
 	public void loadBullet(double firingPositionX, double firingPositionY) {
 
-		x = firingPositionX - 9;
+		x = firingPositionX;
 		y = firingPositionY;
 	}
 
