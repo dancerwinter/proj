@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.geom.*;
 
-public class PlayerShip implements DrawingObject {
+public class PlayerShip {
 
 	private Rectangle2D.Double r;
 	private Color color;
@@ -21,11 +21,10 @@ public class PlayerShip implements DrawingObject {
 
 	}
 
-	@Override
 	public void draw(Graphics2D g2d) {
 		r = new Rectangle2D.Double(x, y, width, height);
 
-		
+
 		g2d.setColor(Color.RED);
 		g2d.fill(r);
 	}
@@ -87,7 +86,7 @@ public class PlayerShip implements DrawingObject {
 		}
 	}
 
-	private class Projectile implements DrawingObject {
+	private class Projectile {
 
 		private Rectangle2D.Double r;
 		private double x, y;
@@ -96,7 +95,6 @@ public class PlayerShip implements DrawingObject {
 			
 		}
 
-		@Override
 		public void draw(Graphics2D g2d) {
 
 			r = new Rectangle2D.Double(x, y, 20, 40);
