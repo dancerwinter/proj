@@ -1,19 +1,21 @@
 import java.awt.*;
 import java.awt.geom.*;
 
-public class Projectile implements Runnable{
+public class Projectile implements DrawingObject{
 	
 	private Rectangle2D.Double r;
 	private double x, y;
-	
+	private double speed;
 	private double barrel;
 	private PlayerShip ps;
 
 	public Projectile(double a, double b) {
 		x = a;
 		y = b;
+		speed = 5;
 	}
 
+	@Override
 	public void draw(Graphics2D g2d) {
 		r = new Rectangle2D.Double(x, y, 20, 40);
 
@@ -21,24 +23,14 @@ public class Projectile implements Runnable{
 		g2d.fill(r);
 	}
 
-	public void run() {
+	public void fireBullet() {	
+		y -= 5;	
 	}
 
 	public void loadBullet(double firingPositionX, double firingPositionY) {
 
 		x = firingPositionX - 9;
 		y = firingPositionY;
-
-	}
-
-	public void fireBullet(double speed) {
-		if (y != -36) {
-			y -= speed ;
-		}
-
-		else if (y < -50) {
-			y = -40;
-		}
 	}
 
 	public void reloadBullet(double xLocation, double yLocation) {
@@ -53,12 +45,14 @@ public class Projectile implements Runnable{
 	public double getPositionY() {
 		return y;
 	}
-	public boolean isOutOfFrame(){
+
+	public boolean isOutOfFrame() {
 		boolean outOfFrame = false;
-		if(y <= -40)
-		{
+
+		if(y <= -40) {
 			outOfFrame = true;
 		}
+
 		return outOfFrame;
 	}
 }

@@ -21,7 +21,7 @@ import java.net.*;
  *
  *
  */
-public class Player extends JFrame {
+public class Player extends JFrame{
 	
 	private int width, height;
 	private int bulletsFired, bulletsLeft;
@@ -31,29 +31,31 @@ public class Player extends JFrame {
 	private MyKeyListener mkl;
 	private ClientSideConnection csc;
 	private PlayerShip ps;
-	private Projectile bullet1, bullet2, bullet3, bullet4, bullet5;
-	private boolean up, down, left, right, spacebar, reload, trigger;
+	private Background bg;
+	
+	// private Projectile bullet1, bullet2, bullet3, bullet4, bullet5;
+	private boolean up, down, left, right, spacebar, reload;
 	private Timer tm;
 	private int playerID;
 	private int otherPlayer;
+
 	/**
 	 * @Constructor
-	 * param: w = width of frame h = height of frame
+	 * @param w = width of frame, h = height of frame
 	 *
 	 */
 	public Player(int w, int h) {
 		width = w;
 		height = h;
 		container = this.getContentPane();
-		ps = new PlayerShip(Color.RED);
-
-		ArrayList<Projectile> cartridge = new ArrayList<Projectile>();
-
-		bullet1 = new Projectile(690, 550);
+		ps = new PlayerShip();
+		bg = new Background();
+		
+		/*bullet1 = new Projectile(690, 550);
 		bullet2 = new Projectile(730, 550);
 		bullet3 = new Projectile(770, 550);
 		bullet4 = new Projectile(810, 550);
-		bullet5 = new Projectile(850, 550);
+		bullet5 = new Projectile(850, 550);*/
 
 		dc = new DrawingComponent();	
 		mkl = new MyKeyListener();
@@ -77,17 +79,6 @@ public class Player extends JFrame {
 		// dc.revalidate();
 		
 		this.setVisible(true);
-
-		if (playerID == 1)
-		{
-			System.out.println("You're player number 1");
-			otherPlayer = 2;
-		}
-		if(playerID == 2)
-		{
-			System.out.println("you're player number 2");
-			otherPlayer = 1;
-		}
 	}
 
 	private class DrawingComponent extends JComponent{
@@ -101,11 +92,14 @@ public class Player extends JFrame {
 			RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			g2d.setRenderingHints(rh);
 			
-			bullet1.draw(g2d);
+			bg.draw(g2d);
+			
+
+			/*bullet1.draw(g2d);
 			bullet2.draw(g2d);
 			bullet3.draw(g2d);
 			bullet4.draw(g2d);
-			bullet5.draw(g2d);
+			bullet5.draw(g2d);*/
 
 			ps.draw(g2d);
 			
@@ -136,36 +130,39 @@ public class Player extends JFrame {
 				dc.repaint();
 			}
 
-			if (spacebar && bulletsFired < 7) {
+			if (spacebar) {
+				ps.fire();
+			}
+
+			/*if (spacebar && bulletsFired < 7) {
 				if (bulletsFired == 1) {
-					bullet1.loadBullet(ps.getPositionX(), ps.getPositionY());
+					bullet1.fireBullet(speed);
 					dc.repaint();
 				}
 
 				else if (bulletsFired == 2) {
-					bullet2.loadBullet(ps.getPositionX(), ps.getPositionY());
+					bullet2.fireBullet(speed);
 					dc.repaint();
 				}
 
 				else if (bulletsFired == 3) {
-					bullet3.loadBullet(ps.getPositionX(), ps.getPositionY());
+					bullet3.fireBullet(speed);
 					dc.repaint();
 				}
 
 				else if (bulletsFired == 4) {
-					bullet4.loadBullet(ps.getPositionX(), ps.getPositionY());
+					bullet4.fireBullet(speed);
 					dc.repaint();
 				}
 
 				else if (bulletsFired == 5) {
-					bullet5.loadBullet(ps.getPositionX(), ps.getPositionY());
+					bullet5.fireBullet(speed);
 					dc.repaint();
 				}
 
-				if (!spacebar && !left && !right) {
+				if (!spacebar) {
 					if (bulletsFired == 1) {
 						bullet1.fireBullet(speed);
-						dc.repaint();
 					}
 
 					else if (bulletsFired == 2) {
@@ -185,8 +182,6 @@ public class Player extends JFrame {
 					}
 				}
 
-				bullet1.fireBullet(speed * 3);
-
 				if (reload) {
 					bulletsFired = 0;
 					bullet1.reloadBullet(690, 550);
@@ -195,7 +190,7 @@ public class Player extends JFrame {
 					bullet4.reloadBullet(810, 550);
 					bullet5.reloadBullet(850, 550);
 				}
-			}
+			}*/
 		}
 	}
 
@@ -276,8 +271,9 @@ public class Player extends JFrame {
                 	break;
 
                 case KeyEvent.VK_SPACE:
-
-                	System.out.println(bulletsFired);
+                	spacebar = false;
+                	
+                	/*System.out.println(bulletsFired);
                 	if (bulletsFired == 5) {
                 		System.out.println("Press Ctrl to reload");
                 	}
@@ -285,7 +281,7 @@ public class Player extends JFrame {
                 	else {
 	                	bulletsFired++;
 	                	bulletsLeft--;
-                	}
+                	}*/
 
                 	break;
 
@@ -322,13 +318,10 @@ public class Player extends JFrame {
 			}
 		}
 	}
-	public void connectToServer()
-	{
-		csc = new ClientSideConnection();
-	}
+
 	public static void main (String[] args) {
 		Player p = new Player(900, 650);
-		p.connectToServer();
+		
 		p.setUpGUI();
 		
 		
