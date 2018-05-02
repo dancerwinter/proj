@@ -1,6 +1,6 @@
 import java.awt.*;
 import java.awt.geom.*;
-
+import java.util.ArrayList;
 public class PlayerShip implements DrawingObject {
 
 	private Rectangle2D.Double r;
@@ -9,6 +9,7 @@ public class PlayerShip implements DrawingObject {
 	private double width, height;
 	private int health;
 	private Projectile bullet;
+	private Projectile[] ammo;
 
 	public PlayerShip() {
 		x = 450;
@@ -16,8 +17,13 @@ public class PlayerShip implements DrawingObject {
 		width = 80;
 		height = 80;
 		health = 5;
+		ammo = new Projectile[5];
+		for (int i = 0; i<5 ; i++)
+		{
+			ammo[i] = new Projectile(100+(i*10),500);
 
-		bullet = new Projectile();
+		}
+	
 
 	}
 
@@ -25,16 +31,17 @@ public class PlayerShip implements DrawingObject {
 	public void draw(Graphics2D g2d) {
 		r = new Rectangle2D.Double(x, y, width, height);
 
+		for(int i = 0; i<5; i++)
+
+		{
+			ammo[i].draw(g2d);
+		}
 		
-		g2d.setColor(Color.RED);
-		g2d.fill(r);
+		
 	}
 
 	public void fire() {
-		// bullet = new Projectile(this.getPositionX(), this.getPositionY());
 
-		// bullet.loadBullet(this.getPositionX(), this.getPositionY());
-		bullet.fireBullet();
 	}
 
 	public double getPositionX() {
@@ -84,58 +91,6 @@ public class PlayerShip implements DrawingObject {
 
 		if (y >= 459) {
 			y = 459;
-		}
-	}
-
-	private class Projectile implements DrawingObject {
-
-		private Rectangle2D.Double r;
-		private double x, y;
-
-		public Projectile() {
-			
-		}
-
-		@Override
-		public void draw(Graphics2D g2d) {
-
-			r = new Rectangle2D.Double(x, y, 20, 40);
-
-			g2d.setColor(new Color(255, 102, 204));
-			g2d.fill(r);
-		}
-
-		public void fireBullet() {	
-			y -= 5;	
-		}
-
-		public void loadBullet(double firingPositionX, double firingPositionY) {
-
-			x = firingPositionX;
-			y = firingPositionY;
-		}
-
-		public void reloadBullet(double xLocation, double yLocation) {
-			x = xLocation;
-			y = yLocation;
-		}
-
-		public double getPositionX() {
-			return x;
-		}
-
-		public double getPositionY() {
-			return y;
-		}
-
-		public boolean isOutOfFrame() {
-			boolean outOfFrame = false;
-
-			if(y <= -40) {
-				outOfFrame = true;
-			}
-			
-			return outOfFrame;
 		}
 	}
 }
