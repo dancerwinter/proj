@@ -1,7 +1,10 @@
 import java.awt.*;
 import java.awt.geom.*;
+
 import java.util.ArrayList;
-public class PlayerShip implements DrawingObject {
+
+public class PlayerShip {
+
 
 	private Rectangle2D.Double r;
 	private Color color;
@@ -19,6 +22,7 @@ public class PlayerShip implements DrawingObject {
 		height = 80;
 		health = 5;
 		ammo = new Projectile[5];
+
 		bullet1 = new Projectile(100,500);
 		bullet2 = new Projectile(150,500);
 		bullet3 = new Projectile(200,500);
@@ -32,10 +36,17 @@ public class PlayerShip implements DrawingObject {
 		ammo[3] = bullet4;
 		ammo[4] = bullet5;
 		
+
+		for (int i = 0; i<5 ; i++)
+		{
+			ammo[i] = new Projectile(100+(i*10),500);
+
+		}
+
 	}
 
-	@Override
 	public void draw(Graphics2D g2d) {
+
 		for (int i = 0; i<5;i++)
 		{
 			ammo[i].draw(g2d);
@@ -43,7 +54,7 @@ public class PlayerShip implements DrawingObject {
 		r = new Rectangle2D.Double(x, y, width, height);
 		g2d.setColor(new Color(0,0,0,100));
 		g2d.fill(r);
-		
+
 		
 	}
 	public void loadBullet(){
