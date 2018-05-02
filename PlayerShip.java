@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.geom.*;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class PlayerShip {
 
@@ -11,8 +11,6 @@ public class PlayerShip {
 	private double x, y;
 	private double width, height;
 	private int health;
-	private Projectile bullet;
-	private Projectile[] ammo;
 
 	public PlayerShip() {
 		x = 450;
@@ -20,12 +18,6 @@ public class PlayerShip {
 		width = 80;
 		height = 80;
 		health = 5;
-		ammo = new Projectile[5];
-		for (int i = 0; i<5 ; i++)
-		{
-			ammo[i] = new Projectile(100+(i*10),500);
-
-		}
 	}
 
 	public void draw(Graphics2D g2d) {
@@ -33,16 +25,10 @@ public class PlayerShip {
 
 		g2d.setColor(Color.RED);
 		g2d.fill(r);
-
-		for(int i = 0; i<5; i++)
-
-		{
-			ammo[i].draw(g2d);
-		}
 	}
 
 	public void fire() {
-
+		
 	}
 
 	public double getPositionX() {
