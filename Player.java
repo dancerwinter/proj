@@ -14,13 +14,9 @@ import java.net.*;
  * @author Neil Daniel B. Bautista, Jessica Anne M. Manzano
  * @IDNumber 170252, 171429
  * @version April 24, 2018
- *
+ * This program is 
  */
 
-/**
- *
- *
- */
 public class Player extends JFrame{
 	
 	private int width, height;
@@ -93,7 +89,6 @@ public class Player extends JFrame{
 			g2d.setRenderingHints(rh);
 			
 			bg.draw(g2d);
-			
 
 			bullet1.draw(g2d);
 			bullet2.draw(g2d);
@@ -139,7 +134,6 @@ public class Player extends JFrame{
 				dc.repaint();
 			}
 
-
 			if (bulletsFired >= 1) {
 				bullet1.fireBullet();
 				dc.repaint();
@@ -169,7 +163,6 @@ public class Player extends JFrame{
 
 	/**
 	 * This private class implements KeyListener.
-	 * 
 	 */
 	private class MyKeyListener implements KeyListener {
 
@@ -214,23 +207,23 @@ public class Player extends JFrame{
                 	bulletsFired++;
 
                 	if (bulletsFired == 1) {
-                		bullet1.loadBullet(ps.getPositionX(), ps.getPositionY());
+                		bullet1.loadBullet(ps.getPositionX() - 5, ps.getPositionY());
                 	}
 
                 	else if (bulletsFired == 2) {
-                		bullet2.loadBullet(ps.getPositionX(), ps.getPositionY());
+                		bullet2.loadBullet(ps.getPositionX() - 5, ps.getPositionY());
                 	}
 
                 	else if (bulletsFired == 3) {
-                		bullet3.loadBullet(ps.getPositionX(), ps.getPositionY());
+                		bullet3.loadBullet(ps.getPositionX() - 5, ps.getPositionY());
                 	}
 
                 	else if (bulletsFired == 4) {
-                		bullet4.loadBullet(ps.getPositionX(), ps.getPositionY());
+                		bullet4.loadBullet(ps.getPositionX() - 5, ps.getPositionY());
                 	}
 
                 	else if (bulletsFired == 5) {
-                		bullet5.loadBullet(ps.getPositionX(), ps.getPositionY());
+                		bullet5.loadBullet(ps.getPositionX() - 5, ps.getPositionY());
                 	}
 
                 	break;
@@ -309,8 +302,6 @@ public class Player extends JFrame{
 	public static void main (String[] args) {
 		Player p = new Player(900, 650);
 		
-		p.setUpGUI();
-		
-		
+		p.setUpGUI();		
 	}
 }
