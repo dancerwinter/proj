@@ -33,7 +33,7 @@ public class Player extends JFrame{
 	private PlayerShip ps;
 	private Background bg;
 	
-	// private Projectile bullet1, bullet2, bullet3, bullet4, bullet5;
+	private Projectile bullet1, bullet2, bullet3, bullet4, bullet5;
 	private boolean up, down, left, right, spacebar, reload;
 	private Timer tm;
 	private int playerID;
@@ -51,11 +51,11 @@ public class Player extends JFrame{
 		ps = new PlayerShip();
 		bg = new Background();
 		
-		/*bullet1 = new Projectile(690, 550);
+		bullet1 = new Projectile(690, 550);
 		bullet2 = new Projectile(730, 550);
 		bullet3 = new Projectile(770, 550);
 		bullet4 = new Projectile(810, 550);
-		bullet5 = new Projectile(850, 550);*/
+		bullet5 = new Projectile(850, 550);
 
 		dc = new DrawingComponent();	
 		mkl = new MyKeyListener();
@@ -95,11 +95,11 @@ public class Player extends JFrame{
 			bg.draw(g2d);
 			
 
-			/*bullet1.draw(g2d);
+			bullet1.draw(g2d);
 			bullet2.draw(g2d);
 			bullet3.draw(g2d);
 			bullet4.draw(g2d);
-			bullet5.draw(g2d);*/
+			bullet5.draw(g2d);
 
 			ps.draw(g2d);
 			
@@ -130,67 +130,40 @@ public class Player extends JFrame{
 				dc.repaint();
 			}
 
-			if (spacebar) {
-				ps.fire();
+			if (reload) {
+				bullet1.loadBullet(690, 550);
+				bullet2.loadBullet(730, 550);
+				bullet3.loadBullet(770, 550);
+				bullet4.loadBullet(810, 550);
+				bullet5.loadBullet(850, 550);
+				dc.repaint();
 			}
 
-			/*if (spacebar && bulletsFired < 7) {
-				if (bulletsFired == 1) {
-					bullet1.fireBullet(speed);
-					dc.repaint();
-				}
 
-				else if (bulletsFired == 2) {
-					bullet2.fireBullet(speed);
-					dc.repaint();
-				}
+			if (bulletsFired >= 1) {
+				bullet1.fireBullet();
+				dc.repaint();
+			}
 
-				else if (bulletsFired == 3) {
-					bullet3.fireBullet(speed);
-					dc.repaint();
-				}
+			if (bulletsFired >= 2) {
+				bullet2.fireBullet();
+				dc.repaint();
+			}
 
-				else if (bulletsFired == 4) {
-					bullet4.fireBullet(speed);
-					dc.repaint();
-				}
+			if (bulletsFired >= 3) {
+				bullet3.fireBullet();
+				dc.repaint();
+			}
 
-				else if (bulletsFired == 5) {
-					bullet5.fireBullet(speed);
-					dc.repaint();
-				}
+			if (bulletsFired >= 4) {
+				bullet4.fireBullet();
+				dc.repaint();
+			}
 
-				if (!spacebar) {
-					if (bulletsFired == 1) {
-						bullet1.fireBullet(speed);
-					}
-
-					else if (bulletsFired == 2) {
-						bullet2.fireBullet(speed);
-					}
-
-					else if (bulletsFired == 3) {
-						bullet3.fireBullet(speed);
-					}
-
-					else if (bulletsFired == 4) {
-						bullet4.fireBullet(speed);
-					}
-
-					else if (bulletsFired == 5) {
-						bullet5.fireBullet(speed);
-					}
-				}
-
-				if (reload) {
-					bulletsFired = 0;
-					bullet1.reloadBullet(690, 550);
-					bullet2.reloadBullet(730, 550);
-					bullet3.reloadBullet(770, 550);
-					bullet4.reloadBullet(810, 550);
-					bullet5.reloadBullet(850, 550);
-				}
-			}*/
+			if (bulletsFired >= 5) {
+				bullet5.fireBullet();
+				dc.repaint();
+			}
 		}
 	}
 
@@ -238,10 +211,35 @@ public class Player extends JFrame{
 
                 case KeyEvent.VK_SPACE:
                 	spacebar = true;
+                	bulletsFired++;
+
+                	if (bulletsFired == 1) {
+                		bullet1.loadBullet(ps.getPositionX(), ps.getPositionY());
+                	}
+
+                	else if (bulletsFired == 2) {
+                		bullet2.loadBullet(ps.getPositionX(), ps.getPositionY());
+                	}
+
+                	else if (bulletsFired == 3) {
+                		bullet3.loadBullet(ps.getPositionX(), ps.getPositionY());
+                	}
+
+                	else if (bulletsFired == 4) {
+                		bullet4.loadBullet(ps.getPositionX(), ps.getPositionY());
+                	}
+
+                	else if (bulletsFired == 5) {
+                		bullet5.loadBullet(ps.getPositionX(), ps.getPositionY());
+                	}
+
                 	break;
 
                 case KeyEvent.VK_CONTROL:
-                	reload = true;
+                	if (bulletsFired >= 5) {
+	                	reload = true;
+	                	bulletsFired = 0;	
+                	}                	
                 	break;
                 	
                 default:
@@ -272,17 +270,6 @@ public class Player extends JFrame{
 
                 case KeyEvent.VK_SPACE:
                 	spacebar = false;
-                	
-                	/*System.out.println(bulletsFired);
-                	if (bulletsFired == 5) {
-                		System.out.println("Press Ctrl to reload");
-                	}
-
-                	else {
-	                	bulletsFired++;
-	                	bulletsLeft--;
-                	}*/
-
                 	break;
 
                 case KeyEvent.VK_CONTROL:

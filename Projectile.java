@@ -16,7 +16,6 @@ public class Projectile implements Runnable{
 		speed = 5;
 		isNotFired = true;
 	}
-
 	
 	public void draw(Graphics2D g2d) {
 		r = new Rectangle2D.Double(x, y, 20, 40);
@@ -24,21 +23,20 @@ public class Projectile implements Runnable{
 		g2d.setColor(new Color(255, 102, 204));
 		g2d.fill(r);
 	}
+
 	// increments bullets
-	public void fireBullet() {	
-		y -= 5;	
-		isNotFired = false;
+	public void fireBullet() {
+		
+		if (y != -1000) {
+			y -= 25;	
+		}
+		// isNotFired = false;
 	}
 
 	public void loadBullet(double firingPositionX, double firingPositionY) {
 
-		x = firingPositionX - 9;
+		x = firingPositionX;
 		y = firingPositionY;
-	}
-
-	public void reloadBullet(double xLocation, double yLocation) {
-		x = xLocation;
-		y = yLocation;
 	}
 
 	public double getPositionX() {

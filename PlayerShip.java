@@ -10,7 +10,8 @@ public class PlayerShip {
 	private Color color;
 	private double x, y;
 	private double width, height;
-	private int health;
+	private int health, ammoCounter;
+	
 
 	public PlayerShip() {
 		x = 450;
@@ -18,6 +19,7 @@ public class PlayerShip {
 		width = 80;
 		height = 80;
 		health = 5;
+		ammoCounter = 0;
 	}
 
 	public void draw(Graphics2D g2d) {
@@ -25,6 +27,10 @@ public class PlayerShip {
 
 		g2d.setColor(Color.RED);
 		g2d.fill(r);
+	}
+
+	public void loadBullet() {
+		
 	}
 
 	public void fire() {
