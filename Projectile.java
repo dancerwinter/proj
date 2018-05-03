@@ -10,6 +10,9 @@ public class Projectile implements Runnable{
 	private PlayerShip ps;
 	private boolean isNotFired;
 
+	/**
+	 * This is the constructor for the Projectile class.
+	 */
 	public Projectile(double a, double b) {
 		x = a;
 		y = b;
@@ -17,6 +20,9 @@ public class Projectile implements Runnable{
 		isNotFired = true;
 	}
 	
+	/**
+	 * this method draws the projectile.
+	 */
 	public void draw(Graphics2D g2d) {
 		r = new Rectangle2D.Double(x, y, 20, 40);
 
@@ -24,45 +30,55 @@ public class Projectile implements Runnable{
 		g2d.fill(r);
 	}
 
-	// increments bullets
+	/**
+	 * This method decrements the projectile's position.
+	 */
 	public void fireBullet() {
-		
-		if (y != -1000) {
+		if (y != -1) {
 			y -= 25;	
 		}
-		// isNotFired = false;
 	}
 
+	/**
+	 * This method sets the location of the projectile.
+	 */
 	public void loadBullet(double firingPositionX, double firingPositionY) {
 
 		x = firingPositionX;
 		y = firingPositionY;
 	}
 
+	/**
+	 * This method returns the x coordinate of the projectile.
+	 */
 	public double getPositionX() {
 		return x;
 	}
 
-	public void reload()
-	{
-		isNotFired = true;
-	}
-
+	/**
+	 * This method returns the y coordinate of the projectile.
+	 */
 	public double getPositionY() {
 		return y;
 	}
 
+	public void reload() {
+		isNotFired = true;
+	}
+
 	public boolean isOutOfFrame() {
+
 		boolean outOfFrame = false;
 
 		if(y <= -40) {
+
 			outOfFrame = true;
 		}
 
 		return outOfFrame;
 	}
-	public void run()
-	{
+
+	public void run() {
 
 	}
 	
