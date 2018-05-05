@@ -28,6 +28,7 @@ public class Projectile implements Runnable{
 		g2d.setColor(new Color(255, 102, 204));
 		g2d.fill(r);
 	}
+
 	/**
 	* this method is the method used to move the projectile from the top of the frame to the bottom.
 	*/
@@ -37,6 +38,7 @@ public class Projectile implements Runnable{
 			this.isOutOfFrame();
 		}
 	}
+	
 	/**
 	 * This method decrements the projectile's position.
 	 */
@@ -73,6 +75,9 @@ public class Projectile implements Runnable{
 		return y;
 	}
 
+	/**
+	 * @return this is outOfFrame boolean.
+	 */
 	public boolean isOutOfFrame() {
 
 		boolean outOfFrame = false;
