@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.geom.*;
 
-public class Projectile implements Runnable{
+public class Projectile implements Runnable {
 	
 	private Rectangle2D.Double r;
 	private double x, y;
@@ -12,6 +12,8 @@ public class Projectile implements Runnable{
 
 	/**
 	 * This is the constructor for the Projectile class.
+	 * @param a the x coordinate
+	 * @param b the y coordinate
 	 */
 	public Projectile(double a, double b) {
 		x = a;
@@ -21,6 +23,7 @@ public class Projectile implements Runnable{
 	
 	/**
 	 * this method draws the projectile.
+	 * @param g2d Graphics2D
 	 */
 	public void draw(Graphics2D g2d) {
 		r = new Rectangle2D.Double(x, y, 20, 40);
@@ -32,13 +35,13 @@ public class Projectile implements Runnable{
 	/**
 	* this method is the method used to move the projectile from the top of the frame to the bottom.
 	*/
-	public void shoot(){
+	public void shoot() {
 		if (y != 650){
 			y += 25;
 			this.isOutOfFrame();
 		}
 	}
-	
+
 	/**
 	 * This method decrements the projectile's position.
 	 */
@@ -51,13 +54,13 @@ public class Projectile implements Runnable{
 
 	/**
 	 * This method sets the location of the projectile.
-	 * @param firingPositionX the x starting position
-	 * @param firingPositionY the y starting position
+	 * @param positionX the x starting position
+	 * @param positionY the y starting position
 	 */
-	public void loadBullet(double firingPositionX, double firingPositionY) {
+	public void loadBullet(double positionX, double positionY) {
 
-		x = firingPositionX;
-		y = firingPositionY;
+		x = positionX;
+		y = positionY;
 	}
 
 	/**
@@ -70,6 +73,7 @@ public class Projectile implements Runnable{
 
 	/**
 	 * This method returns the y coordinate of the projectile.
+	 * @return y coordinate of the projectile.
 	 */
 	public double getPositionY() {
 		return y;
@@ -90,6 +94,9 @@ public class Projectile implements Runnable{
 		return outOfFrame;
 	}
 
+	/**
+	 * This method is for the thread.
+	 */
 	public void run() {
 
 	}

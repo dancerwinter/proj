@@ -70,15 +70,18 @@ public class GameServer {
 		
 	}
 	 /**
-	 * This is a class to support both player connections made (Output)
-	 * @Parameters s: Socket of the player 1 or 2; id: numPlay variable to determine who is player one and two based on who connected first
-	 */
+	  * This is a class to support both player connections made (Output)
+	  */
 	private class ServerSideConnectionOut implements Runnable {
 		private Socket socket;
 		private DataInputStream dataIn;
 		private DataOutputStream dataOut;
 		private int playerID;
 
+		/**
+		 * @param s socket of player 1 or 2
+		 * @param id numPlay variable to determine who is player one and two based on who connected first
+		 */
 		public ServerSideConnectionOut(Socket s, int id) {
 			socket = s;
 			playerID = id;
@@ -87,7 +90,7 @@ public class GameServer {
 				dataOut = new DataOutputStream(socket.getOutputStream());
 			}
 
-			catch (IOException ex){
+			catch (IOException ex) {
 				System.out.println("IOException from run() SSCO Constructor");
 			}
 		}
@@ -138,14 +141,13 @@ public class GameServer {
 				while(true) {
 					String shotMade = dataIn.readUTF();
 
-					if(shotMade.equals("true"));
-					{
+					if(shotMade.equals("true")) {
 						System.out.println(shotMade);
 					}
 				}
 			} 
 
-			catch(IOException e){
+			catch(IOException e) {
 				System.out.println("Error in run() method of SSCI");
 			}
 		}
