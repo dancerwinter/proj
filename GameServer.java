@@ -18,6 +18,7 @@ public class GameServer {
 	private ServerSideConnectionOut player2Out;
 	private ServerSideConnectionIn player1In;
 	private ServerSideConnectionIn player2In;
+
 	
 	/**
 	 * This is the constructor for the GameServer class.
@@ -134,17 +135,11 @@ public class GameServer {
 		public void run() {
 
 			try {
-				while(true) {
-					int shotsMade = dataIn.readInt();
-					// while(true){
-					System.out.println(shotsMade);
-					// }
-					
+				while(true){
+					int shotsFired = dataIn.readInt();
+					System.out.println(shotsFired);
 				}
-
-			} 
-
-			catch(IOException e) {
+			}catch(IOException e) {
 				System.out.println("Error in run() method of SSCI");
 			}
 		}
