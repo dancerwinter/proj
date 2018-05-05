@@ -29,14 +29,6 @@ public class PlayerShip {
 		g2d.fill(r);
 	}
 
-	public void loadBullet() {
-		
-	}
-
-	public void fire() {
-		
-	}
-
 	public double getPositionX() {
 		double position = x + (width / 2);
 		return position;
