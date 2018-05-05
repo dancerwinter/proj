@@ -336,16 +336,18 @@ public class Player extends JFrame{
 		}
 
 
+
 		public void run(){
 			try{
 				// only works when there are bullets to fire.
-				if(bulletsFired <= 5){
+				if(bulletsFired <= 5) {					
 					System.out.println("checkFireCalled" + " " + bulletsFired);
-					if(bulletsFired == 1){
+					if(bulletsFired == 1) {
 						do{
 							System.out.println("bullet1 not out of frame");
 						}while(!bullet1.isOutOfFrame());
-						if (bullet1.isOutOfFrame()){
+						if (bullet1.isOutOfFrame()) {
+
 							System.out.println("bullet1 outofFrame");
 							dataOut.writeInt(bulletsFired);
 							dataOut.flush();
