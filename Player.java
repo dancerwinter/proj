@@ -352,7 +352,9 @@ public class Player extends JFrame{
 						}
 					}
 				}
-			}catch(IOException e){
+			}
+
+			catch(IOException e){
 				System.out.println("IOException in checkFire() method from CSC");
 			}
 		}
