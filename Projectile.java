@@ -8,7 +8,7 @@ public class Projectile implements Runnable{
 	private double speed;
 	private double barrel;
 	private PlayerShip ps;
-	private boolean isNotFired;
+
 
 	/**
 	 * This is the constructor for the Projectile class.
@@ -17,7 +17,6 @@ public class Projectile implements Runnable{
 		x = a;
 		y = b;
 		speed = 5;
-		isNotFired = true;
 	}
 	
 	/**
@@ -29,13 +28,22 @@ public class Projectile implements Runnable{
 		g2d.setColor(new Color(255, 102, 204));
 		g2d.fill(r);
 	}
-
+	/**
+	* this method is the method used to move the projectile from the top of the frame to the bottom.
+	*/
+	public void shoot(){
+		if (y != 650){
+			y += 25;
+			this.isOutOfFrame();
+		}
+	}
 	/**
 	 * This method decrements the projectile's position.
 	 */
 	public void fireBullet() {
-		if (y >= -40) {
-			y -= 25;	
+		if (y != -40) {
+			y -= 25;
+			this.isOutOfFrame();
 		}
 	}
 
@@ -65,15 +73,11 @@ public class Projectile implements Runnable{
 		return y;
 	}
 
-	public void reload() {
-		isNotFired = true;
-	}
-
 	public boolean isOutOfFrame() {
 
 		boolean outOfFrame = false;
 
-		if(y <= -40) {
+		if(y <= -40 || y >= 650) {
 
 			outOfFrame = true;
 		}

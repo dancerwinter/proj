@@ -31,8 +31,10 @@ public class Player extends JFrame{
 	private Background bg;
 	private HealthBar hb;
 	private ReloadText reloadText;
-	
-	private Projectile bullet1, bullet2, bullet3, bullet4, bullet5;
+
+	private boolean isShot;
+	private Projectile bullet1, bullet2, bullet3, bullet4, bullet5, b;
+
 	private boolean up, down, left, right, spacebar, reload;
 	private Timer tm;
 	private int playerID;
@@ -52,13 +54,13 @@ public class Player extends JFrame{
 		hb = new HealthBar();
 		reloadText = new ReloadText();
 		bg = new Background();
-		
+		b = new Projectile(1000,1000);
 		bullet1 = new Projectile(690, 550);
 		bullet2 = new Projectile(730, 550);
 		bullet3 = new Projectile(770, 550);
 		bullet4 = new Projectile(810, 550);
 		bullet5 = new Projectile(850, 550);
-
+		isShot = false;
 		dc = new DrawingComponent();	
 		mkl = new MyKeyListener();
 		tm = new Timer(10, new MyActionListener());
@@ -103,6 +105,7 @@ public class Player extends JFrame{
 			bullet3.draw(g2d);
 			bullet4.draw(g2d);
 			bullet5.draw(g2d);
+			b.draw(g2d);
 
 			hb.draw(g2d);
 
@@ -252,8 +255,9 @@ public class Player extends JFrame{
                 default:
                 	System.out.println("Other key was pressed"); 
                 	break;
+                }
 			}
-		}
+		
 
 		public void keyReleased(KeyEvent ke) {
 			int keyCode = ke.getKeyCode();
@@ -283,39 +287,66 @@ public class Player extends JFrame{
                 	reload = false;
                 	break;
                 }
+            }
 		}
-	}
-
+	
 	/**
 	 * This private class is for the client side connection.
 	 */
-	private class ClientSideConnection
-	{
+	private class ClientSideConnection {
 			private Socket socket;
 			private DataInputStream dataIn;
 			private DataOutputStream dataOut;
 			
-		public ClientSideConnection()
-		{
+		public ClientSideConnection() {
 			System.out.println("ClientSideConnectionMade");
-			try
-			{
+			try {
 				socket = new Socket("localhost", 1842);
 				dataIn = new DataInputStream(socket.getInputStream());
 				dataOut = new DataOutputStream(socket.getOutputStream());
 				playerID = dataIn.readInt();
 				System.out.println("Connected to server as player number" + playerID);
+				startGame();
 			}
-			catch(IOException ex)
-			{
+
+			catch(IOException ex) {
 				System.out.println("IOException from CSC Constructor");
+			}
+		}
+
+		public void startGame(){
+
+			while (true) {
+				try {
+
+					String shotMade = "";
+
+					if(bullet1.isOutOfFrame() || bullet2.isOutOfFrame() || bullet3.isOutOfFrame() || bullet4.isOutOfFrame() || bullet5.isOutOfFrame()) {
+						shotMade += "true";
+					}
+					
+					else if(!bullet1.isOutOfFrame() || !bullet2.isOutOfFrame() || !bullet3.isOutOfFrame() || !bullet4.isOutOfFrame() || !bullet5.isOutOfFrame()) {
+						shotMade += "false";
+					}
+
+					dataOut.writeUTF(shotMade);
+				} 
+
+				catch(IOException e) {
+					System.out.println("Error on startGame() method");
+				}
 			}
 		}
 	}
 
-	public static void main (String[] args) {
+	public void connectToServer(){
+		csc = new ClientSideConnection();	
+	}
+
+	public static void main(String[] args) {
 		Player p = new Player(900, 650);
-		
-		p.setUpGUI();		
+		p.setUpGUI();
+		p.connectToServer();
+			
 	}
 }

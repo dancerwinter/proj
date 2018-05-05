@@ -119,9 +119,22 @@ public class GameServer {
 		}
 		public void run()
 		{
-			// try{
-			
-			// }
+
+			try{
+				while(true){
+					String shotMade = dataIn.readUTF();
+
+					if(shotMade.equals("true"));
+					{
+						System.out.println(shotMade);
+					}
+				}
+
+				
+				
+			} catch(IOException e){
+				System.out.println("Error in run() method of SSCI");
+			}
 		}
 	}
 	/**
