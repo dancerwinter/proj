@@ -34,13 +34,15 @@ public class Projectile implements Runnable{
 	 * This method decrements the projectile's position.
 	 */
 	public void fireBullet() {
-		if (y != -1) {
+		if (y >= -40) {
 			y -= 25;	
 		}
 	}
 
 	/**
 	 * This method sets the location of the projectile.
+	 * @param firingPositionX the x starting position
+	 * @param firingPositionY the y starting position
 	 */
 	public void loadBullet(double firingPositionX, double firingPositionY) {
 
@@ -50,6 +52,7 @@ public class Projectile implements Runnable{
 
 	/**
 	 * This method returns the x coordinate of the projectile.
+	 * @return this x position.
 	 */
 	public double getPositionX() {
 		return x;

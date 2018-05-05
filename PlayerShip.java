@@ -1,10 +1,8 @@
 import java.awt.*;
 import java.awt.geom.*;
-
 import java.util.*;
 
 public class PlayerShip {
-
 
 	private Rectangle2D.Double r;
 	private Color color;
@@ -27,14 +25,6 @@ public class PlayerShip {
 
 		g2d.setColor(Color.RED);
 		g2d.fill(r);
-	}
-
-	public void loadBullet() {
-		
-	}
-
-	public void fire() {
-		
 	}
 
 	public double getPositionX() {

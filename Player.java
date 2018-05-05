@@ -14,7 +14,7 @@ import java.net.*;
  * @author Neil Daniel B. Bautista, Jessica Anne M. Manzano
  * @IDNumber 170252, 171429
  * @version April 24, 2018
- * This program is 
+ * This program is a game.
  */
 
 public class Player extends JFrame{
@@ -26,8 +26,11 @@ public class Player extends JFrame{
 	private MyActionListener mal;
 	private MyKeyListener mkl;
 	private ClientSideConnection csc;
+
 	private PlayerShip ps;
 	private Background bg;
+	private HealthBar hb;
+	private ReloadText reloadText;
 	
 	private Projectile bullet1, bullet2, bullet3, bullet4, bullet5;
 	private boolean up, down, left, right, spacebar, reload;
@@ -36,15 +39,18 @@ public class Player extends JFrame{
 	private int otherPlayer;
 
 	/**
-	 * @Constructor
-	 * @param w = width of frame, h = height of frame
-	 *
+	 * This is the constructor for the Player class.
+	 * @param w This is the width of frame
+	 * @param h This is the height of frame
 	 */
 	public Player(int w, int h) {
 		width = w;
 		height = h;
 		container = this.getContentPane();
+
 		ps = new PlayerShip();
+		hb = new HealthBar();
+		reloadText = new ReloadText();
 		bg = new Background();
 		
 		bullet1 = new Projectile(690, 550);
@@ -90,11 +96,15 @@ public class Player extends JFrame{
 			
 			bg.draw(g2d);
 
+			reloadText.draw(g2d);
+
 			bullet1.draw(g2d);
 			bullet2.draw(g2d);
 			bullet3.draw(g2d);
 			bullet4.draw(g2d);
 			bullet5.draw(g2d);
+
+			hb.draw(g2d);
 
 			ps.draw(g2d);
 			
@@ -156,6 +166,7 @@ public class Player extends JFrame{
 
 			if (bulletsFired >= 5) {
 				bullet5.fireBullet();
+				reloadText.animate(bulletsFired);
 				dc.repaint();
 			}
 		}
@@ -207,23 +218,23 @@ public class Player extends JFrame{
                 	bulletsFired++;
 
                 	if (bulletsFired == 1) {
-                		bullet1.loadBullet(ps.getPositionX() - 5, ps.getPositionY());
+                		bullet1.loadBullet(ps.getPositionX() - 10, ps.getPositionY());
                 	}
 
                 	else if (bulletsFired == 2) {
-                		bullet2.loadBullet(ps.getPositionX() - 5, ps.getPositionY());
+                		bullet2.loadBullet(ps.getPositionX() - 10, ps.getPositionY());
                 	}
 
                 	else if (bulletsFired == 3) {
-                		bullet3.loadBullet(ps.getPositionX() - 5, ps.getPositionY());
+                		bullet3.loadBullet(ps.getPositionX() - 10, ps.getPositionY());
                 	}
 
                 	else if (bulletsFired == 4) {
-                		bullet4.loadBullet(ps.getPositionX() - 5, ps.getPositionY());
+                		bullet4.loadBullet(ps.getPositionX() - 10, ps.getPositionY());
                 	}
 
                 	else if (bulletsFired == 5) {
-                		bullet5.loadBullet(ps.getPositionX() - 5, ps.getPositionY());
+                		bullet5.loadBullet(ps.getPositionX() - 10, ps.getPositionY());
                 	}
 
                 	break;
@@ -232,7 +243,10 @@ public class Player extends JFrame{
                 	if (bulletsFired >= 5) {
 	                	reload = true;
 	                	bulletsFired = 0;	
-                	}                	
+                	}
+
+                	reloadText.animate(bulletsFired);
+
                 	break;
                 	
                 default:
