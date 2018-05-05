@@ -27,14 +27,22 @@ public class PlayerShip {
 		g2d.fill(r);
 	}
 
-	public double getPositionX() {
+	public double getCenterX() {
 		double position = x + (width / 2);
 		return position;
 	}
 
-	public double getPositionY() {
+	public double getCenterY() {
 		double position = y + (height / 2);
 		return position;
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
 	}
 
 	public double getWidth() {
