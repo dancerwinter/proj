@@ -145,9 +145,9 @@ public class Player extends JFrame{
 			}
 
 			if (testBullet.isColliding(ps)) {
-				int i = 0;
-				System.out.println("OUCH " + i);
-				i++;
+				/*ps.damageShip();
+				hb.updateHP(ps.getHealth());*/
+				System.out.println("OUCH");
 			}
 
 			if (reload) {
@@ -156,7 +156,6 @@ public class Player extends JFrame{
 				bullet3.loadBullet(770, 550);
 				bullet4.loadBullet(810, 550);
 				bullet5.loadBullet(850, 550);
-				hb.updateHP(ps.getHealth());
 
 				dc.repaint();
 			}
