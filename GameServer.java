@@ -39,104 +39,120 @@ public class GameServer {
 	public void connectPlayers() {
 		 try {
 			System.out.println("Waiting for connection...");
+			
 			while(numPlay < 2) {
 				Socket s = ss.accept();
 				numPlay++;
 				System.out.println("Player#" + numPlay + " has connected");
 				ServerSideConnectionOut ssco = new ServerSideConnectionOut(s, numPlay);
 				ServerSideConnectionIn ssci = new ServerSideConnectionIn(s);
-				if(numPlay == 1)
-				{
+				
+				if(numPlay == 1) {
 					player1Out = ssco;
 					player1In = ssci;
 				}
-				else{
+
+				else {
 					player2Out = ssco;
 					player1In = ssci;
 				}
+
 				Thread t = new Thread(ssco);
 				Thread t1 = new Thread(ssci);
 				t.start();
 				t1.start();
 			}
-		} catch(IOException ex) {
+		} 
+
+		catch(IOException ex) {
 			System.out.println("IOException from connectPlayers()");
 		}
 		
 	}
 	 /**
-	 * This is a class to support both player connections made (Output)
-	 * @Parameters s: Socket of the player 1 or 2; id: numPlay variable to determine who is player one and two based on who connected first
-	 */
-	private class ServerSideConnectionOut implements Runnable
-	{
+	  * This is a class to support both player connections made (Output)
+	  */
+	private class ServerSideConnectionOut implements Runnable {
 		private Socket socket;
 		private DataInputStream dataIn;
 		private DataOutputStream dataOut;
 		private int playerID;
 
-		public ServerSideConnectionOut(Socket s, int id)
-		{
+		/**
+		 * @param s socket of player 1 or 2
+		 * @param id numPlay variable to determine who is player one and two based on who connected first
+		 */
+		public ServerSideConnectionOut(Socket s, int id) {
 			socket = s;
 			playerID = id;
-			try{
+			try {
 				dataIn = new DataInputStream(socket.getInputStream());
 				dataOut = new DataOutputStream(socket.getOutputStream());
-			} catch (IOException ex){
+			}
+
+			catch (IOException ex) {
 				System.out.println("IOException from run() SSCO Constructor");
 			}
 		}
-		public void run()
-		{
-			try{
+
+		public void run() {
+			try {
 				dataOut.writeInt(playerID);
 				dataOut.flush();
-				while(true){
-					
+
+				while(true) {
 
 				}
 
-			}catch(IOException ex){
+			}
+
+			catch(IOException ex) {
 				System.out.println("IOException from run() method SSCO");
 			}
 		}
 	}
-	private class ServerSideConnectionIn implements Runnable
-	{
+
+	/* I was thinking na
+	If the bulletsFired is 1
+	Then then it'll check if it's out of frame constantly
+	Once outOfFrame is true
+	It'll writeUTF to the server the string true*/
+
+	private class ServerSideConnectionIn implements Runnable {
 		private Socket socket;
 		private DataInputStream dataIn;
 		private DataOutputStream dataOut;
 
-		public ServerSideConnectionIn(Socket s)
-		{
+		public ServerSideConnectionIn(Socket s) {
 			socket = s;
-			try{
+			try {
 				dataIn = new DataInputStream(socket.getInputStream());
 				dataOut = new DataOutputStream(socket.getOutputStream());
-			} catch(IOException ex){
+			} 
+
+			catch(IOException ex){
 				System.out.println("IOException from run() SSCI Constructor");
 			}
 		}
-		public void run()
-		{
 
-			try{
-				while(true){
+		public void run() {
+
+			try {
+				while(true) {
 					String shotMade = dataIn.readUTF();
 
-					if(shotMade.equals("true"));
-					{
+					if(shotMade.equals("true")) {
 						System.out.println(shotMade);
 					}
 				}
+			} 
 
-				
-				
-			} catch(IOException e){
+			catch(IOException e) {
 				System.out.println("Error in run() method of SSCI");
 			}
 		}
 	}
+
 	/**
 	 * This is the main method for the GameServer class.
 	 */

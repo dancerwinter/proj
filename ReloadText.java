@@ -20,7 +20,7 @@ public class ReloadText {
 		bullet4 = new Rectangle2D.Double(810, y, width, height);
 		bullet5 = new Rectangle2D.Double(850, y, width, height);
 
-		text = "RELOAD";
+		text = "R E L O A D";
 		a = 0;
 		setTransparency = 15;
 	}
