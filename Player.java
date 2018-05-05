@@ -73,7 +73,7 @@ public class Player extends JFrame{
 		remainingHealth = 5;
 		bulletsFired = 0;
 		bulletsLeft = 5;
-
+		spacebar = false;
 		this.addKeyListener(mkl);
 	}
 
@@ -254,7 +254,7 @@ public class Player extends JFrame{
                 	else if (bulletsFired == 5) {
                 		bullet5.loadBullet(ps.getCenterX() - 10, ps.getCenterY());
                 	}
-
+                	csc.checkFire();
                 	break;
 
                 case KeyEvent.VK_CONTROL:
@@ -326,8 +326,7 @@ public class Player extends JFrame{
 				dataIn = new DataInputStream(socket.getInputStream());
 				dataOut = new DataOutputStream(socket.getOutputStream());
 				playerID = dataIn.readInt();
-				System.out.println("Connected to server as player number" + playerID);
-				startGame();
+				System.out.println("Connected to server as player number" + playerID);		
 			}
 
 			catch(IOException ex) {
@@ -335,28 +334,38 @@ public class Player extends JFrame{
 			}
 		}
 
-		public void startGame(){
-			while(true) {
-				if(bulletsFired == 1) {
-					try {
-						if(bullet1.isOutOfFrame()) {
-							dataOut.writeInt(bulletsFired);
-						}				
-						else if(!bullet1.isOutOfFrame()) {
-							continue;
-						}	
-					} 
-					catch(IOException e) {
-						System.out.println("Error on startGame() method");
-					}
-				}
-			}			
+		public void checkFire() {
+			// try{
+				// if (bulletsFired == 1){
+				// 	dataOut.writeInt(bulletsFired);
+				// }
+				// else if(bulletsFired == 2){
+				// 	dataOut.writeInt(bulletsFired);
+				// }
+				// else if(bulletsFired == 3){
+				// 	dataOut.writeInt(bulletsFired);
+				// }
+				// else if(bulletsFired == 4){
+				// 	dataOut.writeInt(bulletsFired);
+				// }
+				// else if(bulletsFired == 5){
+				// 	dataOut.writeInt(bulletsFired);
+				System.out.println("checkFire called");
+				// }
+
+
+			// }catch(IOException e){
+			// 	System.out.println("Error on checkFire() method in CSC of player" + playerID);
+			// }
 		}
 	}
 
 	public void connectToServer(){
 		csc = new ClientSideConnection();	
 	}
+	// public void spacebarPressed(){
+	// 	return spacebar;
+	// }
 
 	public static void main(String[] args) {
 		Player p = new Player(900, 650);
@@ -364,4 +373,5 @@ public class Player extends JFrame{
 		p.connectToServer();
 			
 	}
+
 }
