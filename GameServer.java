@@ -112,11 +112,7 @@ public class GameServer {
 		}
 	}
 
-	/* I was thinking na
-	If the bulletsFired is 1
-	Then then it'll check if it's out of frame constantly
-	Once outOfFrame is true
-	It'll writeUTF to the server the string true*/
+	
 
 	private class ServerSideConnectionIn implements Runnable {
 		private Socket socket;
@@ -139,12 +135,21 @@ public class GameServer {
 
 			try {
 				while(true) {
-					String shotMade = dataIn.readUTF();
-
-					if(shotMade.equals("true")) {
-						System.out.println(shotMade);
+					Int shotsMade = dataIn.readInt();
+					while(true){
+						if (shotsMade == 0)
+						{
+							break;
+						}
+						if (shotsMade == 1)
+						{
+							System.out.prinln(shotsMade);
+							break;
+						}
 					}
+					
 				}
+
 			} 
 
 			catch(IOException e) {

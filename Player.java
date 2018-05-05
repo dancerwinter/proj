@@ -39,6 +39,7 @@ public class Player extends JFrame{
 	private Timer tm;
 	private int playerID;
 	private int otherPlayer;
+	private int shotsMade;
 
 	/**
 	 * This is the constructor for the Player class.
@@ -49,7 +50,7 @@ public class Player extends JFrame{
 		width = w;
 		height = h;
 		container = this.getContentPane();
-
+		shotsMade = 0;
 		ps = new PlayerShip();
 		hb = new HealthBar();
 		reloadText = new ReloadText();
@@ -297,6 +298,11 @@ public class Player extends JFrame{
 	/**
 	 * This private class is for the client side connection.
 	 */
+	/* I was thinking na
+	If the bulletsFired is 1
+	Then then it'll check if it's out of frame constantly
+	Once outOfFrame is true
+	It'll writeUTF to the server the string true*/
 	private class ClientSideConnection {
 			private Socket socket;
 			private DataInputStream dataIn;
@@ -319,22 +325,23 @@ public class Player extends JFrame{
 		}
 
 		public void startGame(){
-
-			if(bulletsFired == 1) {
-				try {
-					String shotMade = "";
-					if(bullet1.isOutOfFrame()) {
-						shotMade += "true";
-					}				
-					else if(!bullet1.isOutOfFrame()) {
-						shotMade += "false";
+			while(true){
+					if(bulletsFired == 1) {
+					try {
+						
+						if(bullet1.isOutOfFrame()) {
+							dataOut.writInt(bulletsFired);
+						}				
+						else if(!bullet1.isOutOfFrame()) {
+							continue;
+						}
+						
+					} 
+					catch(IOException e) {
+						System.out.println("Error on startGame() method");
 					}
-					dataOut.writeUTF(shotMade);
-				} 
-				catch(IOException e) {
-					System.out.println("Error on startGame() method");
 				}
-			}
+			}			
 		}
 	}
 

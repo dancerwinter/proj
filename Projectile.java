@@ -67,18 +67,18 @@ public class Projectile implements Runnable {
 	 * @param 
 	 * @return a boolean if the projectile has collided.
 	 */
-	public boolean hasCollision(PlayerShip ship) {
-		boolean collide = false;
+	// public boolean hasCollision(PlayerShip ship) {
+	// 	boolean collide = false;
 
-		// bottom of projectile vs top of ship
-		this.y + this.width == ship.getWidth() ||
+	// 	// bottom of projectile vs top of ship
+	// 	this.y + this.width == ship.getWidth() ||
 
-		// left
+	// 	// left
 
-		// right
+	// 	// right
 
-		return collide;
-	}
+	// 	return collide;
+	// }
 
 	/**
 	 * This method returns the x coordinate of the projectile.
