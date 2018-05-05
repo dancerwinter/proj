@@ -1,14 +1,15 @@
 import java.awt.*;
 import java.awt.geom.*;
 
-import java.util.*;
-
 public class HealthBar {
 	
 	private double x, y1, y2, y3, y4, y5;
 	private Rectangle2D.Double background;
 	private Rectangle2D.Double bar1, bar2, bar3, bar4, bar5;
 
+	/**
+	 *
+	 */
 	public HealthBar() {
 		x = 100;
 		y1 = 550;		
@@ -18,6 +19,9 @@ public class HealthBar {
 		y5 = 550;		
 	}
 
+	/**
+	 * @param g2d Graphics2D
+	 */
 	public void draw(Graphics2D g2d) {
 		background = new Rectangle2D.Double(100, 550, 400, 40);
 		bar1 = new Rectangle2D.Double(x, y1, 80, 40);
@@ -37,8 +41,11 @@ public class HealthBar {
 		g2d.fill(bar5);
 	}
 
-	public void updateHP(int i) {
-		if (i == 5) {
+	/**
+	 * @param hp updates the current health on the health bar.
+	 */
+	public void updateHP(int hp) {
+		if (hp == 5) {
 			y1 = 550;		
 			y2 = 550;		
 			y3 = 550;		
@@ -46,7 +53,7 @@ public class HealthBar {
 			y5 = 550;
 		}
 
-		switch(i) {
+		switch(hp) {
 			case 4:
 				y5 = 650;
 				break;

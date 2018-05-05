@@ -4,11 +4,9 @@ import java.awt.geom.*;
 public class Projectile implements Runnable {
 	
 	private Rectangle2D.Double r;
-	private double x, y;
+	private double x, y, width, height;
 	private double speed;
 	private double barrel;
-	private PlayerShip ps;
-
 
 	/**
 	 * This is the constructor for the Projectile class.
@@ -18,6 +16,8 @@ public class Projectile implements Runnable {
 	public Projectile(double a, double b) {
 		x = a;
 		y = b;
+		width = 20;
+		height = 40;
 		speed = 5;
 	}
 	
@@ -26,7 +26,7 @@ public class Projectile implements Runnable {
 	 * @param g2d Graphics2D
 	 */
 	public void draw(Graphics2D g2d) {
-		r = new Rectangle2D.Double(x, y, 20, 40);
+		r = new Rectangle2D.Double(x, y, width, height);
 
 		g2d.setColor(new Color(255, 102, 204));
 		g2d.fill(r);
@@ -61,6 +61,23 @@ public class Projectile implements Runnable {
 
 		x = positionX;
 		y = positionY;
+	}
+
+	/**
+	 * @param 
+	 * @return a boolean if the projectile has collided.
+	 */
+	public boolean hasCollision(PlayerShip ship) {
+		boolean collide = false;
+
+		// bottom of projectile vs top of ship
+		this.y + this.width == ship.getWidth() ||
+
+		// left
+
+		// right
+
+		return collide;
 	}
 
 	/**

@@ -145,7 +145,7 @@ public class Player extends JFrame{
 				bullet3.loadBullet(770, 550);
 				bullet4.loadBullet(810, 550);
 				bullet5.loadBullet(850, 550);
-				hb.updateHP(remainingHealth);
+				hb.updateHP(ps.getHealth());
 
 				dc.repaint();
 			}
@@ -250,7 +250,7 @@ public class Player extends JFrame{
 	                	reload = true;
 	                	bulletsFired = 0;	
                 	}
-                	
+
                 	remainingHealth--;
                 	reloadText.animate(bulletsFired);
 

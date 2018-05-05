@@ -37,6 +37,14 @@ public class PlayerShip {
 		return position;
 	}
 
+	public double getWidth() {
+		return width;
+	}
+
+	public double getHeight() {
+		return height;
+	}
+
 	public int getHealth() {
 		return health;
 	}
