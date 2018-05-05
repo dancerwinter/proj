@@ -135,7 +135,7 @@ public class GameServer {
 
 			try {
 				while(true) {
-					Int shotsMade = dataIn.readInt();
+					int shotsMade = dataIn.readInt();
 					while(true){
 						if (shotsMade == 0)
 						{
@@ -143,7 +143,7 @@ public class GameServer {
 						}
 						if (shotsMade == 1)
 						{
-							System.out.prinln(shotsMade);
+							System.out.println(shotsMade);
 							break;
 						}
 					}
