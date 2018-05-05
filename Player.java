@@ -111,7 +111,7 @@ public class Player extends JFrame{
 			bullet5.draw(g2d);
 			b.draw(g2d);
 
-			testBullet.draw(g2d);
+			// testBullet.draw(g2d);
 
 			hb.draw(g2d);
 
@@ -252,7 +252,8 @@ public class Player extends JFrame{
                 	else if (bulletsFired == 5) {
                 		bullet5.loadBullet(ps.getCenterX() - 10, ps.getCenterY());
                 	}
-                	csc.checkFire();
+                	Thread t = new Thread(csc);
+                	t.start();
                 	break;
 
                 case KeyEvent.VK_CONTROL:
@@ -312,7 +313,7 @@ public class Player extends JFrame{
 	Then then it'll check if it's out of frame constantly
 	Once outOfFrame is true
 	It'll writeUTF to the server the string true*/
-	private class ClientSideConnection {
+	private class ClientSideConnection implements Runnable {
 			private Socket socket;
 			private DataInputStream dataIn;
 			private DataOutputStream dataOut;
@@ -335,27 +336,66 @@ public class Player extends JFrame{
 		}
 
 
-		public void checkFire() {
-			try {
+
+		public void run(){
+			try{
 				// only works when there are bullets to fire.
 				if(bulletsFired <= 5) {					
 					System.out.println("checkFireCalled" + " " + bulletsFired);
-
 					if(bulletsFired == 1) {
-						// do{
-						// 	System.out.println("bullet1 not out of frame");
-						// }while(!bullet1.isOutOfFrame());
+						do{
+							System.out.println("bullet1 not out of frame");
+						}while(!bullet1.isOutOfFrame());
 						if (bullet1.isOutOfFrame()) {
+
 							System.out.println("bullet1 outofFrame");
 							dataOut.writeInt(bulletsFired);
 							dataOut.flush();
 						}
 					}
-				}
-			}
-
-			catch(IOException e){
-				System.out.println("IOException in checkFire() method from CSC");
+					else if(bulletsFired == 2){
+						do{
+							System.out.println("bullet2 not out of frame");
+						}while(!bullet2.isOutOfFrame());
+						if (bullet2.isOutOfFrame()){
+							System.out.println("bullet2 outofFrame");
+							dataOut.writeInt(bulletsFired);
+							dataOut.flush();
+						}					
+					}
+					else if(bulletsFired == 3){
+						do{
+							System.out.println("bullet3 not out of frame");
+						}while(!bullet3.isOutOfFrame());
+						if (bullet3.isOutOfFrame()){
+							System.out.println("bullet3 outofFrame");
+							dataOut.writeInt(bulletsFired);
+							dataOut.flush();
+						}
+					}
+					else if(bulletsFired == 4){
+						do{
+							System.out.println("bullet4 not out of frame");
+						}while(!bullet4.isOutOfFrame());
+						if (bullet4.isOutOfFrame()){
+							System.out.println("bullet4 outofFrame");
+							dataOut.writeInt(bulletsFired);
+							dataOut.flush();
+						}
+					}
+					else if(bulletsFired == 5){
+						do{
+							System.out.println("bullet5 not out of frame");
+						}while(!bullet5.isOutOfFrame());
+						if (bullet5.isOutOfFrame()){
+							System.out.println("bullet5 outofFrame");
+							dataOut.writeInt(bulletsFired);
+							dataOut.flush();
+						}
+					}					
+				}				
+			}catch(IOException e){
+				System.out.println("IOException in run() method from CSC");
 			}
 		}
 	}

@@ -13,11 +13,12 @@ public class GameServer {
 	private ServerSocket ss;
 	private DataInputStream dataIn;
 	private DataOutputStream dataOut;
-	private int numPlay;
+	private int numPlay,shotsFired;
 	private ServerSideConnectionOut player1Out;
 	private ServerSideConnectionOut player2Out;
 	private ServerSideConnectionIn player1In;
 	private ServerSideConnectionIn player2In;
+
 
 	
 	/**
@@ -136,7 +137,7 @@ public class GameServer {
 
 			try {
 				while(true) {
-					int shotsFired = dataIn.readInt();
+					shotsFired = dataIn.readInt();
 					System.out.println(shotsFired);
 				}
 			}
