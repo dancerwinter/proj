@@ -20,7 +20,7 @@ import java.net.*;
 public class Player extends JFrame{
 	
 	private int width, height;
-	private int bulletsFired, bulletsLeft;
+	private int bulletsFired, bulletsLeft, remainingHealth;
 	private Container container;
 	private DrawingComponent dc;
 	private MyActionListener mal;
@@ -66,6 +66,7 @@ public class Player extends JFrame{
 		tm = new Timer(10, new MyActionListener());
 		tm.start();
 
+		remainingHealth = 5;
 		bulletsFired = 0;
 		bulletsLeft = 5;
 
@@ -144,6 +145,8 @@ public class Player extends JFrame{
 				bullet3.loadBullet(770, 550);
 				bullet4.loadBullet(810, 550);
 				bullet5.loadBullet(850, 550);
+				hb.updateHP(remainingHealth);
+
 				dc.repaint();
 			}
 
@@ -247,7 +250,8 @@ public class Player extends JFrame{
 	                	reload = true;
 	                	bulletsFired = 0;	
                 	}
-
+                	
+                	remainingHealth--;
                 	reloadText.animate(bulletsFired);
 
                 	break;

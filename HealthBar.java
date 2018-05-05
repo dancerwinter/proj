@@ -39,8 +39,31 @@ public class HealthBar {
 
 	public void updateHP(int i) {
 		if (i == 5) {
-			y1 = 650;
+			y1 = 550;		
+			y2 = 550;		
+			y3 = 550;		
+			y4 = 550;		
+			y5 = 550;
 		}
+
+		switch(i) {
+			case 4:
+				y5 = 650;
+				break;
+			case 3:
+				y4 = 650;
+				break;
+			case 2:
+				y3 = 650;
+				break;
+			case 1:
+				y2 = 650;
+				break;
+			case 0:
+				y1 = 650;
+				break;
+		}
+
 	}
 }
 
