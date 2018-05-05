@@ -135,18 +135,10 @@ public class GameServer {
 
 			try {
 				while(true) {
-					Int shotsMade = dataIn.readInt();
-					while(true){
-						if (shotsMade == 0)
-						{
-							break;
-						}
-						if (shotsMade == 1)
-						{
-							System.out.prinln(shotsMade);
-							break;
-						}
-					}
+					int shotsMade = dataIn.readInt();
+					// while(true){
+					System.out.println(shotsMade);
+					// }
 					
 				}
 

@@ -330,7 +330,7 @@ public class Player extends JFrame{
 					try {
 						
 						if(bullet1.isOutOfFrame()) {
-							dataOut.writInt(bulletsFired);
+							dataOut.writeInt(bulletsFired);
 						}				
 						else if(!bullet1.isOutOfFrame()) {
 							continue;
