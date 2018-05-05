@@ -3,7 +3,7 @@ import java.awt.geom.*;
 
 public class ReloadText {
 	
-	private String text;
+	private String text1, text2;
 	private int a, setTransparency;
 	private Rectangle2D.Double bullet1, bullet2, bullet3, bullet4, bullet5;
 	private double y, width, height;
@@ -20,7 +20,8 @@ public class ReloadText {
 		bullet4 = new Rectangle2D.Double(810, y, width, height);
 		bullet5 = new Rectangle2D.Double(850, y, width, height);
 
-		text = "R E L O A D";
+		text1 = "RELOAD";
+		text2 = "AMMO";
 		a = 0;
 		setTransparency = 15;
 	}
@@ -35,9 +36,15 @@ public class ReloadText {
 		g2d.fill(bullet4);
 		g2d.fill(bullet5);
 
-		/*g2d.setFont(new Font("Consolas", Font.BOLD, 48));
+		g2d.setFont(new Font("Consolas", Font.BOLD, 48));
+		g2d.setColor(new Color(255, 255, 255));
+
+		g2d.drawString(text2, (int)545, (int)585);
+
+		g2d.setFont(new Font("Consolas", Font.BOLD, 100));
 		g2d.setColor(new Color(255, 255, 255, a));
-		g2d.drawString(text, (int)705, (int)585);*/
+
+		g2d.drawString(text1, (int)285, (int)350);
 	}
 
 	public void animate(int i) {

@@ -135,11 +135,13 @@ public class GameServer {
 		public void run() {
 
 			try {
-				while(true){
+				while(true) {
 					int shotsFired = dataIn.readInt();
 					System.out.println(shotsFired);
 				}
-			}catch(IOException e) {
+			}
+
+			catch(IOException e) {
 				System.out.println("Error in run() method of SSCI");
 			}
 		}

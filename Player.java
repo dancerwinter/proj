@@ -35,6 +35,8 @@ public class Player extends JFrame{
 	private boolean isShot;
 	private Projectile bullet1, bullet2, bullet3, bullet4, bullet5, b;
 
+	private Projectile testBullet;
+
 	private boolean up, down, left, right, spacebar, reload;
 	private Timer tm;
 	private int playerID;
@@ -56,6 +58,7 @@ public class Player extends JFrame{
 		reloadText = new ReloadText();
 		bg = new Background();
 		b = new Projectile(1000,1000);
+		testBullet = new Projectile(100, 300);
 		bullet1 = new Projectile(690, 550);
 		bullet2 = new Projectile(730, 550);
 		bullet3 = new Projectile(770, 550);
@@ -108,6 +111,8 @@ public class Player extends JFrame{
 			bullet5.draw(g2d);
 			b.draw(g2d);
 
+			testBullet.draw(g2d);
+
 			hb.draw(g2d);
 
 			ps.draw(g2d);
@@ -137,6 +142,12 @@ public class Player extends JFrame{
 			else if (right) {
 				ps.moveRight(speed);
 				dc.repaint();
+			}
+
+			if (testBullet.isColliding(ps)) {
+				int i = 0;
+				System.out.println("OUCH " + i);
+				i++;
 			}
 
 			if (reload) {
@@ -324,6 +335,7 @@ public class Player extends JFrame{
 			}
 		}
 
+
 		public void checkFire(){
 			try{
 				// only works when there are bullets to fire.
@@ -343,6 +355,9 @@ public class Player extends JFrame{
 				}
 				
 				
+		public void checkFire() {
+			// try{
+
 				// if (bulletsFired == 1){
 				// 	dataOut.writeInt(bulletsFired);
 				// }
@@ -359,13 +374,9 @@ public class Player extends JFrame{
 				// 	dataOut.writeInt(bulletsFired);
 				
 				// }
-
-
 			} catch(IOException e){
 				System.out.println("Error on checkFire() method in CSC of player" + playerID);
 			}
-			
-			
 		}
 	}
 

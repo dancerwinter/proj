@@ -33,8 +33,8 @@ public class Projectile implements Runnable {
 	}
 
 	/**
-	* this method is the method used to move the projectile from the top of the frame to the bottom.
-	*/
+	 * this method is the method used to move the projectile from the top of the frame to the bottom.
+	 */
 	public void shoot() {
 		if (y != 650){
 			y += 25;
@@ -64,31 +64,21 @@ public class Projectile implements Runnable {
 	}
 
 	/**
-	 * @param 
+	 * This method returns a boolean whether or not there was collision between the Projectile and the PlayerShip.
+	 * @param ship a PlayShip class
 	 * @return a boolean if the projectile has collided.
 	 */
-	// public boolean hasCollision(PlayerShip ship) {
-	// 	boolean collide = false;
+	public boolean isColliding(PlayerShip ship) {
+		/* The collision boolean arguments are as follows:
+		 * bottom of the projectile vs top of the ship
+		 * left of the projectile vs right of the ship
+		 * right of the projectile vs left of the ship
+		 * top of the projectile vs bottom of the ship
+		 */
+		boolean collide = this.y + this.height <= ship.getY() || this.x >= ship.getX() + ship.getWidth() || this.x + this.width <= ship.getX() || this.y >= ship.getY() + ship.getHeight();
 
-	// 	// bottom of projectile vs top of ship
-	// 	this.y + this.width == ship.getWidth() ||
-
-	// 	// left
-
-	// 	// right
-
-	// 	return collide;
-	// }
-
-	// public boolean isColliding(PlayerShip ship) {
-
-	// 	// bottom of projectile vs top of ship
-	// 	// left
-	// 	// right
-	// 	boolean collide = this.y + this.height <= ship.getY() || this.x >= ship.getX() + ship.getWidth() || this.x + this.width <= ship.getX();
-
-	// 	return !collide;
-	// }
+		return !collide;
+	}
 
 	/**
 	 * This method returns the x coordinate of the projectile.

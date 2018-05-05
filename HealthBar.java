@@ -6,20 +6,23 @@ public class HealthBar {
 	private double x, y1, y2, y3, y4, y5;
 	private Rectangle2D.Double background;
 	private Rectangle2D.Double bar1, bar2, bar3, bar4, bar5;
+	private String text;
 
 	/**
-	 *
+	 * This is the constructor for the HealthBar class.
 	 */
 	public HealthBar() {
 		x = 100;
-		y1 = 550;		
-		y2 = 550;		
-		y3 = 550;		
-		y4 = 550;		
-		y5 = 550;		
+		y1 = 550;
+		y2 = 550;
+		y3 = 550;
+		y4 = 550;
+		y5 = 550;
+		text = "HP";
 	}
 
 	/**
+	 * This method draws the health bar and the individual health boxes.
 	 * @param g2d Graphics2D
 	 */
 	public void draw(Graphics2D g2d) {
@@ -39,9 +42,14 @@ public class HealthBar {
 		g2d.fill(bar3);
 		g2d.fill(bar4);
 		g2d.fill(bar5);
+
+		g2d.setFont(new Font("Consolas", Font.BOLD, 48));
+		g2d.setColor(new Color(255, 255, 255));
+		g2d.drawString(text, (int)25, (int)585);
 	}
 
 	/**
+	 * This method updates the health bar.
 	 * @param hp updates the current health on the health bar.
 	 */
 	public void updateHP(int hp) {
@@ -70,7 +78,6 @@ public class HealthBar {
 				y1 = 650;
 				break;
 		}
-
 	}
 }
 
