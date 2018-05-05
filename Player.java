@@ -316,22 +316,17 @@ public class Player extends JFrame{
 
 		public void startGame(){
 
-			while (true) {
+			if(bulletsFired == 1) {
 				try {
-
 					String shotMade = "";
-
-					if(bullet1.isOutOfFrame() || bullet2.isOutOfFrame() || bullet3.isOutOfFrame() || bullet4.isOutOfFrame() || bullet5.isOutOfFrame()) {
+					if(bullet1.isOutOfFrame()) {
 						shotMade += "true";
-					}
-					
-					else if(!bullet1.isOutOfFrame() || !bullet2.isOutOfFrame() || !bullet3.isOutOfFrame() || !bullet4.isOutOfFrame() || !bullet5.isOutOfFrame()) {
+					}				
+					else if(!bullet1.isOutOfFrame()) {
 						shotMade += "false";
 					}
-
 					dataOut.writeUTF(shotMade);
 				} 
-
 				catch(IOException e) {
 					System.out.println("Error on startGame() method");
 				}
