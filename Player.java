@@ -353,29 +353,8 @@ public class Player extends JFrame{
 						
 					}
 				}
-				
-				
-		public void checkFire() {
-			// try{
-
-				// if (bulletsFired == 1){
-				// 	dataOut.writeInt(bulletsFired);
-				// }
-				// else if(bulletsFired == 2){
-				// 	dataOut.writeInt(bulletsFired);
-				// }
-				// else if(bulletsFired == 3){
-				// 	dataOut.writeInt(bulletsFired);
-				// }
-				// else if(bulletsFired == 4){
-				// 	dataOut.writeInt(bulletsFired);
-				// }
-				// else if(bulletsFired == 5){
-				// 	dataOut.writeInt(bulletsFired);
-				
-				// }
-			} catch(IOException e){
-				System.out.println("Error on checkFire() method in CSC of player" + playerID);
+			}catch(IOException e){
+				System.out.println("IOException in checkFire() method from CSC");
 			}
 		}
 	}
