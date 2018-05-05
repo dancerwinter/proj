@@ -335,45 +335,52 @@ public class Player extends JFrame{
 		}
 
 
-		public void checkFire(){
-			try{
+		/*public void checkFire() {
+			try {
 				// only works when there are bullets to fire.
-				if(bulletsFired <= 5){
+				if(bulletsFired <= 5) {					
 					System.out.println("checkFireCalled" + " " + bulletsFired);
-					if(bulletsFired == 1){
+
+					if(bulletsFired == 1) {
 						// do{
 						// 	System.out.println("bullet1 not out of frame");
 						// }while(!bullet1.isOutOfFrame());
-						if (bullet1.isOutOfFrame()){
+						if (bullet1.isOutOfFrame()) {
 							System.out.println("bullet1 outofFrame");
 							dataOut.writeInt(bulletsFired);
 							dataOut.flush();
 						}
-						
 					}
 				}
+			}
+		}*/
 				
 				
 		public void checkFire() {
-			// try{
+			try {
 
-				// if (bulletsFired == 1){
-				// 	dataOut.writeInt(bulletsFired);
-				// }
-				// else if(bulletsFired == 2){
-				// 	dataOut.writeInt(bulletsFired);
-				// }
-				// else if(bulletsFired == 3){
-				// 	dataOut.writeInt(bulletsFired);
-				// }
-				// else if(bulletsFired == 4){
-				// 	dataOut.writeInt(bulletsFired);
-				// }
-				// else if(bulletsFired == 5){
-				// 	dataOut.writeInt(bulletsFired);
-				
-				// }
-			} catch(IOException e){
+				if (bulletsFired == 1){
+					dataOut.writeInt(bulletsFired);
+				}
+
+				else if(bulletsFired == 2){
+					dataOut.writeInt(bulletsFired);
+				}
+
+				else if(bulletsFired == 3){
+					dataOut.writeInt(bulletsFired);
+				}
+
+				else if(bulletsFired == 4){
+					dataOut.writeInt(bulletsFired);
+				}
+
+				else if(bulletsFired == 5){
+					dataOut.writeInt(bulletsFired);
+				}
+			}
+
+			catch(IOException e) {
 				System.out.println("Error on checkFire() method in CSC of player" + playerID);
 			}
 		}
