@@ -73,7 +73,6 @@ public class Player extends JFrame{
 		remainingHealth = 5;
 		bulletsFired = 0;
 		bulletsLeft = 5;
-		spacebar = false;
 		this.addKeyListener(mkl);
 	}
 
@@ -317,10 +316,12 @@ public class Player extends JFrame{
 			private Socket socket;
 			private DataInputStream dataIn;
 			private DataOutputStream dataOut;
+			private Player p;
 			
-		public ClientSideConnection() {
+		public ClientSideConnection(Player x) {
 			System.out.println("ClientSideConnectionMade");
 			try {
+				x.setUpGUI();
 				socket = new Socket("localhost", 1842);
 				dataIn = new DataInputStream(socket.getInputStream());
 				dataOut = new DataOutputStream(socket.getOutputStream());
@@ -333,8 +334,29 @@ public class Player extends JFrame{
 			}
 		}
 
+
+		public void checkFire(){
+			try{
+				// only works when there are bullets to fire.
+				if(bulletsFired <= 5){
+					System.out.println("checkFireCalled" + " " + bulletsFired);
+					if(bulletsFired == 1){
+						// do{
+						// 	System.out.println("bullet1 not out of frame");
+						// }while(!bullet1.isOutOfFrame());
+						if (bullet1.isOutOfFrame()){
+							System.out.println("bullet1 outofFrame");
+							dataOut.writeInt(bulletsFired);
+							dataOut.flush();
+						}
+						
+					}
+				}
+				
+				
 		public void checkFire() {
 			// try{
+
 				// if (bulletsFired == 1){
 				// 	dataOut.writeInt(bulletsFired);
 				// }
@@ -349,18 +371,16 @@ public class Player extends JFrame{
 				// }
 				// else if(bulletsFired == 5){
 				// 	dataOut.writeInt(bulletsFired);
-				System.out.println("checkFire called");
+				
 				// }
-
-
-			// }catch(IOException e){
-			// 	System.out.println("Error on checkFire() method in CSC of player" + playerID);
-			// }
+			} catch(IOException e){
+				System.out.println("Error on checkFire() method in CSC of player" + playerID);
+			}
 		}
 	}
 
 	public void connectToServer(){
-		csc = new ClientSideConnection();	
+		csc = new ClientSideConnection(this);	
 	}
 	// public void spacebarPressed(){
 	// 	return spacebar;
@@ -368,7 +388,7 @@ public class Player extends JFrame{
 
 	public static void main(String[] args) {
 		Player p = new Player(900, 650);
-		p.setUpGUI();
+		// p.setUpGUI();
 		p.connectToServer();
 			
 	}
