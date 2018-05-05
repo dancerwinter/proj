@@ -225,23 +225,23 @@ public class Player extends JFrame{
                 	bulletsFired++;
 
                 	if (bulletsFired == 1) {
-                		bullet1.loadBullet(ps.getPositionX() - 10, ps.getPositionY());
+                		bullet1.loadBullet(ps.getCenterX() - 10, ps.getCenterY());
                 	}
 
                 	else if (bulletsFired == 2) {
-                		bullet2.loadBullet(ps.getPositionX() - 10, ps.getPositionY());
+                		bullet2.loadBullet(ps.getCenterX() - 10, ps.getCenterY());
                 	}
 
                 	else if (bulletsFired == 3) {
-                		bullet3.loadBullet(ps.getPositionX() - 10, ps.getPositionY());
+                		bullet3.loadBullet(ps.getCenterX() - 10, ps.getCenterY());
                 	}
 
                 	else if (bulletsFired == 4) {
-                		bullet4.loadBullet(ps.getPositionX() - 10, ps.getPositionY());
+                		bullet4.loadBullet(ps.getCenterX() - 10, ps.getCenterY());
                 	}
 
                 	else if (bulletsFired == 5) {
-                		bullet5.loadBullet(ps.getPositionX() - 10, ps.getPositionY());
+                		bullet5.loadBullet(ps.getCenterX() - 10, ps.getCenterY());
                 	}
 
                 	break;
