@@ -18,6 +18,9 @@ public class GameServer {
 	private ServerSideConnectionOut player2Out;
 	private ServerSideConnectionIn player1In;
 	private ServerSideConnectionIn player2In;
+	private String parts[];
+	private String part1;
+	private String part2;
 
 
 	
@@ -56,7 +59,7 @@ public class GameServer {
 
 				else {
 					player2Out = ssco;
-					player1In = ssci;
+					player2In = ssci;
 				}
 
 				Thread t = new Thread(ssco);
@@ -93,7 +96,7 @@ public class GameServer {
 			}
 
 			catch (IOException ex) {
-				System.out.println("IOException from run() SSCO Constructor");
+				System.out.println("IOException from run() SSCO Constructor of Player " + playerID);
 			}
 		}
 
@@ -103,13 +106,13 @@ public class GameServer {
 				dataOut.flush();
 
 				while(true) {
-
+					// if()
 				}
 
 			}
 
 			catch(IOException ex) {
-				System.out.println("IOException from run() method SSCO");
+				System.out.println("IOException from run() method SSCO of Player " + playerID);
 			}
 		}
 	}
@@ -132,18 +135,22 @@ public class GameServer {
 				System.out.println("IOException from run() SSCI Constructor");
 			}
 		}
+		public int getShotsFired(){
+			return shotsFired;
+		}
 
 		public void run() {
 
 			try {
 				while(true) {
-					shotsFired = dataIn.readInt();
-					System.out.println(shotsFired);
+					String playerIDAndShotsFired = dataIn.readUTF();
+					System.out.println(playerIDAndShotsFired);
+
 				}
 			}
 
 			catch(IOException e) {
-				System.out.println("Error in run() method of SSCI");
+				System.out.println("Error in run() method of SSCI ");
 			}
 		}
 	}
