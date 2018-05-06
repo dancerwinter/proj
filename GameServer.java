@@ -51,6 +51,7 @@ public class GameServer {
 				System.out.println("Player#" + numPlay + " has connected");
 				ServerSideConnectionOut ssco = new ServerSideConnectionOut(s, numPlay);
 				ServerSideConnectionIn ssci = new ServerSideConnectionIn(s);
+				parts[] = new 
 				
 				if(numPlay == 1) {
 					player1Out = ssco;
