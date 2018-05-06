@@ -144,11 +144,11 @@ public class Player extends JFrame{
 				dc.repaint();
 			}
 
-			if (testBullet.isColliding(ps)) {
-				/*ps.damageShip();
-				hb.updateHP(ps.getHealth());*/
+/*			if (testBullet.isColliding(ps)) {
+				ps.damageShip();
+				hb.updateHP(ps.getHealth());
 				System.out.println("OUCH");
-			}
+			}*/
 
 			if (reload) {
 				bullet1.loadBullet(690, 550);
