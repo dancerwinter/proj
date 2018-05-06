@@ -322,16 +322,17 @@ public class Player extends JFrame{
 		public ClientSideConnection(Player x) {
 			System.out.println("ClientSideConnectionMade");
 			try {
-				x.setUpGUI();
+				
 				socket = new Socket("localhost", 1842);
 				dataIn = new DataInputStream(socket.getInputStream());
 				dataOut = new DataOutputStream(socket.getOutputStream());
 				playerID = dataIn.readInt();
-				System.out.println("Connected to server as player number" + playerID);		
+				System.out.println("Connected to server as player number" + playerID);	
+				x.setUpGUI();	
 			}
 
 			catch(IOException ex) {
-				System.out.println("IOException from CSC Constructor");
+				System.out.println("IOException from CSC Constructor of Player " + playerID);
 			}
 		}
 
@@ -347,19 +348,32 @@ public class Player extends JFrame{
 							System.out.println("bullet1 not out of frame");
 						}while(!bullet1.isOutOfFrame());
 						if (bullet1.isOutOfFrame()) {
-
+							String playerID2 = "";
+							if(playerID == 1){
+								playerID2 += "1";
+							}
+							else if(playerID == 2){
+								playerID2 += "2";
+							}
 							System.out.println("bullet1 outofFrame");
-							dataOut.writeInt(bulletsFired);
+							dataOut.writeUTF(playerID2 + " 1");
 							dataOut.flush();
 						}
 					}
 					else if(bulletsFired == 2){
 						do{
 							System.out.println("bullet2 not out of frame");
-						}while(!bullet2.isOutOfFrame());
+						}while(!bullet2.isOutOfFrame());							
 						if (bullet2.isOutOfFrame()){
+							String playerID2 = "";
+							if(playerID == 1){
+								playerID2 += "1";
+							}
+							else if(playerID == 2){
+								playerID2 += "2";
+							}
 							System.out.println("bullet2 outofFrame");
-							dataOut.writeInt(bulletsFired);
+							dataOut.writeUTF(playerID2 + " 2");
 							dataOut.flush();
 						}					
 					}
@@ -368,8 +382,15 @@ public class Player extends JFrame{
 							System.out.println("bullet3 not out of frame");
 						}while(!bullet3.isOutOfFrame());
 						if (bullet3.isOutOfFrame()){
+							String playerID2 = "";
+							if(playerID == 1){
+								playerID2 += "1";
+							}
+							else if(playerID == 2){
+								playerID2 += "2";
+							}
 							System.out.println("bullet3 outofFrame");
-							dataOut.writeInt(bulletsFired);
+							dataOut.writeUTF(playerID2 + " 3");
 							dataOut.flush();
 						}
 					}
@@ -378,8 +399,15 @@ public class Player extends JFrame{
 							System.out.println("bullet4 not out of frame");
 						}while(!bullet4.isOutOfFrame());
 						if (bullet4.isOutOfFrame()){
+							String playerID2 = "";
+							if(playerID == 1){
+								playerID2 += "1";
+							}
+							else if(playerID == 2){
+								playerID2 += "2";
+							}
 							System.out.println("bullet4 outofFrame");
-							dataOut.writeInt(bulletsFired);
+							dataOut.writeUTF(playerID2 + " 4");
 							dataOut.flush();
 						}
 					}
@@ -388,14 +416,21 @@ public class Player extends JFrame{
 							System.out.println("bullet5 not out of frame");
 						}while(!bullet5.isOutOfFrame());
 						if (bullet5.isOutOfFrame()){
+							String playerID2 = "";
+							if(playerID == 1){
+								playerID2 += "1";
+							}
+							else if(playerID == 2){
+								playerID2 += "2";
+							}
 							System.out.println("bullet5 outofFrame");
-							dataOut.writeInt(bulletsFired);
+							dataOut.writeUTF(playerID2 + " 5");
 							dataOut.flush();
 						}
 					}					
 				}				
 			}catch(IOException e){
-				System.out.println("IOException in run() method from CSC");
+				System.out.println("IOException in run() method from CSC of Player " + playerID);
 			}
 		}
 	}
@@ -403,10 +438,6 @@ public class Player extends JFrame{
 	public void connectToServer(){
 		csc = new ClientSideConnection(this);	
 	}
-	// public void spacebarPressed(){
-	// 	return spacebar;
-	// }
-
 	public static void main(String[] args) {
 		Player p = new Player(900, 650);
 		// p.setUpGUI();
