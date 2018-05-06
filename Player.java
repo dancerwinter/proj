@@ -428,8 +428,7 @@ public class Player extends JFrame{
 							dataOut.flush();
 						}
 					}					
-				}
-				
+				}				
 			}catch(IOException e){
 				System.out.println("IOException in run() method from CSC of Player " + playerID);
 			}
