@@ -33,7 +33,7 @@ public class Player extends JFrame{
 	private ReloadText reloadText;
 
 	private boolean isShot;
-	private Projectile bullet1, bullet2, bullet3, bullet4, bullet5, b;
+	private Projectile bullet1, bullet2, bullet3, bullet4, bullet5, b1, b2, b3, b4, b5;
 
 	private Projectile testBullet;
 
@@ -57,7 +57,12 @@ public class Player extends JFrame{
 		hb = new HealthBar();
 		reloadText = new ReloadText();
 		bg = new Background();
-		b = new Projectile(1000,1000);
+		b1 = new Projectile(1000,1000);
+		b2 = new Projectile(1000,1000);
+		b3 = new Projectile(1000,1000);
+		b4 = new Projectile(1000,1000);
+		b5 = new Projectile(1000,1000);
+
 		testBullet = new Projectile(100, 300);
 		bullet1 = new Projectile(690, 550);
 		bullet2 = new Projectile(730, 550);
@@ -109,7 +114,7 @@ public class Player extends JFrame{
 			bullet3.draw(g2d);
 			bullet4.draw(g2d);
 			bullet5.draw(g2d);
-			b.draw(g2d);
+			b1.draw(g2d);
 
 			// testBullet.draw(g2d);
 
@@ -304,6 +309,17 @@ public class Player extends JFrame{
                 }
             }
 		}
+
+	// private class ClientSideConnectionIn implements Runnable{
+	// 	private Socket socket;
+	// 	private DataInputStream dataIn;
+	// 	private DataOutputStream dataOut;
+
+	// 	public class ClientSideConnectionIn(){
+
+	// 		try
+	// 	}
+	// }
 	
 	/**
 	 * This private class is for the client side connection.
@@ -329,6 +345,9 @@ public class Player extends JFrame{
 				playerID = dataIn.readInt();
 				System.out.println("Connected to server as player number" + playerID);	
 				x.setUpGUI();	
+				Thread t = new Thread(new ClientSideReader());
+				t.start();
+				
 			}
 
 			catch(IOException ex) {
@@ -342,21 +361,15 @@ public class Player extends JFrame{
 			try{
 				// only works when there are bullets to fire.
 				if(bulletsFired <= 5) {					
-					System.out.println("checkFireCalled" + " " + bulletsFired);
+					// System.out.println("checkFireCalled" + " " + bulletsFired);
 					if(bulletsFired == 1) {
 						do{
 							System.out.println("bullet1 not out of frame");
 						}while(!bullet1.isOutOfFrame());
 						if (bullet1.isOutOfFrame()) {
-							String playerID2 = "";
-							if(playerID == 1){
-								playerID2 += "1";
-							}
-							else if(playerID == 2){
-								playerID2 += "2";
-							}
+							
 							System.out.println("bullet1 outofFrame");
-							dataOut.writeUTF(playerID2 + " 1");
+							dataOut.writeInt(playerID);
 							dataOut.flush();
 						}
 					}
@@ -365,16 +378,10 @@ public class Player extends JFrame{
 							System.out.println("bullet2 not out of frame");
 						}while(!bullet2.isOutOfFrame());							
 						if (bullet2.isOutOfFrame()){
-							String playerID2 = "";
-							if(playerID == 1){
-								playerID2 += "1";
-							}
-							else if(playerID == 2){
-								playerID2 += "2";
-							}
 							System.out.println("bullet2 outofFrame");
-							dataOut.writeUTF(playerID2 + " 2");
+							dataOut.writeInt(playerID);
 							dataOut.flush();
+
 						}					
 					}
 					else if(bulletsFired == 3){
@@ -382,15 +389,8 @@ public class Player extends JFrame{
 							System.out.println("bullet3 not out of frame");
 						}while(!bullet3.isOutOfFrame());
 						if (bullet3.isOutOfFrame()){
-							String playerID2 = "";
-							if(playerID == 1){
-								playerID2 += "1";
-							}
-							else if(playerID == 2){
-								playerID2 += "2";
-							}
 							System.out.println("bullet3 outofFrame");
-							dataOut.writeUTF(playerID2 + " 3");
+							dataOut.writeInt(playerID);
 							dataOut.flush();
 						}
 					}
@@ -399,15 +399,8 @@ public class Player extends JFrame{
 							System.out.println("bullet4 not out of frame");
 						}while(!bullet4.isOutOfFrame());
 						if (bullet4.isOutOfFrame()){
-							String playerID2 = "";
-							if(playerID == 1){
-								playerID2 += "1";
-							}
-							else if(playerID == 2){
-								playerID2 += "2";
-							}
 							System.out.println("bullet4 outofFrame");
-							dataOut.writeUTF(playerID2 + " 4");
+							dataOut.writeInt(playerID);
 							dataOut.flush();
 						}
 					}
@@ -416,23 +409,35 @@ public class Player extends JFrame{
 							System.out.println("bullet5 not out of frame");
 						}while(!bullet5.isOutOfFrame());
 						if (bullet5.isOutOfFrame()){
-							String playerID2 = "";
-							if(playerID == 1){
-								playerID2 += "1";
-							}
-							else if(playerID == 2){
-								playerID2 += "2";
-							}
 							System.out.println("bullet5 outofFrame");
-							dataOut.writeUTF(playerID2 + " 5");
+							dataOut.writeInt(playerID);
 							dataOut.flush();
 						}
 					}					
-				}				
-			}catch(IOException e){
+				}
+			}
+			catch(IOException e){
 				System.out.println("IOException in run() method from CSC of Player " + playerID);
 			}
 		}
+		private class ClientSideReader implements Runnable{
+				private DataInputStream dataI;
+				private ClientSideReader(){
+					dataI = dataIn;
+				}
+				public void run(){
+					try{
+						while (true){
+							String playerShot = dataI.readUTF();
+							System.out.println(playerShot);
+							}
+					}
+					catch(IOException e){
+							System.out.println("IOException from CSR run() method");
+					}
+				}
+		}
+			
 	}
 
 	public void connectToServer(){

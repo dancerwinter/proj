@@ -18,17 +18,13 @@ public class GameServer {
 	private ServerSideConnectionOut player2Out;
 	private ServerSideConnectionIn player1In;
 	private ServerSideConnectionIn player2In;
-	private String parts[];
-	private String part1;
-	private String part2;
-
-
-	
+	private int playerNum;
 	/**
 	 * This is the constructor for the GameServer class.
 	 */
 	public GameServer() {
 		System.out.println("TheServer has been instantiated");
+		playerNum = 0;
 		try {
 			ss = new ServerSocket(1842);
 		} 
@@ -51,7 +47,7 @@ public class GameServer {
 				System.out.println("Player#" + numPlay + " has connected");
 				ServerSideConnectionOut ssco = new ServerSideConnectionOut(s, numPlay);
 				ServerSideConnectionIn ssci = new ServerSideConnectionIn(s);
-				parts[] = new 
+				// parts[] = new 
 				
 				if(numPlay == 1) {
 					player1Out = ssco;
@@ -103,11 +99,23 @@ public class GameServer {
 
 		public void run() {
 			try {
+
 				dataOut.writeInt(playerID);
 				dataOut.flush();
 
 				while(true) {
-					// if()
+					System.out.println(playerNum);
+					//if bullet came from player 1
+					if(playerNum == 1){
+						dataOut.writeUTF("player2");//player2 is shot
+						dataOut.flush();
+					}
+					//if bullet came from player 2
+					else if(playerNum == 2){
+						dataOut.writeUTF("player1");//player1 is shot
+						dataOut.flush();
+
+					}
 				}
 
 			}
@@ -124,6 +132,7 @@ public class GameServer {
 		private Socket socket;
 		private DataInputStream dataIn;
 		private DataOutputStream dataOut;
+		
 
 		public ServerSideConnectionIn(Socket s) {
 			socket = s;
@@ -144,9 +153,8 @@ public class GameServer {
 
 			try {
 				while(true) {
-					String playerIDAndShotsFired = dataIn.readUTF();
-					System.out.println(playerIDAndShotsFired);
-
+					playerNum = dataIn.readInt();
+					System.out.println(playerNum);
 				}
 			}
 
