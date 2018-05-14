@@ -26,12 +26,12 @@ public class Player extends JFrame{
 	private MyActionListener mal;
 	private MyKeyListener mkl;
 	private ClientSideConnection csc;
-
+	private int shotCounter;
 	private PlayerShip ps;
 	private Background bg;
 	private HealthBar hb;
 	private ReloadText reloadText;
-
+	private double shotCoordinates;
 	private boolean isShot;
 	private Projectile bullet1, bullet2, bullet3, bullet4, bullet5, b1, b2, b3, b4, b5;
 
@@ -63,7 +63,7 @@ public class Player extends JFrame{
 		b4 = new Projectile(1000,1000);
 		b5 = new Projectile(1000,1000);
 
-		testBullet = new Projectile(100, 300);
+		// testBullet = new Projectile(100, 300);
 		bullet1 = new Projectile(690, 550);
 		bullet2 = new Projectile(730, 550);
 		bullet3 = new Projectile(770, 550);
@@ -115,6 +115,10 @@ public class Player extends JFrame{
 			bullet4.draw(g2d);
 			bullet5.draw(g2d);
 			b1.draw(g2d);
+			b2.draw(g2d);
+			b3.draw(g2d);
+			b4.draw(g2d);
+			b5.draw(g2d);
 
 			// testBullet.draw(g2d);
 
@@ -190,6 +194,33 @@ public class Player extends JFrame{
 				reloadText.animate(bulletsFired);
 				dc.repaint();
 			}
+
+			if(shotCounter >= 1){
+				b1.loadBullet(shotCoordinates, -40);
+				b1.shoot();
+				dc.repaint();
+			}
+			if(shotCounter >= 2){
+				b2.loadBullet(shotCoordinates, -40);
+				b2.shoot();
+				dc.repaint();
+			}
+			if(shotCounter >= 3){
+				b3.loadBullet(shotCoordinates, -40);
+				b3.shoot();
+				dc.repaint();
+			}
+			if(shotCounter >= 4){
+				b4.loadBullet(shotCoordinates, -40);
+				b4.shoot();
+				dc.repaint();
+			}
+			if(shotCounter >= 5){
+				b5.loadBullet(shotCoordinates, -40);
+				b5.shoot();
+				dc.repaint();
+			}
+
 		}
 	}
 
@@ -370,6 +401,7 @@ public class Player extends JFrame{
 							
 							System.out.println("bullet1 outofFrame");
 							dataOut.writeInt(playerID);
+							dataOut.writeDouble(900 - bullet1.getPositionX());
 							dataOut.flush();
 						}
 					}
@@ -380,6 +412,7 @@ public class Player extends JFrame{
 						if (bullet2.isOutOfFrame()){
 							System.out.println("bullet2 outofFrame");
 							dataOut.writeInt(playerID);
+							dataOut.writeDouble(900 - bullet2.getPositionX());
 							dataOut.flush();
 
 						}					
@@ -391,6 +424,7 @@ public class Player extends JFrame{
 						if (bullet3.isOutOfFrame()){
 							System.out.println("bullet3 outofFrame");
 							dataOut.writeInt(playerID);
+							dataOut.writeDouble(900 - bullet3.getPositionX());
 							dataOut.flush();
 						}
 					}
@@ -401,6 +435,7 @@ public class Player extends JFrame{
 						if (bullet4.isOutOfFrame()){
 							System.out.println("bullet4 outofFrame");
 							dataOut.writeInt(playerID);
+							dataOut.writeDouble(900 - bullet4.getPositionX());
 							dataOut.flush();
 						}
 					}
@@ -411,6 +446,7 @@ public class Player extends JFrame{
 						if (bullet5.isOutOfFrame()){
 							System.out.println("bullet5 outofFrame");
 							dataOut.writeInt(playerID);
+							dataOut.writeDouble(900 - bullet5.getPositionX());
 							dataOut.flush();
 						}
 					}					
@@ -422,14 +458,17 @@ public class Player extends JFrame{
 		}
 		private class ClientSideReader implements Runnable{
 				private DataInputStream dataI;
+				
 				private ClientSideReader(){
 					dataI = dataIn;
+					shotCounter = 0;
 				}
 				public void run(){
 					try{
 						while (true){
-							String playerShot = dataI.readUTF();
-							System.out.println(playerShot);
+							shotCoordinates = dataIn.readDouble();
+							System.out.println(shotCoordinates);
+
 							}
 					}
 					catch(IOException e){

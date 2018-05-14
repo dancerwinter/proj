@@ -47,7 +47,7 @@ public class GameServer {
 				System.out.println("Player#" + numPlay + " has connected");
 				ServerSideConnectionOut ssco = new ServerSideConnectionOut(s, numPlay);
 				ServerSideConnectionIn ssci = new ServerSideConnectionIn(s);
-				// parts[] = new 
+				 
 				
 				if(numPlay == 1) {
 					player1Out = ssco;
@@ -103,26 +103,36 @@ public class GameServer {
 				dataOut.writeInt(playerID);
 				dataOut.flush();
 
-				while(true) {
-					System.out.println(playerNum);
-					//if bullet came from player 1
-					if(playerNum == 1){
-						dataOut.writeUTF("player2");//player2 is shot
-						dataOut.flush();
-					}
-					//if bullet came from player 2
-					else if(playerNum == 2){
-						dataOut.writeUTF("player1");//player1 is shot
-						dataOut.flush();
+				// while(true) {
+				// 	System.out.println(playerNum);
+				// 	//if bullet came from player 1
+				// 	if(playerNum == 1){
+				// 		dataOut.writeUTF("player2");//player2 is shot
+				// 		dataOut.flush();
+				// 	}
+				// 	//if bullet came from player 2
+				// 	else if(playerNum == 2){
+				// 		dataOut.writeUTF("player1");//player1 is shot
+				// 		dataOut.flush();
 
-					}
-				}
+				// 	}
+				// }
 
 			}
 
 			catch(IOException ex) {
 				System.out.println("IOException from run() method SSCO of Player " + playerID);
 			}
+		}
+
+		public void sendShot(Double x){
+			try{
+				System.out.println("player " + playerID + " was shot at " + x);
+				dataOut.writeDouble(x);	
+			}catch(IOException e){
+				System.out.println("sendShot() error at SSCO of Player " + playerID);
+			}
+			
 		}
 	}
 
@@ -145,8 +155,8 @@ public class GameServer {
 				System.out.println("IOException from run() SSCI Constructor");
 			}
 		}
-		public int getShotsFired(){
-			return shotsFired;
+		public int getPlayerNum(){
+			return playerNum;
 		}
 
 		public void run() {
@@ -155,6 +165,13 @@ public class GameServer {
 				while(true) {
 					playerNum = dataIn.readInt();
 					System.out.println(playerNum);
+					Double x = dataIn.readDouble();
+					if(playerNum == 1){
+						player2Out.sendShot(x);
+					}
+					else if(playerNum == 2){
+						player1Out.sendShot(x);
+					}
 				}
 			}
 
