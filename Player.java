@@ -34,7 +34,7 @@ public class Player extends JFrame{
 	private double shotCoordinates;
 	private boolean isShot;
 	private Projectile bullet1, bullet2, bullet3, bullet4, bullet5, b1, b2, b3, b4, b5;
-
+	private int one,two,three,four,five;
 	private Projectile testBullet;
 
 	private boolean up, down, left, right, spacebar, reload;
@@ -51,6 +51,11 @@ public class Player extends JFrame{
 	public Player(int w, int h) {
 		width = w;
 		height = h;
+		one = 0;//
+		two = 0;//This block of code is for the counters that help us shoot the bullets
+		three = 0;//
+		four = 0;//
+		five = 0;//
 		container = this.getContentPane();
 		shotsMade = 0;
 		ps = new PlayerShip();
@@ -106,7 +111,11 @@ public class Player extends JFrame{
 			g2d.setRenderingHints(rh);
 			
 			bg.draw(g2d);
-
+			b1.draw(g2d);
+			b2.draw(g2d);
+			b3.draw(g2d);
+			b4.draw(g2d);
+			b5.draw(g2d);
 			reloadText.draw(g2d);
 
 			bullet1.draw(g2d);
@@ -114,11 +123,7 @@ public class Player extends JFrame{
 			bullet3.draw(g2d);
 			bullet4.draw(g2d);
 			bullet5.draw(g2d);
-			b1.draw(g2d);
-			b2.draw(g2d);
-			b3.draw(g2d);
-			b4.draw(g2d);
-			b5.draw(g2d);
+			
 
 			// testBullet.draw(g2d);
 
@@ -134,7 +139,7 @@ public class Player extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 				
-			double speed = 5;
+			double speed = 10;
 
 			if (up) {
 				ps.moveUp(-speed);
@@ -153,11 +158,11 @@ public class Player extends JFrame{
 				dc.repaint();
 			}
 
-			if (testBullet.isColliding(ps)) {
-				/*ps.damageShip();
-				hb.updateHP(ps.getHealth());*/
-				System.out.println("OUCH");
-			}
+			// if (testBullet.isColliding(ps)) {
+			// 	ps.damageShip();
+			// 	hb.updateHP(ps.getHealth());
+			// 	System.out.println("OUCH");
+			// }
 
 			if (reload) {
 				bullet1.loadBullet(690, 550);
@@ -196,29 +201,65 @@ public class Player extends JFrame{
 			}
 
 			if(shotCounter >= 1){
-				b1.loadBullet(shotCoordinates, -40);
+				
+				if (one < 1){
+					b1.loadBullet(shotCoordinates, -40);
+					one++;
+				}
+				
 				b1.shoot();
 				dc.repaint();
+				// if(b1.isOutOfFrame()){
+				// 	one = 0;
+				// }
 			}
 			if(shotCounter >= 2){
-				b2.loadBullet(shotCoordinates, -40);
+			
+				if (two < 1){
+					b2.loadBullet(shotCoordinates, -40);
+					two++;
+				}
 				b2.shoot();
 				dc.repaint();
+				// if(b2.isOutOfFrame()){
+				// 	two = 0;
+				// }
 			}
 			if(shotCounter >= 3){
-				b3.loadBullet(shotCoordinates, -40);
+				
+				if (three < 1){
+					b3.loadBullet(shotCoordinates, -40);
+					three++;
+				}
 				b3.shoot();
 				dc.repaint();
+				// if(b3.isOutOfFrame()){
+				// 	three = 0;
+				// }
 			}
 			if(shotCounter >= 4){
-				b4.loadBullet(shotCoordinates, -40);
+				
+				if (four < 1){
+					b4.loadBullet(shotCoordinates, -40);
+					four++;
+				}
 				b4.shoot();
 				dc.repaint();
+				// if(b4.isOutOfFrame()){
+				// 	four = 0;
+				// }
 			}
 			if(shotCounter >= 5){
-				b5.loadBullet(shotCoordinates, -40);
+				
+				if (five < 1){
+					b5.loadBullet(shotCoordinates, -40);
+					five++;
+				}
 				b5.shoot();
 				dc.repaint();
+				// if(b5.isOutOfFrame()){
+				// 	five = 0;
+				// }
 			}
 
 		}
@@ -468,8 +509,18 @@ public class Player extends JFrame{
 						while (true){
 							shotCoordinates = dataIn.readDouble();
 							System.out.println(shotCoordinates);
-
+							if(shotCounter != 5){
+								shotCounter++;
+							} else{
+								shotCounter = 0;
+								shotCounter++;
+								one = 0;
+								two = 0;
+								three = 0;
+								four = 0;
+								five = 0;
 							}
+						}
 					}
 					catch(IOException e){
 							System.out.println("IOException from CSR run() method");
