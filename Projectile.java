@@ -38,7 +38,7 @@ public class Projectile implements Runnable {
 	public void shoot() {
 		if (y != 650){
 			y += 25;
-			this.isOutOfFrame();
+			// this.isOutOfFrame();
 		}
 	}
 
