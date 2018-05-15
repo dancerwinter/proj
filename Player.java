@@ -36,6 +36,8 @@ public class Player extends JFrame{
 	private Projectile bullet1, bullet2, bullet3, bullet4, bullet5, b1, b2, b3, b4, b5;
 	private int one,two,three,four,five;
 	private Projectile testBullet;
+	private static int player1HP = 5;
+	private static int player2HP = 5;
 
 	private boolean up, down, left, right, spacebar, reload;
 	private Timer tm;
@@ -166,6 +168,13 @@ public class Player extends JFrame{
 				ps.damageShip();
 				hb.updateHP(ps.getHealth());
 				b1.loadBullet(ps.getX(), 700);
+				if (playerID == 1){
+					player1HP--;
+					System.out.println(player1HP + "health left for player 1");
+				} else if(playerID == 2){
+					player2HP--;
+					System.out.println(player2HP + "health left for player 2");
+				}
 				// dc.repaint();
 			}
 
@@ -173,6 +182,13 @@ public class Player extends JFrame{
 				ps.damageShip();
 				hb.updateHP(ps.getHealth());
 				b2.loadBullet(ps.getX(), 700);
+				if (playerID == 1){
+					player1HP--;
+					System.out.println(player1HP + "health left for player 1");
+				} else if(playerID == 2){
+					player2HP--;
+					System.out.println(player2HP + "health left for player 2");
+				}
 				// dc.repaint();
 			}
 
@@ -180,6 +196,13 @@ public class Player extends JFrame{
 				ps.damageShip();
 				hb.updateHP(ps.getHealth());
 				b3.loadBullet(ps.getX(), 700);
+				if (playerID == 1){
+					player1HP--;
+					System.out.println(player1HP + "health left for player 1");
+				} else if(playerID == 2){
+					player2HP--;
+					System.out.println(player2HP + "health left for player 2");
+				}
 				// dc.repaint();
 			}
 
@@ -187,6 +210,13 @@ public class Player extends JFrame{
 				ps.damageShip();
 				hb.updateHP(ps.getHealth());
 				b4.loadBullet(ps.getX(), 700);
+				if (playerID == 1){
+					player1HP--;
+					System.out.println(player1HP + "health left for player 1");
+				} else if(playerID == 2){
+					player2HP--;
+					System.out.println(player2HP + "health left for player 2");
+				}
 				// dc.repaint();
 			}
 
@@ -194,6 +224,13 @@ public class Player extends JFrame{
 				ps.damageShip();
 				hb.updateHP(ps.getHealth());
 				b5.loadBullet(ps.getX(), 700);
+				if (playerID == 1){
+					player1HP--;
+					System.out.println(player1HP + "health left for player 1");
+				} else if(playerID == 2){
+					player2HP--;
+					System.out.println(player2HP + "health left for player 2");
+				}
 				// dc.repaint();
 			}
 
@@ -206,7 +243,9 @@ public class Player extends JFrame{
 
 				dc.repaint();
 			}
-
+			/*
+			* Firing Animation
+			*/
 			if (bulletsFired >= 1) {
 				bullet1.fireBullet();
 				dc.repaint();
@@ -232,7 +271,9 @@ public class Player extends JFrame{
 				reloadText.animate(bulletsFired);
 				dc.repaint();
 			}
-
+			/*
+			* shooting animation
+			*/
 			if(shotCounter >= 1){
 				
 				if (one < 1){
@@ -293,6 +334,29 @@ public class Player extends JFrame{
 				// if(b5.isOutOfFrame()){
 				// 	five = 0;
 				// }
+			}
+
+			if(player1HP == 0){
+				
+				if(playerID == 1){
+					tm.stop();
+					System.out.println("You Lose!");
+				}
+				if(playerID == 2){
+					tm.stop();
+					System.out.println("You Win!");
+				}
+			}
+			if(player2HP == 0){
+				
+				if(playerID == 1){
+					tm.stop();
+					System.out.println("You Win!");
+				}
+				if(playerID == 2){
+					tm.stop();
+					System.out.println("You Lose!");
+				}
 			}
 
 		}
