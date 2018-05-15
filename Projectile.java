@@ -36,7 +36,7 @@ public class Projectile implements Runnable {
 	 * this method is the method used to move the projectile from the top of the frame to the bottom.
 	 */
 	public void shoot() {
-		if (y != 650){
+		if (y <= 650){
 			y += 25;
 			// this.isOutOfFrame();
 		}

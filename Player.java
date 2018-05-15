@@ -158,11 +158,44 @@ public class Player extends JFrame{
 				dc.repaint();
 			}
 
-			// if (testBullet.isColliding(ps)) {
-			// 	ps.damageShip();
-			// 	hb.updateHP(ps.getHealth());
-			// 	System.out.println("OUCH");
-			// }
+			/*
+			 * Collisions
+			 */
+
+			if (b1.isColliding(ps)) {
+				ps.damageShip();
+				hb.updateHP(ps.getHealth());
+				b1.loadBullet(ps.getX(), 700);
+				// dc.repaint();
+			}
+
+			else if (b2.isColliding(ps)) {
+				ps.damageShip();
+				hb.updateHP(ps.getHealth());
+				b2.loadBullet(ps.getX(), 700);
+				// dc.repaint();
+			}
+
+			else if (b3.isColliding(ps)) {
+				ps.damageShip();
+				hb.updateHP(ps.getHealth());
+				b3.loadBullet(ps.getX(), 700);
+				// dc.repaint();
+			}
+
+			else if (b4.isColliding(ps)) {
+				ps.damageShip();
+				hb.updateHP(ps.getHealth());
+				b4.loadBullet(ps.getX(), 700);
+				// dc.repaint();
+			}
+
+			else if (b5.isColliding(ps)) {
+				ps.damageShip();
+				hb.updateHP(ps.getHealth());
+				b5.loadBullet(ps.getX(), 700);
+				// dc.repaint();
+			}
 
 			if (reload) {
 				bullet1.loadBullet(690, 550);
@@ -337,10 +370,8 @@ public class Player extends JFrame{
                 	if (bulletsFired >= 5) {
 	                	reload = true;
 	                	bulletsFired = 0;	
+                		reloadText.animate(bulletsFired);
                 	}
-
-                	remainingHealth--;
-                	reloadText.animate(bulletsFired);
 
                 	break;
                 	
