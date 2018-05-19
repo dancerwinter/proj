@@ -2,8 +2,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
 
-import java.util.ArrayList;
-
 import javax.swing.*;
 import javax.swing.Timer;
 
@@ -35,7 +33,6 @@ public class Player extends JFrame{
 	private boolean isShot;
 	private Projectile bullet1, bullet2, bullet3, bullet4, bullet5, b1, b2, b3, b4, b5;
 	private int one,two,three,four,five;
-	private Projectile testBullet;
 	private static int player1HP = 5;
 	private static int player2HP = 5;
 
@@ -53,29 +50,38 @@ public class Player extends JFrame{
 	public Player(int w, int h) {
 		width = w;
 		height = h;
-		one = 0;//
-		two = 0;//This block of code is for the counters that help us shoot the bullets
-		three = 0;//
-		four = 0;//
-		five = 0;//
+
+		/*
+		 * This block of code is for the counters that help us shoot the bullets
+		 */
+		one = 0;
+		two = 0;
+		three = 0;
+		four = 0;
+		five = 0;
+		/***/
+
 		container = this.getContentPane();
+
 		shotsMade = 0;
+
 		ps = new PlayerShip();
 		hb = new HealthBar();
 		reloadText = new ReloadText();
 		bg = new Background();
+
 		b1 = new Projectile(1000,1000);
 		b2 = new Projectile(1000,1000);
 		b3 = new Projectile(1000,1000);
 		b4 = new Projectile(1000,1000);
 		b5 = new Projectile(1000,1000);
 
-		// testBullet = new Projectile(100, 300);
 		bullet1 = new Projectile(690, 550);
 		bullet2 = new Projectile(730, 550);
 		bullet3 = new Projectile(770, 550);
 		bullet4 = new Projectile(810, 550);
 		bullet5 = new Projectile(850, 550);
+
 		isShot = false;
 		dc = new DrawingComponent();	
 		mkl = new MyKeyListener();
@@ -118,18 +124,15 @@ public class Player extends JFrame{
 			b3.draw(g2d);
 			b4.draw(g2d);
 			b5.draw(g2d);
+
+			hb.draw(g2d);
 			reloadText.draw(g2d);
 
 			bullet1.draw(g2d);
 			bullet2.draw(g2d);
 			bullet3.draw(g2d);
 			bullet4.draw(g2d);
-			bullet5.draw(g2d);
-			
-
-			// testBullet.draw(g2d);
-
-			hb.draw(g2d);
+			bullet5.draw(g2d);		
 
 			ps.draw(g2d);
 			
@@ -163,33 +166,34 @@ public class Player extends JFrame{
 			/*
 			 * Collisions
 			 */
-
 			if (b1.isColliding(ps)) {
 				ps.damageShip();
 				hb.updateHP(ps.getHealth());
 				b1.loadBullet(ps.getX(), 700);
-				if (playerID == 1){
+				if (playerID == 1) {
 					player1HP--;
 					System.out.println(player1HP + "health left for player 1");
-				} else if(playerID == 2){
+				} 
+
+				else if(playerID == 2) {
 					player2HP--;
 					System.out.println(player2HP + "health left for player 2");
 				}
-				// dc.repaint();
 			}
 
 			else if (b2.isColliding(ps)) {
 				ps.damageShip();
 				hb.updateHP(ps.getHealth());
 				b2.loadBullet(ps.getX(), 700);
-				if (playerID == 1){
+				if (playerID == 1) {
 					player1HP--;
 					System.out.println(player1HP + "health left for player 1");
-				} else if(playerID == 2){
+				} 
+
+				else if(playerID == 2){
 					player2HP--;
 					System.out.println(player2HP + "health left for player 2");
 				}
-				// dc.repaint();
 			}
 
 			else if (b3.isColliding(ps)) {
@@ -199,11 +203,12 @@ public class Player extends JFrame{
 				if (playerID == 1){
 					player1HP--;
 					System.out.println(player1HP + "health left for player 1");
-				} else if(playerID == 2){
+				} 
+
+				else if(playerID == 2){
 					player2HP--;
 					System.out.println(player2HP + "health left for player 2");
 				}
-				// dc.repaint();
 			}
 
 			else if (b4.isColliding(ps)) {
@@ -217,7 +222,6 @@ public class Player extends JFrame{
 					player2HP--;
 					System.out.println(player2HP + "health left for player 2");
 				}
-				// dc.repaint();
 			}
 
 			else if (b5.isColliding(ps)) {
@@ -227,13 +231,17 @@ public class Player extends JFrame{
 				if (playerID == 1){
 					player1HP--;
 					System.out.println(player1HP + "health left for player 1");
-				} else if(playerID == 2){
+				} 
+
+				else if(playerID == 2){
 					player2HP--;
 					System.out.println(player2HP + "health left for player 2");
 				}
-				// dc.repaint();
 			}
 
+			/*
+			 * Reload method
+			 */
 			if (reload) {
 				bullet1.loadBullet(690, 550);
 				bullet2.loadBullet(730, 550);
@@ -243,9 +251,10 @@ public class Player extends JFrame{
 
 				dc.repaint();
 			}
+
 			/*
-			* Firing Animation
-			*/
+			 * Firing Animation
+			 */
 			if (bulletsFired >= 1) {
 				bullet1.fireBullet();
 				dc.repaint();
@@ -271,10 +280,11 @@ public class Player extends JFrame{
 				reloadText.animate(bulletsFired);
 				dc.repaint();
 			}
+
 			/*
-			* shooting animation
-			*/
-			if(shotCounter >= 1){
+			 * shooting animation
+			 */
+			if (shotCounter >= 1){
 				
 				if (one < 1){
 					b1.loadBullet(shotCoordinates, -40);
@@ -283,59 +293,55 @@ public class Player extends JFrame{
 				
 				b1.shoot();
 				dc.repaint();
-				// if(b1.isOutOfFrame()){
-				// 	one = 0;
-				// }
 			}
-			if(shotCounter >= 2){
+
+			if (shotCounter >= 2){
 			
 				if (two < 1){
 					b2.loadBullet(shotCoordinates, -40);
 					two++;
 				}
+
 				b2.shoot();
 				dc.repaint();
-				// if(b2.isOutOfFrame()){
-				// 	two = 0;
-				// }
 			}
-			if(shotCounter >= 3){
+
+			if (shotCounter >= 3){
 				
 				if (three < 1){
 					b3.loadBullet(shotCoordinates, -40);
 					three++;
 				}
+
 				b3.shoot();
 				dc.repaint();
-				// if(b3.isOutOfFrame()){
-				// 	three = 0;
-				// }
 			}
-			if(shotCounter >= 4){
+
+			if (shotCounter >= 4){
 				
 				if (four < 1){
 					b4.loadBullet(shotCoordinates, -40);
 					four++;
 				}
+
 				b4.shoot();
 				dc.repaint();
-				// if(b4.isOutOfFrame()){
-				// 	four = 0;
-				// }
 			}
-			if(shotCounter >= 5){
+
+			if (shotCounter >= 5){
 				
 				if (five < 1){
 					b5.loadBullet(shotCoordinates, -40);
 					five++;
 				}
+
 				b5.shoot();
 				dc.repaint();
-				// if(b5.isOutOfFrame()){
-				// 	five = 0;
-				// }
 			}
 
+			/*
+			 * Win lose method
+			 */
 			if(player1HP == 0){
 				
 				if(playerID == 1){
@@ -426,6 +432,7 @@ public class Player extends JFrame{
                 	else if (bulletsFired == 5) {
                 		bullet5.loadBullet(ps.getCenterX() - 10, ps.getCenterY());
                 	}
+
                 	Thread t = new Thread(csc);
                 	t.start();
                 	break;

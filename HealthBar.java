@@ -4,7 +4,7 @@ import java.awt.geom.*;
 public class HealthBar {
 	
 	private double x, y1, y2, y3, y4, y5;
-	private Rectangle2D.Double background;
+	private Rectangle2D.Double background, statusBar;
 	private Rectangle2D.Double bar1, bar2, bar3, bar4, bar5;
 	private String text;
 
@@ -26,6 +26,10 @@ public class HealthBar {
 	 * @param g2d Graphics2D
 	 */
 	public void draw(Graphics2D g2d) {
+		statusBar = new Rectangle2D.Double(0, 539, 950, 65);
+		g2d.setColor(new Color(0, 0, 0));
+		g2d.fill(statusBar);
+
 		background = new Rectangle2D.Double(100, 550, 400, 40);
 		bar1 = new Rectangle2D.Double(x, y1, 80, 40);
 		bar2 = new Rectangle2D.Double(x + 80, y2, 80, 40);

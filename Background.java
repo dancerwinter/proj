@@ -3,14 +3,13 @@ import java.awt.geom.*;
 
 public class Background {
 	
-	private Rectangle2D.Double playingField, statusBar;
+	private Rectangle2D.Double playingField;
 
 	/**
 	 * This is the constructor for the Background class.
 	 */
 	public Background() {
 		playingField = new Rectangle2D.Double(0, 0, 950, 650);
-		statusBar = new Rectangle2D.Double(0, 539, 950, 65);
 	}
 
 	/**
@@ -21,8 +20,5 @@ public class Background {
 		
 		g2d.setColor(new Color(89, 89, 89));
 		g2d.fill(playingField);
-
-		g2d.setColor(new Color(0, 0, 0));
-		g2d.fill(statusBar);
 	}
 }
