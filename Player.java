@@ -24,6 +24,7 @@ public class Player extends JFrame{
 	private MyActionListener mal;
 	private MyKeyListener mkl;
 	private ClientSideConnection csc;
+	// private ClientSideOutput cso;
 	private int shotCounter;
 	private PlayerShip ps;
 	private Background bg;
@@ -33,14 +34,14 @@ public class Player extends JFrame{
 	private boolean isShot;
 	private Projectile bullet1, bullet2, bullet3, bullet4, bullet5, b1, b2, b3, b4, b5;
 	private int one,two,three,four,five;
-	private static int player1HP = 5;
-	private static int player2HP = 5;
-
+	private int playerHP,enemyHP;
 	private boolean up, down, left, right, spacebar, reload;
 	private Timer tm;
 	private int playerID;
 	private int otherPlayer;
 	private int shotsMade;
+	private boolean isHit;
+	private int playerHit;
 
 	/**
 	 * This is the constructor for the Player class.
@@ -60,7 +61,8 @@ public class Player extends JFrame{
 		four = 0;
 		five = 0;
 		/***/
-
+		playerHP = 5;
+		enemyHP = 5;
 		container = this.getContentPane();
 
 		shotsMade = 0;
@@ -170,73 +172,53 @@ public class Player extends JFrame{
 				ps.damageShip();
 				hb.updateHP(ps.getHealth());
 				b1.loadBullet(ps.getX(), 700);
-				if (playerID == 1) {
-					player1HP--;
-					System.out.println(player1HP + "health left for player 1");
-				} 
+				isHit = true;
+				Thread t = new Thread(csc);
+                t.start();
 
-				else if(playerID == 2) {
-					player2HP--;
-					System.out.println(player2HP + "health left for player 2");
-				}
+				// cso.playerIsHit(playerID);
+
 			}
 
 			else if (b2.isColliding(ps)) {
 				ps.damageShip();
 				hb.updateHP(ps.getHealth());
 				b2.loadBullet(ps.getX(), 700);
-				if (playerID == 1) {
-					player1HP--;
-					System.out.println(player1HP + "health left for player 1");
-				} 
-
-				else if(playerID == 2){
-					player2HP--;
-					System.out.println(player2HP + "health left for player 2");
-				}
+				
+				isHit = true;
+				Thread t = new Thread(csc);
+                t.start();
+				// cso.playerIsHit(playerID);
 			}
 
 			else if (b3.isColliding(ps)) {
 				ps.damageShip();
 				hb.updateHP(ps.getHealth());
 				b3.loadBullet(ps.getX(), 700);
-				if (playerID == 1){
-					player1HP--;
-					System.out.println(player1HP + "health left for player 1");
-				} 
-
-				else if(playerID == 2){
-					player2HP--;
-					System.out.println(player2HP + "health left for player 2");
-				}
+				isHit = true;
+				Thread t = new Thread(csc);
+                t.start();
+				// cso.playerIsHit(playerID);
 			}
 
 			else if (b4.isColliding(ps)) {
 				ps.damageShip();
 				hb.updateHP(ps.getHealth());
 				b4.loadBullet(ps.getX(), 700);
-				if (playerID == 1){
-					player1HP--;
-					System.out.println(player1HP + "health left for player 1");
-				} else if(playerID == 2){
-					player2HP--;
-					System.out.println(player2HP + "health left for player 2");
-				}
+				isHit = true;
+				Thread t = new Thread(csc);
+                t.start();
+				// cso.playerIsHit(playerID);
 			}
 
 			else if (b5.isColliding(ps)) {
 				ps.damageShip();
 				hb.updateHP(ps.getHealth());
 				b5.loadBullet(ps.getX(), 700);
-				if (playerID == 1){
-					player1HP--;
-					System.out.println(player1HP + "health left for player 1");
-				} 
-
-				else if(playerID == 2){
-					player2HP--;
-					System.out.println(player2HP + "health left for player 2");
-				}
+				isHit = true;
+				Thread t = new Thread(csc);
+                t.start();
+				// cso.playerIsHit(playerID);
 			}
 
 			/*
@@ -342,28 +324,28 @@ public class Player extends JFrame{
 			/*
 			 * Win lose method
 			 */
-			if(player1HP == 0){
+			// if(player1HP == 0){
 				
-				if(playerID == 1){
-					tm.stop();
-					System.out.println("You Lose!");
-				}
-				if(playerID == 2){
-					tm.stop();
-					System.out.println("You Win!");
-				}
-			}
-			if(player2HP == 0){
+			// 	if(playerID == 1){
+			// 		tm.stop();
+			// 		System.out.println("You Lose!");
+			// 	}
+			// 	if(playerID == 2){
+			// 		tm.stop();
+			// 		System.out.println("You Win!");
+			// 	}
+			// }
+			// if(player2HP == 0){
 				
-				if(playerID == 1){
-					tm.stop();
-					System.out.println("You Win!");
-				}
-				if(playerID == 2){
-					tm.stop();
-					System.out.println("You Lose!");
-				}
-			}
+			// 	if(playerID == 1){
+			// 		tm.stop();
+			// 		System.out.println("You Win!");
+			// 	}
+			// 	if(playerID == 2){
+			// 		tm.stop();
+			// 		System.out.println("You Lose!");
+			// 	}
+			// }
 
 		}
 	}
@@ -521,7 +503,9 @@ public class Player extends JFrame{
 				x.setUpGUI();	
 				Thread t = new Thread(new ClientSideReader());
 				t.start();
-				
+				// cso = new ClientSideOutput(dataIn, dataOut);
+				// Thread t2 = new Thread(cso);
+				// t2.start();
 			}
 
 			catch(IOException ex) {
@@ -536,7 +520,7 @@ public class Player extends JFrame{
 				// only works when there are bullets to fire.
 				if(bulletsFired <= 5) {					
 					// System.out.println("checkFireCalled" + " " + bulletsFired);
-					if(bulletsFired == 1) {
+					if(bulletsFired == 1 && spacebar) {
 						do{
 							System.out.println("bullet1 not out of frame");
 						}while(!bullet1.isOutOfFrame());
@@ -546,9 +530,11 @@ public class Player extends JFrame{
 							dataOut.writeInt(playerID);
 							dataOut.writeDouble(900 - bullet1.getPositionX());
 							dataOut.flush();
+							dataOut.writeInt(0);
+							dataOut.flush();
 						}
 					}
-					else if(bulletsFired == 2){
+					else if(bulletsFired == 2 && spacebar){
 						do{
 							System.out.println("bullet2 not out of frame");
 						}while(!bullet2.isOutOfFrame());							
@@ -557,10 +543,12 @@ public class Player extends JFrame{
 							dataOut.writeInt(playerID);
 							dataOut.writeDouble(900 - bullet2.getPositionX());
 							dataOut.flush();
+							dataOut.writeInt(0);
+							dataOut.flush();
 
 						}					
 					}
-					else if(bulletsFired == 3){
+					else if(bulletsFired == 3 && spacebar){
 						do{
 							System.out.println("bullet3 not out of frame");
 						}while(!bullet3.isOutOfFrame());
@@ -569,9 +557,11 @@ public class Player extends JFrame{
 							dataOut.writeInt(playerID);
 							dataOut.writeDouble(900 - bullet3.getPositionX());
 							dataOut.flush();
+							dataOut.writeInt(0);
+							dataOut.flush();
 						}
 					}
-					else if(bulletsFired == 4){
+					else if(bulletsFired == 4 && spacebar){
 						do{
 							System.out.println("bullet4 not out of frame");
 						}while(!bullet4.isOutOfFrame());
@@ -580,9 +570,11 @@ public class Player extends JFrame{
 							dataOut.writeInt(playerID);
 							dataOut.writeDouble(900 - bullet4.getPositionX());
 							dataOut.flush();
+							dataOut.writeInt(0);
+							dataOut.flush();
 						}
 					}
-					else if(bulletsFired == 5){
+					else if(bulletsFired == 5 && spacebar){
 						do{
 							System.out.println("bullet5 not out of frame");
 						}while(!bullet5.isOutOfFrame());
@@ -591,7 +583,17 @@ public class Player extends JFrame{
 							dataOut.writeInt(playerID);
 							dataOut.writeDouble(900 - bullet5.getPositionX());
 							dataOut.flush();
+							dataOut.writeInt(0);
+							dataOut.flush();
 						}
+					}
+					if(isHit){
+						System.out.println(playerID + "got hit!");
+						dataOut.writeInt(0);
+						dataOut.writeDouble(0);
+						dataOut.flush();
+						dataOut.writeInt(playerID);
+						isHit = false;
 					}					
 				}
 			}
@@ -610,8 +612,11 @@ public class Player extends JFrame{
 					try{
 						while (true){
 							shotCoordinates = dataIn.readDouble();
+							playerHit = dataIn.readInt();
+
 							System.out.println(shotCoordinates);
-							if(shotCounter != 5){
+							System.out.println(playerHit);
+							if(shotCounter != 5 && shotCoordinates != -1000.0){
 								shotCounter++;
 							} else{
 								shotCounter = 0;
@@ -622,15 +627,28 @@ public class Player extends JFrame{
 								four = 0;
 								five = 0;
 							}
+							if(playerHit == playerID && playerHit != 0){
+								playerHP--;
+								System.out.println("Player " + playerID + " has " + playerHP + "left.");
+								System.out.println("other player has " + enemyHP + "left.");
+
+							}
+							else if(playerHit != playerID && playerHit != 0){
+								enemyHP--;
+								System.out.println("Player " + playerID + " has " + playerHP + "left.");
+								System.out.println("other player has " + enemyHP + "left.");
+							}
+
 						}
 					}
 					catch(IOException e){
 							System.out.println("IOException from CSR run() method");
 					}
 				}
-		}
-			
+		}			
 	}
+
+
 
 	public void connectToServer(){
 		csc = new ClientSideConnection(this);	

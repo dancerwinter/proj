@@ -19,6 +19,8 @@ public class GameServer {
 	private ServerSideConnectionIn player1In;
 	private ServerSideConnectionIn player2In;
 	private int playerNum;
+	private int player1HP;
+	private int player2HP;
 	/**
 	 * This is the constructor for the GameServer class.
 	 */
@@ -104,17 +106,22 @@ public class GameServer {
 				dataOut.flush();
 
 				// while(true) {
-				// 	System.out.println(playerNum);
-				// 	//if bullet came from player 1
-				// 	if(playerNum == 1){
-				// 		dataOut.writeUTF("player2");//player2 is shot
+				// 	int playerHit = dataIn.readInt();
+				// 	if(playerHit == 1){
+				// 		System.out.println("player 1 hit");
+				// 		player1HP--;
+				// 	}
+				// 	else if(playerHit == 2){
+				// 		System.out.println("player 2 hit");
+				// 		player2HP--;
+				// 	}
+				// 	if (player1HP == 0){
+				// 		dataOut.writeInt(1);
 				// 		dataOut.flush();
 				// 	}
-				// 	//if bullet came from player 2
-				// 	else if(playerNum == 2){
-				// 		dataOut.writeUTF("player1");//player1 is shot
+				// 	else if(player2HP == 0){
+				// 		dataOut.writeInt(2);
 				// 		dataOut.flush();
-
 				// 	}
 				// }
 
@@ -129,11 +136,19 @@ public class GameServer {
 			try{
 				System.out.println("player " + playerID + " was shot at " + x);
 				dataOut.writeDouble(x);	
+				dataOut.writeInt(0);
+				dataOut.flush();
 			}catch(IOException e){
 				System.out.println("sendShot() error at SSCO of Player " + playerID);
-			}
-			
+			}	
 		}
+		public void sendHP(int i) throws IOException{ 
+			System.out.println("hp sent");
+			dataOut.writeDouble(-1000);
+			dataOut.writeInt(i);
+			dataOut.flush();
+		}
+
 	}
 
 	
@@ -172,6 +187,22 @@ public class GameServer {
 					else if(playerNum == 2){
 						player1Out.sendShot(x);
 					}
+					int playerHit = dataIn.readInt();
+
+					if(playerHit == 1){
+						player1HP--;
+						System.out.println("player 1 is hit");
+						player1Out.sendHP(1);
+						player2Out.sendHP(1);
+					}
+					else if(playerHit == 2){
+						player2HP--;
+						System.out.println("player 2 is hit");
+						player1Out.sendHP(2);
+						player2Out.sendHP(2);
+
+					}
+
 				}
 			}
 
