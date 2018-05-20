@@ -30,6 +30,7 @@ public class Player extends JFrame{
 	private Background bg;
 	private HealthBar hb;
 	private ReloadText reloadText;
+	private EndGameText endGameText;
 	private double shotCoordinates;
 	private boolean isShot;
 	private Projectile bullet1, bullet2, bullet3, bullet4, bullet5, b1, b2, b3, b4, b5;
@@ -71,7 +72,7 @@ public class Player extends JFrame{
 		hb = new HealthBar();
 		reloadText = new ReloadText();
 		bg = new Background();
-
+		endGameText = new EndGameText();
 		b1 = new Projectile(1000,1000);
 		b2 = new Projectile(1000,1000);
 		b3 = new Projectile(1000,1000);
@@ -129,7 +130,7 @@ public class Player extends JFrame{
 
 			hb.draw(g2d);
 			reloadText.draw(g2d);
-
+			endGameText.draw(g2d);
 			bullet1.draw(g2d);
 			bullet2.draw(g2d);
 			bullet3.draw(g2d);
@@ -257,7 +258,7 @@ public class Player extends JFrame{
 				dc.repaint();
 			}
 
-			if (bulletsFired >= 5) {
+			if (bulletsFired >= 5 && (playerHP != 0 || enemyHP != 0)) {
 				bullet5.fireBullet();
 				reloadText.animate(bulletsFired);
 				dc.repaint();
@@ -324,28 +325,21 @@ public class Player extends JFrame{
 			/*
 			 * Win lose method
 			 */
-			// if(player1HP == 0){
+			if(playerHP == 0 || enemyHP == 0){
+				reloadText.animate(0);
 				
-			// 	if(playerID == 1){
-			// 		tm.stop();
-			// 		System.out.println("You Lose!");
-			// 	}
-			// 	if(playerID == 2){
-			// 		tm.stop();
-			// 		System.out.println("You Win!");
-			// 	}
-			// }
-			// if(player2HP == 0){
-				
-			// 	if(playerID == 1){
-			// 		tm.stop();
-			// 		System.out.println("You Win!");
-			// 	}
-			// 	if(playerID == 2){
-			// 		tm.stop();
-			// 		System.out.println("You Lose!");
-			// 	}
-			// }
+				if(playerHP == 0){
+					System.out.println("You Lose");
+					endGameText.animate("lose");
+
+				}
+				else if(enemyHP == 0){
+					System.out.println("You Win");
+					endGameText.animate("win");
+				}
+				tm.stop();
+			}
+			
 
 		}
 	}
