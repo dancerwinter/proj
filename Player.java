@@ -12,9 +12,27 @@ import java.net.*;
  * @author Neil Daniel B. Bautista, Jessica Anne M. Manzano
  * @IDNumber 170252, 171429
  * @version April 24, 2018
- * This program is a game.
+ * Bautista, Neil Daniel - 170252
+ *
+ *We have not discussed the Java language code 
+ *in our program with anyone
+ *other than our instructor or the teaching
+ *assistants assigned to this course.
+ *
+ *We have not used Java language code 
+ *obtained from another student, or
+ *any other unauthorized source, either 
+ *modified or unmodified.
+ *
+ *If any Java language
+ *code or documentation used in our program was
+ *obtained from another source, such as a text
+ *book or course notes, those have been clearly
+ *noted with a proper citation in the 
+ *comments of our code. 
+ *
+ * This program is the Player class
  */
-
 public class Player extends JFrame{
 	
 	private int width, height;
@@ -96,7 +114,10 @@ public class Player extends JFrame{
 		bulletsLeft = 5;
 		this.addKeyListener(mkl);
 	}
-
+/**
+* This is our method to set up the JFrame of the game, this will only be called after player 2 has connected
+*
+*/
 	public void setUpGUI() {
 		this.setSize(width, height);
 		this.setTitle("SPACE WARS" + playerID);
@@ -109,7 +130,11 @@ public class Player extends JFrame{
 		
 		this.setVisible(true);
 	}
-
+/**
+* Draws player sprites into the JFrame
+*
+*
+*/
 	private class DrawingComponent extends JComponent{
 
 		public DrawingComponent() {
@@ -141,14 +166,20 @@ public class Player extends JFrame{
 			
 		}
 	}
-
+/**
+* handles animation, and constantly checks for win/lose conditions on both player instances. Timer refers to this
+* note: shot is a bullet that came from the top of the frame, representing a bullet fired by the enemy player
+* fire is the bullet that came from the player itself
+*/
 	private class MyActionListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 				
 			double speed = 10;
-
+			/**
+			* Movement animation
+			*/
 			if (up) {
 				ps.moveUp(-speed);
 				dc.repaint();
@@ -166,8 +197,11 @@ public class Player extends JFrame{
 				dc.repaint();
 			}
 
-			/*
-			 * Collisions
+			/**
+			 * Collision conditions
+			 * if a shot collides with a player
+			 *it will send to the server that it has been shot, server updates its data on how much health each players has, and sends to both players the health of both players
+			 *also updates the HP bar drawing to show how much health is left
 			 */
 			if (b1.isColliding(ps)) {
 				ps.damageShip();
@@ -177,19 +211,16 @@ public class Player extends JFrame{
 				Thread t = new Thread(csc);
                 t.start();
 
-				// cso.playerIsHit(playerID);
-
 			}
 
 			else if (b2.isColliding(ps)) {
 				ps.damageShip();
 				hb.updateHP(ps.getHealth());
-				b2.loadBullet(ps.getX(), 700);
-				
+				b2.loadBullet(ps.getX(), 700);			
 				isHit = true;
 				Thread t = new Thread(csc);
                 t.start();
-				// cso.playerIsHit(playerID);
+				
 			}
 
 			else if (b3.isColliding(ps)) {
@@ -199,7 +230,6 @@ public class Player extends JFrame{
 				isHit = true;
 				Thread t = new Thread(csc);
                 t.start();
-				// cso.playerIsHit(playerID);
 			}
 
 			else if (b4.isColliding(ps)) {
@@ -209,7 +239,6 @@ public class Player extends JFrame{
 				isHit = true;
 				Thread t = new Thread(csc);
                 t.start();
-				// cso.playerIsHit(playerID);
 			}
 
 			else if (b5.isColliding(ps)) {
@@ -219,11 +248,11 @@ public class Player extends JFrame{
 				isHit = true;
 				Thread t = new Thread(csc);
                 t.start();
-				// cso.playerIsHit(playerID);
 			}
 
-			/*
-			 * Reload method
+			/**
+			 * Reload animation
+			 * can only be called when there are no more bullets to fire
 			 */
 			if (reload) {
 				bullet1.loadBullet(690, 550);
@@ -231,12 +260,12 @@ public class Player extends JFrame{
 				bullet3.loadBullet(770, 550);
 				bullet4.loadBullet(810, 550);
 				bullet5.loadBullet(850, 550);
-
 				dc.repaint();
 			}
 
-			/*
+			/**
 			 * Firing Animation
+			 * handles animation for each bullet whenever spacebar is pressed
 			 */
 			if (bulletsFired >= 1) {
 				bullet1.fireBullet();
@@ -264,8 +293,9 @@ public class Player extends JFrame{
 				dc.repaint();
 			}
 
-			/*
+			/**
 			 * shooting animation
+			 * shots coming from the top of of the frame.
 			 */
 			if (shotCounter >= 1){
 				
@@ -322,8 +352,9 @@ public class Player extends JFrame{
 				dc.repaint();
 			}
 
-			/*
-			 * Win lose method
+			/**
+			 * Win lose conditions
+			 * checks constantly if anyone has an HP of 0
 			 */
 			if(playerHP == 0 || enemyHP == 0){
 				reloadText.animate(0);
@@ -346,6 +377,8 @@ public class Player extends JFrame{
 
 	/**
 	 * This private class implements KeyListener.
+	 * Allows player to use the keyboard to control the player sprite.
+	 * 
 	 */
 	private class MyKeyListener implements KeyListener {
 
@@ -357,6 +390,10 @@ public class Player extends JFrame{
 			int keyCode = ke.getKeyCode();
 			
 			switch (keyCode) {
+				/**
+				*Movement keys
+				*
+				*/
 				case KeyEvent.VK_UP: 
 					up = true;
 					down = false;
@@ -384,7 +421,10 @@ public class Player extends JFrame{
 					left = false;
 					right = true;
                 	break;
-
+                /**
+                *
+                *Shooting key
+                */
                 case KeyEvent.VK_SPACE:
                 	spacebar = true;
                 	bulletsFired++;
@@ -412,7 +452,10 @@ public class Player extends JFrame{
                 	Thread t = new Thread(csc);
                 	t.start();
                 	break;
-
+                /**
+                *Reload key
+                *
+                */
                 case KeyEvent.VK_CONTROL:
                 	if (bulletsFired >= 5) {
 	                	reload = true;
@@ -460,21 +503,13 @@ public class Player extends JFrame{
             }
 		}
 
-	// private class ClientSideConnectionIn implements Runnable{
-	// 	private Socket socket;
-	// 	private DataInputStream dataIn;
-	// 	private DataOutputStream dataOut;
-
-	// 	public class ClientSideConnectionIn(){
-
-	// 		try
-	// 	}
-	// }
+	
 	
 	/**
 	 * This private class is for the client side connection.
+	 * most of the server/client interaction happens here
 	 */
-	/* I was thinking na
+	/* 
 	If the bulletsFired is 1
 	Then then it'll check if it's out of frame constantly
 	Once outOfFrame is true
@@ -485,7 +520,11 @@ public class Player extends JFrame{
 			private DataOutputStream dataOut;
 			private Player p;
 			private String ip;
-			
+		/**
+		*Constructor
+		*@param player x: to setupGUI() once player 2 has connected, String i: to be able to input needed IP address
+		*
+		*/
 		public ClientSideConnection(Player x, String i) {
 			System.out.println("ClientSideConnectionMade");
 			try {
@@ -499,29 +538,35 @@ public class Player extends JFrame{
 				x.setUpGUI();	
 				Thread t = new Thread(new ClientSideReader());
 				t.start();
-				// cso = new ClientSideOutput(dataIn, dataOut);
-				// Thread t2 = new Thread(cso);
-				// t2.start();
 			}
 
 			catch(IOException ex) {
 				System.out.println("IOException from CSC Constructor of Player " + playerID);
 			}
 		}
+		/**
+		*	Method to start the game only when player two has connected
+		*/
 
 		public void waitStartMessage(){
 			try{
 				String s = dataIn.readUTF();
 			}catch (IOException e){
-				
+
 			}
 		}
-
+		@Override
+		/**
+		* run method
+		* handles data transferring from client to server
+		* thread is started once spacebar is pressed, ends when the bullet is out of frame.
+		*/
 		public void run(){
 			try{
-				// only works when there are bullets to fire.
 				if(bulletsFired <= 5) {					
-					// System.out.println("checkFireCalled" + " " + bulletsFired);
+					/**
+					* connstantly checks if bullet is still within a frame, once out of the frame it will proceed to send to the server 900 - the x coordinate of the bullet when it leaves the frame, this is to simulate the two computers being in front of each other.
+					*/
 					if(bulletsFired == 1 && spacebar) {
 						do{
 							System.out.println("bullet1 not out of frame");
@@ -588,6 +633,10 @@ public class Player extends JFrame{
 							dataOut.flush();
 						}
 					}
+					/**
+					* the thread is also called when the playersprite is hit by a shot
+					* this will tell the server that the player is shot and it will update its own record of the players' healths
+					*/
 					if(isHit){
 						System.out.println(playerID + "got hit!");
 						dataOut.writeInt(0);
@@ -602,13 +651,26 @@ public class Player extends JFrame{
 				System.out.println("IOException in run() method from CSC of Player " + playerID);
 			}
 		}
+		/**
+		*
+		* most of the server output goes through this inner inner class
+		*/
 		private class ClientSideReader implements Runnable{
 				private DataInputStream dataI;
-				
+				/**
+				*Constructor of the inner inner class
+				*
+				*/
 				private ClientSideReader(){
 					dataI = dataIn;
 					shotCounter = 0;
 				}
+
+				/**
+				* Run method is constantly happening as soon as the game starts
+				*constantly checks if the player has been hit, or if there's a shot to be received from the server
+				*/
+
 				public void run(){
 					try{
 						while (true){
@@ -648,11 +710,20 @@ public class Player extends JFrame{
 		}			
 	}
 
-
+	/**
+	* connectToServer method: Instantiates the Client Side connection, which connects to the GameServer
+	*@param String i: holds the IP address that comes from the Menu class
+	*/
 
 	public void connectToServer(String i){
 		csc = new ClientSideConnection(this, i);	
 	}
+
+	/**
+	* main method
+	* runs the entire program
+	* opens a menu JFrame which receives an IP Address, which will later on be sent to the connect to server method of Player.
+	*/
 	public static void main(String[] args) {
 		Player p = new Player(900, 650);
 		Menu m = new Menu();

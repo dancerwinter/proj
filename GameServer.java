@@ -6,9 +6,28 @@ import java.util.*;
  * @author Neil Daniel B. Bautista, Jessica Anne M. Manzano
  * @IDNumber 170252, 171429
  * @version April 24, 2018
+ * Bautista, Neil Daniel - 170252
+ *
+ *We have not discussed the Java language code 
+ *in our program with anyone
+ *other than our instructor or the teaching
+ *assistants assigned to this course.
+ *
+ *We have not used Java language code 
+ *obtained from another student, or
+ *any other unauthorized source, either 
+ *modified or unmodified.
+ *
+ *If any Java language
+ *code or documentation used in our program was
+ *obtained from another source, such as a text
+ *book or course notes, those have been clearly
+ *noted with a proper citation in the 
+ *comments of our code. 
  *
  * This program is the server class.
  */
+
 public class GameServer {
 	private ServerSocket ss;
 	private DataInputStream dataIn;
@@ -23,6 +42,7 @@ public class GameServer {
 	private int player2HP;
 	/**
 	 * This is the constructor for the GameServer class.
+	 *
 	 */
 	public GameServer() {
 		System.out.println("TheServer has been instantiated");
@@ -76,6 +96,8 @@ public class GameServer {
 	}
 	 /**
 	  * This is a class to support both player connections made (Output)
+	  * @param Socket s: holds the socket of the player it will handle, int id: holds the ID number of the player
+	  * 
 	  */
 	private class ServerSideConnectionOut implements Runnable {
 		private Socket socket;
@@ -163,7 +185,11 @@ public class GameServer {
 
 	}
 
-	
+	/**
+	* This Private Class facilitates most of the interactions between the two players and the server
+	* It will call on the methods of the SSO class to output necessary data to the clients
+	*
+	*/
 
 	private class ServerSideConnectionIn implements Runnable {
 		private Socket socket;
@@ -182,10 +208,6 @@ public class GameServer {
 				System.out.println("IOException from run() SSCI Constructor");
 			}
 		}
-		public int getPlayerNum(){
-			return playerNum;
-		}
-
 		public void run() {
 
 			try {
@@ -217,7 +239,6 @@ public class GameServer {
 
 				}
 			}
-
 			catch(IOException e) {
 				System.out.println("Error in run() method of SSCI ");
 			}
