@@ -484,12 +484,13 @@ public class Player extends JFrame{
 			private DataInputStream dataIn;
 			private DataOutputStream dataOut;
 			private Player p;
+			private String ip;
 			
-		public ClientSideConnection(Player x) {
+		public ClientSideConnection(Player x, String i) {
 			System.out.println("ClientSideConnectionMade");
 			try {
-				
-				socket = new Socket("localhost", 1842);
+				ip = i;
+				socket = new Socket(ip, 1842);
 				dataIn = new DataInputStream(socket.getInputStream());
 				dataOut = new DataOutputStream(socket.getOutputStream());
 				playerID = dataIn.readInt();
@@ -644,13 +645,24 @@ public class Player extends JFrame{
 
 
 
-	public void connectToServer(){
-		csc = new ClientSideConnection(this);	
+	public void connectToServer(String i){
+		csc = new ClientSideConnection(this, i);	
 	}
 	public static void main(String[] args) {
 		Player p = new Player(900, 650);
+		Menu m = new Menu();
+		m.setUpGUI();
+		String host = "";
+		do{
+			System.out.println("Please enter an IP Adress");
+			host = m.getHost();
+		}while(host == "");
+		
 		// p.setUpGUI();
-		p.connectToServer();
+		
+		p.connectToServer(host);	
+		
+		// p.connectToServer(host);
 			
 	}
 
