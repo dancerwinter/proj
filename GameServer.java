@@ -158,6 +158,9 @@ public class GameServer {
 				System.out.println("IOException from run() method SSCO of Player " + playerID);
 			}
 		}
+		/**
+		*Method to send start message to both players, starting the game's GUI
+		*/
 		public void sendStartMessage(){
 			try{
 				dataOut.writeUTF("start");
@@ -166,6 +169,10 @@ public class GameServer {
 				sendStartMessage();
 			}
 		}
+		/**
+		* Sends shot coordinates to both players
+		*@param Double x: Shot coordinates
+		*/
 		public void sendShot(Double x){
 			try{
 				System.out.println("player " + playerID + " was shot at " + x);
@@ -176,6 +183,10 @@ public class GameServer {
 				System.out.println("sendShot() error at SSCO of Player " + playerID);
 			}	
 		}
+		/**
+		* updates HP of each player
+		* @param Int i: player who lost HP
+		*/
 		public void sendHP(int i) throws IOException{ 
 			System.out.println("hp sent");
 			dataOut.writeDouble(-1000);
