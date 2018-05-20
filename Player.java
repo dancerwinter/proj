@@ -495,6 +495,7 @@ public class Player extends JFrame{
 				dataOut = new DataOutputStream(socket.getOutputStream());
 				playerID = dataIn.readInt();
 				System.out.println("Connected to server as player number" + playerID);	
+				waitStartMessage();
 				x.setUpGUI();	
 				Thread t = new Thread(new ClientSideReader());
 				t.start();
@@ -508,7 +509,13 @@ public class Player extends JFrame{
 			}
 		}
 
-
+		public void waitStartMessage(){
+			try{
+				String s = dataIn.readUTF();
+			}catch (IOException e){
+				
+			}
+		}
 
 		public void run(){
 			try{
@@ -520,7 +527,6 @@ public class Player extends JFrame{
 							System.out.println("bullet1 not out of frame");
 						}while(!bullet1.isOutOfFrame());
 						if (bullet1.isOutOfFrame()) {
-							
 							System.out.println("bullet1 outofFrame");
 							dataOut.writeInt(playerID);
 							dataOut.writeDouble(900 - bullet1.getPositionX());
@@ -608,7 +614,6 @@ public class Player extends JFrame{
 						while (true){
 							shotCoordinates = dataIn.readDouble();
 							playerHit = dataIn.readInt();
-
 							System.out.println(shotCoordinates);
 							System.out.println(playerHit);
 							if(shotCounter != 5 && shotCoordinates != -1000.0){

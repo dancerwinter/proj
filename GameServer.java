@@ -59,6 +59,7 @@ public class GameServer {
 				else {
 					player2Out = ssco;
 					player2In = ssci;
+
 				}
 
 				Thread t = new Thread(ssco);
@@ -104,7 +105,11 @@ public class GameServer {
 
 				dataOut.writeInt(playerID);
 				dataOut.flush();
-
+				if(playerID == 2){
+					sendStartMessage();
+					player1Out.sendStartMessage();
+				}
+				
 				// while(true) {
 				// 	int playerHit = dataIn.readInt();
 				// 	if(playerHit == 1){
@@ -131,7 +136,14 @@ public class GameServer {
 				System.out.println("IOException from run() method SSCO of Player " + playerID);
 			}
 		}
-
+		public void sendStartMessage(){
+			try{
+				dataOut.writeUTF("start");
+				dataOut.flush();
+			}catch(IOException e){
+				sendStartMessage();
+			}
+		}
 		public void sendShot(Double x){
 			try{
 				System.out.println("player " + playerID + " was shot at " + x);
