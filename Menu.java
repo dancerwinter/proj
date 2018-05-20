@@ -69,9 +69,4 @@ public class Menu extends JFrame{
 	public String getHost() {
 		return ip;
 	}
-
-	public static void main (String[] args) {
-		Menu menu = new Menu();
-		menu.setUpGUI();
-	}
 }
